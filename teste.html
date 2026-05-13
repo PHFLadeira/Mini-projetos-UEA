@@ -8,109 +8,136 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-:root{--bg:#0d0f14;--surface:#13161e;--surface2:#1a1e2a;--border:#1f2433;--text:#e8eaf0;--muted:#7a82a0;--accent:#4f8ef7;--accent2:#a78bfa;--green:#26de81;--red:#ff6b6b;--yellow:#fdcb6e;
-  --card-w:166px; --col-gap:17px;}
+/* ── CSS VARIABLES ─────────────────────────────────────────────────────────── */
+:root{
+  --bg:#0d0f14;--surface:#13161e;--surface2:#1a1e2a;--border:#1f2433;
+  --text:#e8eaf0;--muted:#7a82a0;--accent:#4f8ef7;--accent2:#a78bfa;
+  --green:#26de81;--red:#ff6b6b;--yellow:#fdcb6e;
+  --card-w:166px;--col-gap:17px;
+}
 /* LIGHT THEME */
 body.theme-light{--bg:#f0f2f7;--surface:#fff;--surface2:#e8eaf0;--border:#d0d4e0;--text:#1a1e2a;--muted:#6b7280;}
 body.theme-light header{background:rgba(240,242,247,.95);}
 body.theme-light .stats-bar{background:rgba(240,242,247,.8);}
 body.theme-light .legend{background:rgba(240,242,247,.6);}
 body.theme-light .card{background:#fff;}
+body.theme-light .card.is-opt{border-color:rgba(0,0,0,.15);background:rgba(0,0,0,.01);}
+body.theme-light .opt-badge{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.15);}
 /* HIGH CONTRAST */
 body.theme-hc{--bg:#000;--surface:#111;--surface2:#1a1a1a;--border:#444;--text:#fff;--muted:#aaa;--accent:#00cfff;--green:#00ff88;--yellow:#ffdd00;}
-/* ARROW STYLES */
-.arrow-line.style-straight{stroke-dasharray:none;}
-/* VERTICAL LAYOUT — período como linha, label à esquerda, cards à direita */
+body.theme-hc .opt-badge{border-color:var(--muted);color:var(--text);}
+
+/* ── BULK SELECT MODE ──────────────────────────────────────────────────────── */
+.hbtn-select.selecting{background:rgba(79,142,247,.18);border-color:var(--accent);color:var(--accent);}
+body.select-mode .card{cursor:crosshair!important;}
+body.select-mode .card:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 0 0 2px rgba(255,255,255,.2);}
+.card.sel-pick{
+  outline:2.5px solid var(--accent)!important;
+  box-shadow:0 0 0 4px rgba(79,142,247,.25)!important;
+  transform:translateY(-3px) scale(1.02)!important;
+  opacity:1!important;filter:none!important;
+}
+.card.sel-pick::before{
+  content:'✓';position:absolute;top:4px;right:6px;
+  font-size:.75rem;font-weight:800;color:var(--accent);z-index:10;
+}
+/* Floating bulk bar */
+.bulk-bar{
+  position:fixed;bottom:28px;left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:14px;padding:12px 18px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  box-shadow:0 12px 40px rgba(0,0,0,.5);z-index:800;
+  transition:transform .35s cubic-bezier(.22,.68,0,1.2),opacity .3s;
+  opacity:0;pointer-events:none;
+  min-width:min(700px,92vw);justify-content:space-between;
+}
+.bulk-bar.open{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:all;}
+.bulk-info{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.bulk-count{
+  font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;
+  color:var(--accent);min-width:28px;text-align:center;transition:transform .15s;
+}
+.bulk-count.bump{transform:scale(1.35);}
+.bulk-label{font-size:.75rem;color:var(--muted);white-space:nowrap;}
+.bulk-actions{display:flex;gap:7px;flex-wrap:wrap;}
+.bulk-btn{
+  padding:8px 14px;border-radius:9px;border:1px solid transparent;
+  font-family:'Space Grotesk',sans-serif;font-size:.76rem;font-weight:700;
+  cursor:pointer;transition:all .18s;white-space:nowrap;
+}
+.bulk-done    {background:rgba(38,222,129,.12);border-color:rgba(38,222,129,.35);color:var(--green);}
+.bulk-enrolled{background:rgba(79,142,247,.12);border-color:rgba(79,142,247,.35);color:var(--accent);}
+.bulk-failed  {background:rgba(253,203,110,.12);border-color:rgba(253,203,110,.35);color:var(--yellow);}
+.bulk-pending {background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);color:var(--muted);}
+.bulk-btn:hover{filter:brightness(1.2);transform:translateY(-1px);}
+.bulk-right{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.bulk-sel-all{
+  padding:7px 12px;border-radius:8px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);
+  font-family:'Space Grotesk',sans-serif;font-size:.73rem;font-weight:600;
+  cursor:pointer;transition:all .18s;white-space:nowrap;
+}
+.bulk-sel-all:hover{border-color:var(--accent);color:var(--accent);}
+.bulk-cancel{
+  padding:7px 12px;border-radius:8px;border:1px solid rgba(255,107,107,.3);
+  background:rgba(255,107,107,.08);color:var(--red);
+  font-family:'Space Grotesk',sans-serif;font-size:.73rem;font-weight:700;
+  cursor:pointer;transition:all .18s;white-space:nowrap;
+}
+.bulk-cancel:hover{background:rgba(255,107,107,.18);}
+
+/* ── OPTATIVAS ─────────────────────────────────────────────────────────────── */
+.card.is-opt{border:1px dashed rgba(122,130,160,.35)!important;background:rgba(255,255,255,.015);}
+.opt-badge{
+  display:inline-block;margin-left:5px;padding:1px 5px;
+  background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.2);
+  border-radius:4px;font-size:.48rem;font-weight:700;color:var(--muted);
+  vertical-align:middle;letter-spacing:.05em;
+}
+
+/* ── VERTICAL LAYOUT ───────────────────────────────────────────────────────── */
 .grid-track.vertical{flex-direction:column;gap:0;min-width:unset;width:100%;}
 .grid-track.vertical .period-col{
-  flex-direction:row;
-  width:100%!important;
-  flex-wrap:nowrap;
-  gap:0;
-  padding:0;
-  align-items:stretch;
-  border-bottom:1px solid rgba(255,255,255,.05);
-  min-height:80px;
+  flex-direction:row;width:100%!important;flex-wrap:nowrap;gap:0;padding:0;
+  align-items:stretch;border-bottom:1px solid rgba(255,255,255,.05);min-height:80px;
 }
 .grid-track.vertical .period-head{
-  writing-mode:vertical-rl;
-  text-orientation:mixed;
-  transform:rotate(180deg);
-  width:36px!important;
-  min-width:36px;
-  flex-shrink:0;
-  padding:12px 6px;
-  margin:0;
-  border-radius:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:.62rem;
-  letter-spacing:.15em;
-  border-right:2px solid;
-  border-bottom:none;
-  border-top:none;
-  border-left:none;
+  writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);
+  width:36px!important;min-width:36px;flex-shrink:0;padding:12px 6px;margin:0;
+  border-radius:0;display:flex;align-items:center;justify-content:center;
+  font-size:.62rem;letter-spacing:.15em;
+  border-right:2px solid;border-bottom:none;border-top:none;border-left:none;
 }
 .grid-track.vertical .v-cards-row{
-  display:flex;
-  flex-direction:row;
-  flex-wrap:wrap;
-  gap:8px;
-  padding:10px 12px;
-  flex:1;
-  align-content:flex-start;
+  display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;
+  padding:10px 12px;flex:1;align-content:flex-start;
 }
 .grid-track.vertical .card{width:156px;flex-shrink:0;}
-/* CARD SIZE */
-/* BADGE E ESTILO DAS OPTATIVAS */
-.card.is-opt {
-  border: 1px dashed rgba(122, 130, 160, 0.35);
-  background: rgba(255, 255, 255, 0.015);
-}
-body.theme-light .card.is-opt {
-  border-color: rgba(0, 0, 0, 0.15);
-  background: rgba(0, 0, 0, 0.01);
-}
-.opt-badge {
-  display: inline-block;
-  margin-left: 5px;
-  padding: 1px 5px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px dashed rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  font-size: 0.48rem;
-  font-weight: 700;
-  color: var(--muted);
-  vertical-align: middle;
-  letter-spacing: 0.05em;
-}
-body.theme-light .opt-badge {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.15);
-}
-body.theme-hc .opt-badge {
-  border-color: var(--muted);
-  color: var(--text);
-}
+
+/* ── CARD SIZE VARIANTS ────────────────────────────────────────────────────── */
 .card.sz-compact{padding:6px 7px;}
 .card.sz-compact .card-name{font-size:.65rem;}
 .card.sz-compact .card-code{font-size:.52rem;}
 .card.sz-large{padding:14px 12px;}
 .card.sz-large .card-name{font-size:.85rem;}
-/* GROUP SEPARATOR */
+
+/* ── GROUP SEPARATOR ───────────────────────────────────────────────────────── */
 .group-sep{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);padding:4px 8px;margin-top:6px;opacity:.7;}
-/* NEXT AVAILABLE HIGHLIGHT */
+
+/* ── NEXT AVAILABLE ────────────────────────────────────────────────────────── */
 .card.next-available{box-shadow:0 0 0 2px var(--green),0 0 12px rgba(38,222,129,.25)!important;opacity:1!important;filter:none!important;}
-/* STATUS COLOR MODE */
-body.color-status .card.done   .card-stripe{background:var(--green)!important;}
+
+/* ── COLOR MODES ───────────────────────────────────────────────────────────── */
+body.color-status .card.done     .card-stripe{background:var(--green)!important;}
 body.color-status .card.enrolled .card-stripe{background:var(--accent)!important;}
-body.color-status .card.failed .card-stripe{background:var(--yellow)!important;}
+body.color-status .card.failed   .card-stripe{background:var(--yellow)!important;}
 body.color-status .card:not(.done):not(.enrolled):not(.failed) .card-stripe{background:var(--muted)!important;}
-/* MONO COLOR MODE */
 body.color-mono .card-stripe{background:var(--muted)!important;}
 body.color-mono .period-head{color:var(--text)!important;border-color:var(--border)!important;background:var(--surface2)!important;}
-/* SETTINGS PANEL */
+
+/* ── SETTINGS PANEL ────────────────────────────────────────────────────────── */
 .cfg-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(10px);z-index:700;display:flex;justify-content:flex-end;opacity:0;pointer-events:none;transition:opacity .28s;}
 .cfg-overlay.open{opacity:1;pointer-events:all;}
 .cfg-panel{background:var(--surface);width:340px;max-width:95vw;height:100%;overflow-y:auto;border-left:1px solid var(--border);transform:translateX(100%);transition:transform .3s cubic-bezier(.22,.68,0,1.2);display:flex;flex-direction:column;}
@@ -122,33 +149,31 @@ body.color-mono .period-head{color:var(--text)!important;border-color:var(--bord
 .cfg-body{padding:16px 20px;flex:1;}
 .cfg-section{margin-bottom:22px;}
 .cfg-section-title{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
-/* option rows */
 .cfg-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px;}
 .cfg-label{font-size:.78rem;color:var(--text);flex:1;}
 .cfg-label small{display:block;font-size:.65rem;color:var(--muted);margin-top:1px;}
-/* toggle switch */
 .cfg-toggle{position:relative;width:38px;height:20px;flex-shrink:0;}
 .cfg-toggle input{opacity:0;width:0;height:0;}
 .cfg-toggle-slider{position:absolute;inset:0;background:var(--border);border-radius:99px;cursor:pointer;transition:.2s;}
 .cfg-toggle input:checked+.cfg-toggle-slider{background:var(--accent);}
 .cfg-toggle-slider::before{content:'';position:absolute;width:14px;height:14px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;}
 .cfg-toggle input:checked+.cfg-toggle-slider::before{transform:translateX(18px);}
-/* segmented control */
 .cfg-seg{display:flex;background:var(--surface2);border:1px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0;}
 .cfg-seg button{flex:1;padding:5px 8px;border:none;background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;}
 .cfg-seg button.active{background:var(--accent);color:#fff;}
-/* period filter chips */
 .period-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
 .period-chip{padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-size:.7rem;font-weight:600;cursor:pointer;transition:all .2s;}
 .period-chip.active{border-color:var(--accent);background:rgba(79,142,247,.15);color:var(--accent);}
 .period-chip.all-chip.active{border-color:var(--accent2);background:rgba(167,139,250,.15);color:var(--accent2);}
-/* reset button */
 .cfg-reset{width:100%;margin-top:8px;padding:9px;border-radius:9px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;}
 .cfg-reset:hover{border-color:var(--red);color:var(--red);}
+
+/* ── BASE ──────────────────────────────────────────────────────────────────── */
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
-/* HEADER */
+
+/* ── HEADER ────────────────────────────────────────────────────────────────── */
 header{position:sticky;top:0;z-index:100;background:rgba(13,15,20,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:11px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
 .header-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
 .logo-mark{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -166,7 +191,8 @@ header{position:sticky;top:0;z-index:100;background:rgba(13,15,20,.92);backdrop-
 .hbtn:hover{border-color:var(--accent);color:var(--accent);}
 .hbtn.danger{border-color:rgba(255,107,107,.3);background:rgba(255,107,107,.07);color:var(--red);}
 .hbtn.danger:hover{background:rgba(255,107,107,.15);}
-/* STATS */
+
+/* ── STATS ─────────────────────────────────────────────────────────────────── */
 .stats-bar{display:flex;align-items:center;gap:18px;padding:8px 22px;border-bottom:1px solid var(--border);background:rgba(19,22,30,.7);flex-wrap:wrap;z-index:1;position:relative;}
 .stat-item{display:flex;align-items:center;gap:7px;}
 .stat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
@@ -176,30 +202,29 @@ header{position:sticky;top:0;z-index:100;background:rgba(13,15,20,.92);backdrop-
 .prog-label{font-size:.62rem;color:var(--muted);margin-bottom:4px;display:flex;justify-content:space-between;}
 .prog-bar{height:5px;background:var(--border);border-radius:99px;overflow:hidden;}
 .prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .6s ease;}
-/* LEGEND */
+
+/* ── LEGEND ────────────────────────────────────────────────────────────────── */
 .legend{display:flex;gap:7px;flex-wrap:wrap;padding:7px 22px;border-bottom:1px solid var(--border);background:rgba(13,15,20,.5);position:relative;z-index:1;}
 .legend-item{display:flex;align-items:center;gap:5px;font-size:.64rem;color:var(--muted);white-space:nowrap;}
 .legend-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-/* GRID */
+
+/* ── GRID ──────────────────────────────────────────────────────────────────── */
 .grid-scroll{overflow:auto;padding:22px 22px 40px;position:relative;z-index:1;}
 .grid-track{display:flex;gap:17px;min-width:max-content;position:relative;padding-bottom:30px;}
 svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible;}
 .period-col{display:flex;flex-direction:column;gap:8px;width:166px;z-index:1;position:relative;}
 .period-head{text-align:center;padding:7px 5px;border-radius:8px;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;border:1px solid transparent;}
-/* CARD */
+
+/* ── CARD ──────────────────────────────────────────────────────────────────── */
 .card{border-radius:10px;padding:10px 9px;cursor:pointer;position:relative;border:1px solid transparent;transition:transform .22s cubic-bezier(.22,.68,0,1.2),box-shadow .22s,opacity .25s,filter .25s;background:var(--surface);overflow:hidden;}
 .card:hover{transform:translateY(-6px) scale(1.02);z-index:5;}
-/* DONE: faded, dashed, checkmark */
 .card.done{opacity:.32;filter:saturate(.25) brightness(.65);border-style:dashed!important;}
 .card.done::after{content:'✓';position:absolute;top:5px;right:7px;font-size:.72rem;font-weight:800;color:var(--green);opacity:.85;}
 .card.done:hover{opacity:.55;filter:saturate(.45) brightness(.82);transform:translateY(-3px);}
-/* FAILED: amber tint, retry icon */
 .card.failed{opacity:.48;filter:saturate(.35) brightness(.72) hue-rotate(8deg);border-style:dashed!important;}
 .card.failed::after{content:'↺';position:absolute;top:4px;right:7px;font-size:.82rem;color:var(--yellow);}
-/* ENROLLED: glowing border, play icon */
 .card.enrolled{border-style:solid!important;box-shadow:0 0 0 2px rgba(79,142,247,.32);}
 .card.enrolled::after{content:'▶';position:absolute;top:6px;right:7px;font-size:.62rem;color:var(--accent);}
-/* DIM */
 .grid-track.dimmed .card:not(.lit){opacity:.07;filter:grayscale(1);}
 .card.lit{opacity:1!important;filter:none!important;transform:translateY(-3px) scale(1.03);z-index:4;}
 .card.done.lit{opacity:.5!important;filter:saturate(.35) brightness(.8)!important;}
@@ -208,12 +233,14 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
 .card-name{font-size:.72rem;font-weight:600;line-height:1.3;padding-left:8px;color:var(--text);padding-right:14px;}
 .card-hours{font-size:.59rem;color:var(--muted);padding-left:8px;margin-top:4px;}
 .card-grade{font-size:.66rem;font-weight:700;padding-left:8px;margin-top:3px;}
-/* ARROWS */
+
+/* ── ARROWS ────────────────────────────────────────────────────────────────── */
 .arrow-line{fill:none;stroke:rgba(120,130,160,.18);stroke-width:1.5;transition:stroke .3s,stroke-width .3s,opacity .3s;}
 .grid-track.dimmed .arrow-line{opacity:.04;}
 .arrow-line.active{stroke-width:2.5;opacity:1!important;stroke-dasharray:8 4;animation:flow 1.2s linear infinite;}
 @keyframes flow{to{stroke-dashoffset:-24;}}
-/* MODAL */
+
+/* ── MODAL ─────────────────────────────────────────────────────────────────── */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(14px);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .28s;}
 .overlay.open{opacity:1;pointer-events:all;}
 .modal{background:var(--surface);border-radius:18px;width:520px;max-width:93vw;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.65);transform:translateY(22px) scale(.97);transition:transform .28s cubic-bezier(.22,.68,0,1.2);border:1px solid var(--border);}
@@ -227,15 +254,13 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
 .modal-body{padding:16px 20px;overflow-y:auto;flex:1;}
 .modal-body::-webkit-scrollbar{width:4px;}
 .modal-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:4px;}
-/* STATUS TOGGLE */
 .status-toggle{display:flex;gap:7px;margin-bottom:16px;}
 .st-btn{flex:1;padding:9px 4px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px;}
 .st-btn:hover{border-color:var(--muted);color:var(--text);}
-.st-btn.s-pending{border-color:var(--border);background:var(--surface2);color:var(--muted);}
-.st-btn.s-done{border-color:var(--green);background:rgba(38,222,129,.12);color:var(--green);}
+.st-btn.s-pending {border-color:var(--border);background:var(--surface2);color:var(--muted);}
+.st-btn.s-done    {border-color:var(--green);background:rgba(38,222,129,.12);color:var(--green);}
 .st-btn.s-enrolled{border-color:var(--accent);background:rgba(79,142,247,.12);color:var(--accent);}
-.st-btn.s-failed{border-color:var(--yellow);background:rgba(253,203,110,.12);color:var(--yellow);}
-/* INFO GRID */
+.st-btn.s-failed  {border-color:var(--yellow);background:rgba(253,203,110,.12);color:var(--yellow);}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:14px;}
 .info-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:10px 12px;}
 .info-label{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.36);margin-bottom:4px;}
@@ -247,7 +272,7 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
 .section-title{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.33);margin:14px 0 6px;}
 .chip-wrap{display:flex;flex-wrap:wrap;gap:5px;}
 .chip{padding:4px 10px;border-radius:6px;font-size:.7rem;font-weight:600;border:1px solid transparent;}
-.chip.pre{background:rgba(79,142,247,.1);border-color:rgba(79,142,247,.28);color:#7db3ff;}
+.chip.pre {background:rgba(79,142,247,.1);border-color:rgba(79,142,247,.28);color:#7db3ff;}
 .chip.post{background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.28);color:#c4aaff;}
 .chip.none{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08);color:var(--muted);font-style:italic;}
 .extra-section{margin-top:12px;background:rgba(255,255,255,.025);border:1px dashed rgba(255,255,255,.08);border-radius:10px;padding:12px;}
@@ -257,7 +282,8 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
 .editable-field::placeholder{color:var(--muted);font-style:italic;}
 .save-btn{margin-top:7px;padding:7px 15px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;cursor:pointer;transition:opacity .2s;}
 .save-btn:hover{opacity:.85;}
-/* IMPORT MODAL */
+
+/* ── IMPORT MODAL ──────────────────────────────────────────────────────────── */
 .import-overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(16px);z-index:600;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .28s;}
 .import-overlay.open{opacity:1;pointer-events:all;}
 .import-box{background:var(--surface);border-radius:18px;width:500px;max-width:93vw;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.7);border:1px solid var(--border);transform:translateY(20px) scale(.97);transition:transform .28s cubic-bezier(.22,.68,0,1.2);overflow:hidden;}
@@ -265,6 +291,8 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
 .import-header{padding:20px 20px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
 .import-header h2{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;}
 .import-body{padding:20px;overflow-y:auto;flex:1;}
+.import-grade-btn{flex:1;padding:8px 12px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.import-grade-btn.active{border-color:var(--accent);background:rgba(79,142,247,.12);color:var(--accent);}
 .drop-zone{border:2px dashed var(--border);border-radius:12px;padding:32px 20px;text-align:center;cursor:pointer;transition:all .2s;background:rgba(255,255,255,.02);}
 .drop-zone:hover,.drop-zone.drag-over{border-color:var(--accent);background:rgba(79,142,247,.06);}
 .drop-zone-icon{font-size:2rem;margin-bottom:10px;}
@@ -278,16 +306,19 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
 .import-results::-webkit-scrollbar{width:4px;}
 .import-results::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:4px;}
 .iri{display:flex;align-items:center;gap:7px;padding:5px 9px;border-radius:7px;margin-bottom:4px;font-size:.72rem;}
-.iri.matched{background:rgba(38,222,129,.08);color:var(--green);}
+.iri.matched  {background:rgba(38,222,129,.08);color:var(--green);}
 .iri.unmatched{background:rgba(253,203,110,.07);color:var(--yellow);}
 .iri .sub-name{flex:1;color:var(--text);font-weight:500;}
 .import-confirm-btn{width:100%;margin-top:14px;padding:11px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-family:'Space Grotesk',sans-serif;font-size:.83rem;font-weight:700;cursor:pointer;transition:opacity .2s;display:none;}
 .import-confirm-btn.show{display:block;}
 .import-confirm-btn:hover{opacity:.85;}
-/* TOAST */
+
+/* ── TOAST ─────────────────────────────────────────────────────────────────── */
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(14px);background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:9px 18px;border-radius:10px;font-size:.76rem;z-index:9999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .toast.ok{border-color:rgba(38,222,129,.4);color:var(--green);}
+
+/* ── SCROLLBAR ─────────────────────────────────────────────────────────────── */
 .grid-scroll::-webkit-scrollbar{height:5px;width:5px;}
 .grid-scroll::-webkit-scrollbar-track{background:var(--bg);}
 .grid-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
@@ -295,6 +326,7 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
 </head>
 <body>
 
+<!-- ── HEADER ─────────────────────────────────────────────────────────────── -->
 <header>
   <div class="header-left">
     <div>
@@ -311,6 +343,10 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input id="search" type="text" placeholder="Buscar matéria..." oninput="doSearch(this.value)">
     </div>
+    <button class="hbtn hbtn-select" id="btn-select" onclick="toggleSelectMode()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Selecionar
+    </button>
     <button class="hbtn" onclick="exportToPNG()">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Exportar PNG
@@ -330,6 +366,7 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
   </div>
 </header>
 
+<!-- ── STATS ──────────────────────────────────────────────────────────────── -->
 <div class="stats-bar">
   <div class="stat-item"><div class="stat-dot" style="background:var(--green)"></div><span class="stat-label">Concluídas</span><span class="stat-val" id="s-done">0</span></div>
   <div class="stat-item"><div class="stat-dot" style="background:var(--accent)"></div><span class="stat-label">Cursando</span><span class="stat-val" id="s-enr">0</span></div>
@@ -343,17 +380,36 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
 
 <div class="legend" id="legend"></div>
 
+<!-- ── BULK SELECT FLOATING BAR ───────────────────────────────────────────── -->
+<div class="bulk-bar" id="bulk-bar">
+  <div class="bulk-info">
+    <span class="bulk-count" id="bulk-count">0</span>
+    <span class="bulk-label">matéria(s) selecionada(s)</span>
+  </div>
+  <div class="bulk-actions">
+    <button class="bulk-btn bulk-done"     onclick="applyBulk('done')">✓ Concluída</button>
+    <button class="bulk-btn bulk-enrolled" onclick="applyBulk('enrolled')">▶ Cursando</button>
+    <button class="bulk-btn bulk-failed"   onclick="applyBulk('failed')">↺ Reprovada</button>
+    <button class="bulk-btn bulk-pending"  onclick="applyBulk('pending')">⬜ Pendente</button>
+  </div>
+  <div class="bulk-right">
+    <button class="bulk-sel-all" onclick="bulkSelectAll()">Selecionar todos</button>
+    <button class="bulk-cancel"  onclick="toggleSelectMode()">✕ Cancelar</button>
+  </div>
+</div>
+
+<!-- ── GRID ───────────────────────────────────────────────────────────────── -->
 <div class="grid-scroll" id="scroll">
   <div class="grid-track" id="track"><svg id="svg-layer"></svg></div>
 </div>
 
-<!-- CARD MODAL -->
+<!-- ── CARD MODAL ─────────────────────────────────────────────────────────── -->
 <div class="overlay" id="overlay" onclick="closeModal()">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-top" id="modal-top">
       <div class="modal-badge">
         <span id="m-period"></span>
-        <span id="m-sbadge" style="font-size:.68rem;padding:2px 8px;border-radius:5px;"></span>
+        <span id="m-sbadge"></span>
       </div>
       <div class="modal-title" id="m-title"></div>
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -395,7 +451,7 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
   </div>
 </div>
 
-<!-- IMPORT MODAL -->
+<!-- ── IMPORT MODAL ───────────────────────────────────────────────────────── -->
 <div class="import-overlay" id="import-overlay" onclick="closeImport()">
   <div class="import-box" onclick="event.stopPropagation()">
     <div class="import-header">
@@ -403,6 +459,14 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
       <button class="modal-close" onclick="closeImport()">✕</button>
     </div>
     <div class="import-body">
+      <!-- Seletor de grade — mantido do original -->
+      <div style="margin-bottom:14px;">
+        <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px;">Aplicar na grade:</div>
+        <div style="display:flex;gap:8px;">
+          <button class="import-grade-btn active" id="igbtn-2014" onclick="setImportGrade('2014',this)">Grade 2014</button>
+          <button class="import-grade-btn"        id="igbtn-2023" onclick="setImportGrade('2023',this)">Grade 2023</button>
+        </div>
+      </div>
       <div class="drop-zone" id="drop-zone"
         ondragover="event.preventDefault();this.classList.add('drag-over')"
         ondragleave="this.classList.remove('drag-over')"
@@ -423,7 +487,7 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
   </div>
 </div>
 
-<!-- SETTINGS PANEL -->
+<!-- ── SETTINGS PANEL ─────────────────────────────────────────────────────── -->
 <div class="cfg-overlay" id="cfg-overlay" onclick="closeCfg()">
   <div class="cfg-panel" onclick="event.stopPropagation()">
     <div class="cfg-head">
@@ -431,8 +495,6 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
       <button class="modal-close" onclick="closeCfg()">✕</button>
     </div>
     <div class="cfg-body">
-
-      <!-- FILTROS DE EXIBIÇÃO -->
       <div class="cfg-section">
         <div class="cfg-section-title">🔍 Filtros de Exibição</div>
         <div class="cfg-row">
@@ -454,8 +516,6 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
           </div>
         </div>
       </div>
-
-      <!-- TEMA DE CORES -->
       <div class="cfg-section">
         <div class="cfg-section-title">🎨 Tema e Cores</div>
         <div class="cfg-row">
@@ -475,8 +535,6 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
           </div>
         </div>
       </div>
-
-      <!-- INFORMAÇÕES NO CARD -->
       <div class="cfg-section">
         <div class="cfg-section-title">🃏 Informações no Card</div>
         <div class="cfg-row">
@@ -492,8 +550,6 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
           <label class="cfg-toggle"><input type="checkbox" id="cfg-show-grade" checked onchange="applyCfg()"><span class="cfg-toggle-slider"></span></label>
         </div>
       </div>
-
-      <!-- SETAS -->
       <div class="cfg-section">
         <div class="cfg-section-title">➡️ Setas e Conexões</div>
         <div class="cfg-row">
@@ -529,8 +585,6 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
           </div>
         </div>
       </div>
-
-      <!-- LAYOUT -->
       <div class="cfg-section">
         <div class="cfg-section-title">📐 Layout da Grade</div>
         <div class="cfg-row">
@@ -561,7 +615,6 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
           <label class="cfg-toggle"><input type="checkbox" id="cfg-group" onchange="applyCfg()"><span class="cfg-toggle-slider"></span></label>
         </div>
       </div>
-
       <button class="cfg-reset" onclick="resetCfg()">↺ Restaurar padrões</button>
     </div>
   </div>
@@ -570,75 +623,9 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
 <div class="toast" id="toast"></div>
 
 <script>
-
-  // ── EXPORTAR PARA PNG ALTA RESOLUÇÃO COM PROGRESSO ───────────────────────────
-function exportToPNG() {
-  const trackElement = document.getElementById('track');
-  
-  if (!trackElement) return;
-
-  showToast('📸 A capturar a matriz em Alta Resolução... Aguarde.', 'ok');
-
-  // Vai buscar as cores do tema atual para a imagem combinar com o ecrã
-  const bgColor = getComputedStyle(document.body).getPropertyValue('--bg').trim() || '#0d0f14';
-  const textColor = getComputedStyle(document.body).getPropertyValue('--text').trim() || '#ffffff';
-  const accentColor = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#4f8ef7';
-  
-  // Vai buscar a percentagem atual que está na barra de estatísticas
-  const currentPct = document.getElementById('s-pct').textContent;
-
-  html2canvas(trackElement, {
-    scale: 3, // Resolução 3x para qualidade de impressão/zoom
-    backgroundColor: bgColor,
-    useCORS: true,
-    logging: false
-  }).then(originalCanvas => {
-    // Espaço em pixéis reservado para o cabeçalho no topo da imagem
-    const headerHeight = 280; 
-    
-    // Cria um novo "quadro" combinando o cabeçalho e a matriz capturada
-    const finalCanvas = document.createElement('canvas');
-    finalCanvas.width = Math.max(originalCanvas.width, 1400); // Garante largura mínima para o texto não cortar
-    finalCanvas.height = originalCanvas.height + headerHeight;
-    
-    const ctx = finalCanvas.getContext('2d');
-    
-    // 1. Pinta o fundo do quadro inteiro
-    ctx.fillStyle = bgColor;
-    ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
-    
-    // 2. Prepara o estilo do texto
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    
-    // 3. Escreve o Título Principal (Nome do Curso)
-    ctx.fillStyle = textColor;
-    ctx.font = 'bold 90px "Syne", sans-serif';
-    ctx.fillText('Engenharia de Controle e Automação', finalCanvas.width / 2, 100);
-    
-    // 4. Escreve a Percentagem em destaque com a cor de destaque (azul/roxo)
-    ctx.fillStyle = accentColor;
-    ctx.font = 'bold 75px "Space Grotesk", sans-serif';
-    ctx.fillText(`Progresso Concluído: ${currentPct}`, finalCanvas.width / 2, 190);
-    
-    // 5. Cola a imagem da matriz gerada logo abaixo do cabeçalho
-    // (Calcula o "xOffset" para garantir que a grelha fica perfeitamente centrada)
-    const xOffset = (finalCanvas.width - originalCanvas.width) / 2;
-    ctx.drawImage(originalCanvas, xOffset, headerHeight);
-    
-    // 6. Descarrega o resultado final
-    const link = document.createElement('a');
-    link.download = `Matriz_ECA_Progresso_${currentPct.replace('%','')}.png`;
-    link.href = finalCanvas.toDataURL('image/png', 1.0);
-    link.click();
-    
-    showToast('✅ Imagem exportada com sucesso!', 'ok');
-  }).catch(err => {
-    console.error('Erro ao gerar PNG:', err);
-    showToast('❌ Ocorreu um erro ao exportar a imagem.', '');
-  });
-}
-// ── PERIOD COLORS ────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// PERIOD COLORS
+// ════════════════════════════════════════════════════════════════════════════
 const PC=[null,
   {main:'#ff6b6b',light:'rgba(255,107,107,.11)'},
   {main:'#ff9f43',light:'rgba(255,159,67,.11)'},
@@ -652,363 +639,385 @@ const PC=[null,
   {main:'#74b9ff',light:'rgba(116,185,255,.11)'},
 ];
 
-// ── DATA ─────────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// CURRICULUM DATA
+// ════════════════════════════════════════════════════════════════════════════
 const DATA={
 "2014":[
   // ── 1º PERÍODO ──
-  {id:'com_exp',   name:'Comunicação e Expressão',               code:'ESTBAS006', period:1,  hours:'60h',  pre:[],                              unlocks:[]},
-  {id:'fis1',      name:'Física I',                              code:'ESTBAS007', period:1,  hours:'60h',  pre:[],                              unlocks:['fis2','mec1','cont1','lab_cont1']},
-  {id:'quim',      name:'Química Geral',                         code:'ESTBAS005', period:1,  hours:'60h',  pre:[],                              unlocks:[]},
-  {id:'alglin1',   name:'Álgebra Linear I',                      code:'ESTBAS001', period:1,  hours:'60h',  pre:[],                              unlocks:['alglin2']},
-  {id:'prog1',     name:'Ling. de Programação I',                code:'ESTECP001', period:1,  hours:'60h',  pre:[],                              unlocks:['prog2']},
-  {id:'intro_amb', name:'Intro. Ciências do Ambiente',           code:'ESTEBAS004',period:1,  hours:'30h',  pre:[],                              unlocks:[]},
-  {id:'intro_eca', name:'Intro. à Eng. Controle e Automação',    code:'ESTEBAS003',period:1,  hours:'30h',  pre:[],                              unlocks:[]},
-  {id:'calc1',     name:'Cálculo I',                             code:'ESTBAS002', period:1,  hours:'90h',  pre:[],                              unlocks:['calc2','prob_est']},
-
+  {id:'com_exp',   name:'Comunicação e Expressão',              code:'ESTBAS006', period:1,  hours:'60h',  pre:[],                              unlocks:[]},
+  {id:'fis1',      name:'Física I',                             code:'ESTBAS007', period:1,  hours:'60h',  pre:[],                              unlocks:['fis2','mec1','cont1','lab_cont1']},
+  {id:'quim',      name:'Química Geral',                        code:'ESTBAS005', period:1,  hours:'60h',  pre:[],                              unlocks:[]},
+  {id:'alglin1',   name:'Álgebra Linear I',                     code:'ESTBAS001', period:1,  hours:'60h',  pre:[],                              unlocks:['alglin2']},
+  {id:'prog1',     name:'Ling. de Programação I',               code:'ESTECP001', period:1,  hours:'60h',  pre:[],                              unlocks:['prog2']},
+  {id:'intro_amb', name:'Intro. Ciências do Ambiente',          code:'ESTEBAS004',period:1,  hours:'30h',  pre:[],                              unlocks:[]},
+  {id:'intro_eca', name:'Intro. à Eng. Controle e Automação',   code:'ESTEBAS003',period:1,  hours:'30h',  pre:[],                              unlocks:[]},
+  {id:'calc1',     name:'Cálculo I',                            code:'ESTBAS002', period:1,  hours:'90h',  pre:[],                              unlocks:['calc2','prob_est']},
   // ── 2º PERÍODO ──
-  {id:'intro_econ',name:'Introdução à Economia',                 code:'ESTBAS017', period:2,  hours:'45h',  pre:[],                              unlocks:[]},
-  {id:'fis2',      name:'Física II',                             code:'ESTBAS013', period:2,  hours:'60h',  pre:['fis1'],                        unlocks:['fis3','mec_flu','lab_fis1']},
-  {id:'intro_adm', name:'Introdução à Administração',            code:'ESTBAS011', period:2,  hours:'45h',  pre:[],                              unlocks:[]},
-  {id:'alglin2',   name:'Álgebra Linear II',                     code:'ESTBAS008', period:2,  hours:'60h',  pre:['alglin1'],                     unlocks:[]},
-  {id:'prog2',     name:'Ling. de Programação II',               code:'ESTECP002', period:2,  hours:'60h',  pre:['prog1'],                       unlocks:[]},
-  {id:'des_bas',   name:'Desenho Básico',                        code:'ESTBAS010', period:2,  hours:'60h',  pre:[],                              unlocks:[]},
-  {id:'prob_est',  name:'Probabilidade e Estatística',           code:'ESTBAS012', period:2,  hours:'60h',  pre:['calc1'],                       unlocks:[]},
-  {id:'calc2',     name:'Cálculo II',                            code:'ESTBAS009', period:2,  hours:'75h',  pre:['calc1'],                       unlocks:['calc3']},
-
+  {id:'intro_econ',name:'Introdução à Economia',                code:'ESTBAS017', period:2,  hours:'45h',  pre:[],                              unlocks:[]},
+  {id:'fis2',      name:'Física II',                            code:'ESTBAS013', period:2,  hours:'60h',  pre:['fis1'],                        unlocks:['fis3','mec_flu','lab_fis1']},
+  {id:'intro_adm', name:'Introdução à Administração',           code:'ESTBAS011', period:2,  hours:'45h',  pre:[],                              unlocks:[]},
+  {id:'alglin2',   name:'Álgebra Linear II',                    code:'ESTBAS008', period:2,  hours:'60h',  pre:['alglin1'],                     unlocks:[]},
+  {id:'prog2',     name:'Ling. de Programação II',              code:'ESTECP002', period:2,  hours:'60h',  pre:['prog1'],                       unlocks:[]},
+  {id:'des_bas',   name:'Desenho Básico',                       code:'ESTBAS010', period:2,  hours:'60h',  pre:[],                              unlocks:[]},
+  {id:'prob_est',  name:'Probabilidade e Estatística',          code:'ESTBAS012', period:2,  hours:'60h',  pre:['calc1'],                       unlocks:[]},
+  {id:'calc2',     name:'Cálculo II',                           code:'ESTBAS009', period:2,  hours:'75h',  pre:['calc1'],                       unlocks:['calc3']},
   // ── 3º PERÍODO ──
-  {id:'mec1',      name:'Mecânica I',                            code:'ESTECI002', period:3,  hours:'60h',  pre:['fis1'],                        unlocks:['mec_sol']},
-  {id:'fis3',      name:'Física III',                            code:'ESTBAS015', period:3,  hours:'60h',  pre:['fis2'],                        unlocks:['fis4','lab_fis2','circ1','lab_circ1']},
-  {id:'lab_fis1',  name:'Lab. de Física I',                      code:'ESTBAS016', period:3,  hours:'30h',  pre:['fis2'],                        unlocks:[]},
-  {id:'mec_flu',   name:'Mecânica dos Fluídos',                  code:'ESTEME004', period:3,  hours:'60h',  pre:['fis2'],                        unlocks:[]},
-  {id:'prat_prof', name:'Prática Profissional e Ética',          code:'ESTBAS022', period:3,  hours:'30h',  pre:[],                              unlocks:[]},
-  {id:'intro_mat', name:'Intro. Ciências dos Materiais',         code:'ESTBAS025', period:3,  hours:'60h',  pre:[],                              unlocks:['proc_trans']},
-  {id:'empreend',  name:'Empreendedorismo e Inovação',           code:'ESTEMA062', period:3,  hours:'45h',  pre:[],                              unlocks:[]},
-  {id:'calc3',     name:'Cálculo III',                           code:'ESTBAS014', period:3,  hours:'75h',  pre:['calc2'],                       unlocks:['calc4','calc_num','sist_din']},
-  {id:'intro_ca',  name:'Introdução ao Controle e Automação',    code:'ESTEMA001', period:3,  hours:'60h',  pre:[],                              unlocks:[]},
-
+  {id:'mec1',      name:'Mecânica I',                           code:'ESTECI002', period:3,  hours:'60h',  pre:['fis1'],                        unlocks:['mec_sol']},
+  {id:'fis3',      name:'Física III',                           code:'ESTBAS015', period:3,  hours:'60h',  pre:['fis2'],                        unlocks:['fis4','lab_fis2','circ1','lab_circ1']},
+  {id:'lab_fis1',  name:'Lab. de Física I',                     code:'ESTBAS016', period:3,  hours:'30h',  pre:['fis2'],                        unlocks:[]},
+  {id:'mec_flu',   name:'Mecânica dos Fluídos',                 code:'ESTEME004', period:3,  hours:'60h',  pre:['fis2'],                        unlocks:['cmd_elet']},
+  {id:'prat_prof', name:'Prática Profissional e Ética',         code:'ESTBAS022', period:3,  hours:'30h',  pre:[],                              unlocks:[]},
+  {id:'intro_mat', name:'Intro. Ciências dos Materiais',        code:'ESTBAS025', period:3,  hours:'60h',  pre:[],                              unlocks:['proc_trans']},
+  {id:'empreend',  name:'Empreendedorismo e Inovação',          code:'ESTEMA062', period:3,  hours:'45h',  pre:[],                              unlocks:[]},
+  {id:'calc3',     name:'Cálculo III',                          code:'ESTBAS014', period:3,  hours:'75h',  pre:['calc2'],                       unlocks:['calc4','calc_num','sist_din']},
+  {id:'intro_ca',  name:'Introdução ao Controle e Automação',   code:'ESTEMA001', period:3,  hours:'60h',  pre:[],                              unlocks:[]},
   // ── 4º PERÍODO ──
-  {id:'mec_sol',   name:'Mecânica dos Sólidos',                  code:'ESTEME01',  period:4,  hours:'60h',  pre:['mec1'],                        unlocks:[]},
-  {id:'fis4',      name:'Física IV',                             code:'ESTBAS018', period:4,  hours:'60h',  pre:['fis3'],                        unlocks:['eletromag']},
-  {id:'lab_fis2',  name:'Lab. de Física II',                     code:'ESTBAS020', period:4,  hours:'30h',  pre:['fis3'],                        unlocks:[]},
-  {id:'circ1',     name:'Circuitos Elétricos I',                 code:'ESTEEL001', period:4,  hours:'60h',  pre:['fis3'],                        unlocks:['circ2','elet_ana','inst_ind','lab_inst','lab_circ2']},
-  {id:'lab_circ1', name:'Lab. de Circuitos I',                   code:'ESTEEL002', period:4,  hours:'30h',  pre:['fis3'],                        unlocks:['lab_circ2','lab_elet_ana']},
-  {id:'calc_num',  name:'Cálculo Numérico',                      code:'ESTEBAS049',period:4,  hours:'60h',  pre:['calc3'],                       unlocks:[]},
-  {id:'sist_din',  name:'Sistemas Dinâmicos',                    code:'ESTEMA007', period:4,  hours:'60h',  pre:['calc3'],                       unlocks:[]},
-  {id:'calc4',     name:'Cálculo IV',                            code:'ESTBAS019', period:4,  hours:'60h',  pre:['calc3'],                       unlocks:['sinais']},
-
+  {id:'mec_sol',   name:'Mecânica dos Sólidos',                 code:'ESTEME01',  period:4,  hours:'60h',  pre:['mec1'],                        unlocks:[]},
+  {id:'fis4',      name:'Física IV',                            code:'ESTBAS018', period:4,  hours:'60h',  pre:['fis3'],                        unlocks:['eletromag']},
+  {id:'lab_fis2',  name:'Lab. de Física II',                    code:'ESTBAS020', period:4,  hours:'30h',  pre:['fis3'],                        unlocks:[]},
+  {id:'circ1',     name:'Circuitos Elétricos I',                code:'ESTEEL001', period:4,  hours:'60h',  pre:['fis3'],                        unlocks:['circ2','elet_ana','inst_ind']},
+  {id:'lab_circ1', name:'Lab. de Circuitos I',                  code:'ESTEEL002', period:4,  hours:'30h',  pre:['fis3'],                        unlocks:['lab_circ2','lab_elet_ana']},
+  {id:'calc_num',  name:'Cálculo Numérico',                     code:'ESTEBAS049',period:4,  hours:'60h',  pre:['calc3'],                       unlocks:[]},
+  {id:'sist_din',  name:'Sistemas Dinâmicos',                   code:'ESTEMA007', period:4,  hours:'60h',  pre:['calc3'],                       unlocks:[]},
+  {id:'calc4',     name:'Cálculo IV',                           code:'ESTBAS019', period:4,  hours:'60h',  pre:['calc3'],                       unlocks:['sinais']},
   // ── 5º PERÍODO ──
-  {id:'cont1',     name:'Controle I',                            code:'ESTEMT003', period:5,  hours:'60h',  pre:['fis1'],                        unlocks:['cont2','lab_cont2']},
-  {id:'lab_cont1', name:'Lab. de Controle I',                    code:'ESTEMA008', period:5,  hours:'30h',  pre:['fis1'],                        unlocks:['lab_cont2']},
-  {id:'circ2',     name:'Circuitos Elétricos II',                code:'ESTEEL003', period:5,  hours:'60h',  pre:['circ1'],                       unlocks:['sist_pot']},
-  {id:'elet_ana',  name:'Eletrônica Analógica',                  code:'ESTEMA003', period:5,  hours:'60h',  pre:['circ1'],                       unlocks:['elet_dig','lab_elet_dig']},
-  {id:'inst_ind',  name:'Instrumentação Industrial',             code:'ESTEMA005', period:5,  hours:'60h',  pre:['circ1'],                       unlocks:['lab_inst']},
-  {id:'lab_inst',  name:'Lab. de Instrumentação Industrial',     code:'ESTEMA006', period:5,  hours:'30h',  pre:['circ1'],                       unlocks:[]},
-  {id:'lab_circ2', name:'Lab. de Circuitos Elétricos II',        code:'ESTEEL004', period:5,  hours:'30h',  pre:['circ1','lab_circ1'],           unlocks:[]},
-  {id:'lab_elet_ana',name:'Lab. de Eletrônica Analógica',        code:'ESTEMA004', period:5,  hours:'45h',  pre:['circ1','lab_circ1'],           unlocks:[]},
-  {id:'sinais',    name:'Análise de Sinais e Sistemas',          code:'ESTEMA002', period:5,  hours:'60h',  pre:['calc4'],                       unlocks:['mod_sim']},
-
+  {id:'cont1',     name:'Controle I',                           code:'ESTEMT003', period:5,  hours:'60h',  pre:['fis1'],                        unlocks:['cont2','lab_cont2']},
+  {id:'lab_cont1', name:'Lab. de Controle I',                   code:'ESTEMA008', period:5,  hours:'30h',  pre:['fis1'],                        unlocks:['lab_cont2']},
+  {id:'circ2',     name:'Circuitos Elétricos II',               code:'ESTEEL003', period:5,  hours:'60h',  pre:['circ1'],                       unlocks:['sist_pot']},
+  {id:'elet_ana',  name:'Eletrônica Analógica',                 code:'ESTEMA003', period:5,  hours:'60h',  pre:['circ1'],                       unlocks:['elet_dig','lab_elet_dig']},
+  {id:'inst_ind',  name:'Instrumentação Industrial',            code:'ESTEMA005', period:5,  hours:'60h',  pre:['circ1'],                       unlocks:['lab_inst']},
+  {id:'lab_inst',  name:'Lab. de Instrumentação Industrial',    code:'ESTEMA006', period:5,  hours:'30h',  pre:['inst_ind'],                    unlocks:[]},
+  {id:'lab_circ2', name:'Lab. de Circuitos Elétricos II',       code:'ESTEEL004', period:5,  hours:'30h',  pre:['circ1','lab_circ1'],           unlocks:[]},
+  {id:'lab_elet_ana',name:'Lab. de Eletrônica Analógica',       code:'ESTEMA004', period:5,  hours:'45h',  pre:['circ1','lab_circ1'],           unlocks:[]},
+  {id:'sinais',    name:'Análise de Sinais e Sistemas',         code:'ESTEMA002', period:5,  hours:'60h',  pre:['calc4'],                       unlocks:['mod_sim']},
   // ── 6º PERÍODO ──
-  {id:'cont2',     name:'Controle II',                           code:'ESTEMT004', period:6,  hours:'60h',  pre:['cont1'],                       unlocks:['cont3','lab_cont3']},
-  {id:'lab_cont2', name:'Lab. de Controle II',                   code:'ESTEMA010', period:6,  hours:'30h',  pre:['cont1','lab_cont1'],           unlocks:['lab_cont3']},
-  {id:'sist_pot',  name:'Sist. Eletrônicos de Potência',         code:'ESTEMT006', period:6,  hours:'60h',  pre:['circ2'],                       unlocks:[]},
-  {id:'elet_dig',  name:'Eletrônica Digital',                    code:'ESTMA009',  period:6,  hours:'60h',  pre:['elet_ana'],                    unlocks:[]},
-  {id:'lab_elet_dig',name:'Lab. de Eletrônica Digital',          code:'ESTEMA061', period:6,  hours:'45h',  pre:['elet_ana'],                    unlocks:[]},
-  {id:'proc_trans',name:'Processos de Transformação',            code:'ESTEMA013', period:6,  hours:'60h',  pre:['intro_mat'],                   unlocks:['gest_op']},
-  {id:'eletromag', name:'Eletromagnetismo',                      code:'ESTEEL013', period:6,  hours:'60h',  pre:['fis4'],                        unlocks:['maq_elet','lab_maq']},
-  {id:'mod_sim',   name:'Modelagem e Simulação de Sist. Disc.',  code:'ESTEMT001', period:6,  hours:'60h',  pre:['sinais'],                      unlocks:['auto_sup']},
-
+  {id:'cont2',     name:'Controle II',                          code:'ESTEMT004', period:6,  hours:'60h',  pre:['cont1'],                       unlocks:['cont3','lab_cont3']},
+  {id:'lab_cont2', name:'Lab. de Controle II',                  code:'ESTEMA010', period:6,  hours:'30h',  pre:['cont1','lab_cont1'],           unlocks:['lab_cont3']},
+  {id:'sist_pot',  name:'Sist. Eletrônicos de Potência',        code:'ESTEMT006', period:6,  hours:'60h',  pre:['circ2'],                       unlocks:[]},
+  {id:'elet_dig',  name:'Eletrônica Digital',                   code:'ESTMA009',  period:6,  hours:'60h',  pre:['elet_ana'],                    unlocks:['lab_elet_dig']},
+  {id:'lab_elet_dig',name:'Lab. de Eletrônica Digital',         code:'ESTEMA061', period:6,  hours:'45h',  pre:['elet_dig'],                    unlocks:[]},
+  {id:'proc_trans',name:'Processos de Transformação',           code:'ESTEMA013', period:6,  hours:'60h',  pre:['intro_mat'],                   unlocks:['gest_op']},
+  {id:'eletromag', name:'Eletromagnetismo',                     code:'ESTEEL013', period:6,  hours:'60h',  pre:['fis4'],                        unlocks:['maq_elet','lab_maq']},
+  {id:'mod_sim',   name:'Modelagem e Simulação de Sist. Disc.', code:'ESTEMT001', period:6,  hours:'60h',  pre:['sinais'],                      unlocks:['auto_sup']},
   // ── 7º PERÍODO ──
-  {id:'cont3',     name:'Controle III',                          code:'ESTEMAS015',period:7,  hours:'45h',  pre:['cont2'],                       unlocks:[]},
-  {id:'lab_cont3', name:'Lab. de Controle III',                  code:'ESTEMAS018',period:7,  hours:'30h',  pre:['cont2','lab_cont2'],           unlocks:[]},
-  {id:'estagio1',  name:'Estágio em ECA I',                      code:'ESTEMA011', period:7,  hours:'450h', pre:['com_exp','fis1','quim','alglin1','prog1','intro_amb','intro_eca','calc1','intro_econ','fis2','intro_adm','alglin2','prog2','des_bas','prob_est','calc2','mec1','fis3','lab_fis1','mec_flu','prat_prof','intro_mat','empreend','calc3','intro_ca','mec_sol','fis4','lab_fis2','circ1','lab_circ1','calc_num','sist_din','calc4','cont1','lab_cont1','circ2','elet_ana','inst_ind','lab_inst','lab_circ2','lab_elet_ana','sinais','cont2','lab_cont2','sist_pot','elet_dig','lab_elet_dig','proc_trans','eletromag','mod_sim'], unlocks:['estagio2']},
-  {id:'hig_seg',   name:'Higiene e Segurança do Trabalho',       code:'ESTECI024', period:7,  hours:'60h',  pre:[],                              unlocks:[]},
-  {id:'opt1_14',   name:'Optativa I',                            code:'—',         period:7,  hours:'—',    pre:[],                              unlocks:[]},
-  {id:'maq_elet',  name:'Máquinas Elétricas e Acionamentos',     code:'ESTEEL027', period:7,  hours:'60h',  pre:['eletromag'],                   unlocks:['lab_maq']},
-  {id:'lab_maq',   name:'Lab. de Máquinas Elétricas',            code:'ESTEMA012', period:7,  hours:'45h',  pre:['eletromag'],                   unlocks:[]},
-
+  {id:'cont3',     name:'Controle III',                         code:'ESTEMAS015',period:7,  hours:'45h',  pre:['cont2'],                       unlocks:[]},
+  {id:'lab_cont3', name:'Lab. de Controle III',                 code:'ESTEMAS018',period:7,  hours:'30h',  pre:['cont2','lab_cont2'],           unlocks:[]},
+  {id:'estagio1',  name:'Estágio em ECA I',                     code:'ESTEMA011', period:7,  hours:'450h', pre:['com_exp','fis1','quim','alglin1','prog1','intro_amb','intro_eca','calc1','intro_econ','fis2','intro_adm','alglin2','prog2','des_bas','prob_est','calc2','mec1','fis3','lab_fis1','mec_flu','prat_prof','intro_mat','empreend','calc3','intro_ca','mec_sol','fis4','lab_fis2','circ1','lab_circ1','calc_num','sist_din','calc4','cont1','lab_cont1','circ2','elet_ana','inst_ind','lab_inst','lab_circ2','lab_elet_ana','sinais','cont2','lab_cont2','sist_pot','elet_dig','lab_elet_dig','proc_trans','eletromag','mod_sim'], unlocks:['estagio2']},
+  {id:'hig_seg',   name:'Higiene e Segurança do Trabalho',      code:'ESTECI024', period:7,  hours:'60h',  pre:[],                              unlocks:[]},
+  {id:'opt1_14',   name:'Optativa I',                           code:'—',         period:7,  hours:'—',    pre:[],                              unlocks:[]},
+  {id:'maq_elet',  name:'Máquinas Elétricas e Acionamentos',    code:'ESTEEL027', period:7,  hours:'60h',  pre:['eletromag'],                   unlocks:['lab_maq']},
+  {id:'lab_maq',   name:'Lab. de Máquinas Elétricas',           code:'ESTEMA012', period:7,  hours:'45h',  pre:['maq_elet'],                    unlocks:[]},
   // ── 8º PERÍODO ──
-  {id:'opt2_14',   name:'Optativa II',                           code:'—',         period:8,  hours:'—',    pre:[],                              unlocks:[]},
-  {id:'opt3_14',   name:'Optativa III',                          code:'—',         period:8,  hours:'—',    pre:[],                              unlocks:[]},
-  {id:'estagio2',  name:'Estágio em ECA II',                     code:'ESTEMA021', period:8,  hours:'450h', pre:['estagio1'],                    unlocks:[]},
-  {id:'cmd_elet',  name:'Comandos Eletropneumáticos e Hid.',     code:'ESTEMA031', period:8,  hours:'60h',  pre:['mec_flu'],                     unlocks:['lab_cmd']},
-  {id:'opt4_14',   name:'Optativa IV',                           code:'—',         period:8,  hours:'—',    pre:[],                              unlocks:[]},
-  {id:'gest_op',   name:'Gestão de Operações',                   code:'ESTEMA017', period:8,  hours:'45h',  pre:['proc_trans'],                  unlocks:[]},
-
+  {id:'opt2_14',   name:'Optativa II',                          code:'—',         period:8,  hours:'—',    pre:[],                              unlocks:[]},
+  {id:'opt3_14',   name:'Optativa III',                         code:'—',         period:8,  hours:'—',    pre:[],                              unlocks:[]},
+  {id:'estagio2',  name:'Estágio em ECA II',                    code:'ESTEMA021', period:8,  hours:'450h', pre:['estagio1'],                    unlocks:[]},
+  {id:'cmd_elet',  name:'Comandos Eletropneumáticos e Hid.',    code:'ESTEMA031', period:8,  hours:'60h',  pre:['mec_flu'],                     unlocks:['lab_cmd']},
+  {id:'opt4_14',   name:'Optativa IV',                          code:'—',         period:8,  hours:'—',    pre:[],                              unlocks:[]},
+  {id:'gest_op',   name:'Gestão de Operações',                  code:'ESTEMA017', period:8,  hours:'45h',  pre:['proc_trans'],                  unlocks:[]},
   // ── 9º PERÍODO ──
-  {id:'tcc1',      name:'TCC I',                                 code:'ESTMA036',  period:9,  hours:'45h',  pre:['com_exp','fis1','quim','alglin1','prog1','intro_amb','intro_eca','calc1','intro_econ','fis2','intro_adm','alglin2','prog2','des_bas','prob_est','calc2','mec1','fis3','lab_fis1','mec_flu','prat_prof','intro_mat','empreend','calc3','intro_ca','mec_sol','fis4','lab_fis2','circ1','lab_circ1','calc_num','sist_din','calc4','cont1','lab_cont1','circ2','elet_ana','inst_ind','lab_inst','lab_circ2','lab_elet_ana','sinais','cont2','lab_cont2','sist_pot','elet_dig','lab_elet_dig','proc_trans','eletromag','mod_sim','cont3','lab_cont3','hig_seg','opt1_14','maq_elet','lab_maq','opt2_14','opt3_14','cmd_elet','opt4_14','gest_op'], unlocks:['tcc2']},
-  {id:'top_esp1',  name:'Tópicos Especiais em ECA I',            code:'ESTMA100',  period:9,  hours:'60h',  pre:['com_exp','fis1','quim','alglin1','prog1','intro_amb','intro_eca','calc1','intro_econ','fis2','intro_adm','alglin2','prog2','des_bas','prob_est','calc2','mec1','fis3','lab_fis1','mec_flu','prat_prof','intro_mat','empreend','calc3','intro_ca','mec_sol','fis4','lab_fis2','circ1','lab_circ1','calc_num','sist_din','calc4','cont1','lab_cont1','circ2','elet_ana','inst_ind','lab_inst','lab_circ2','lab_elet_ana','sinais','cont2','lab_cont2','sist_pot','elet_dig','lab_elet_dig','proc_trans','eletromag','mod_sim'], unlocks:['top_esp2']},
-  {id:'opt5_14',   name:'Optativa V',                            code:'—',         period:9,  hours:'—',    pre:[],                              unlocks:[]},
-  {id:'lab_cmd',   name:'Lab. Comandos Eletropneumáticos e Hid.',code:'ESTMA820',  period:9,  hours:'30h',  pre:['cmd_elet'],                    unlocks:[]},
-  {id:'opt6_14',   name:'Optativa VI',                           code:'—',         period:9,  hours:'—',    pre:[],                              unlocks:[]},
-  {id:'opt7_14',   name:'Optativa VII',                          code:'—',         period:9,  hours:'—',    pre:[],                              unlocks:[]},
-  {id:'auto_sup',  name:'Automação e Supervisão de Proc.',       code:'ESTMA026',  period:9,  hours:'45h',  pre:['mod_sim'],                     unlocks:[]},
-
+  {id:'tcc1',      name:'TCC I',                                code:'ESTMA036',  period:9,  hours:'45h',  pre:['com_exp','fis1','quim','alglin1','prog1','intro_amb','intro_eca','calc1','intro_econ','fis2','intro_adm','alglin2','prog2','des_bas','prob_est','calc2','mec1','fis3','lab_fis1','mec_flu','prat_prof','intro_mat','empreend','calc3','intro_ca','mec_sol','fis4','lab_fis2','circ1','lab_circ1','calc_num','sist_din','calc4','cont1','lab_cont1','circ2','elet_ana','inst_ind','lab_inst','lab_circ2','lab_elet_ana','sinais','cont2','lab_cont2','sist_pot','elet_dig','lab_elet_dig','proc_trans','eletromag','mod_sim','cont3','lab_cont3','hig_seg','opt1_14','maq_elet','lab_maq','opt2_14','opt3_14','cmd_elet','opt4_14','gest_op'], unlocks:['tcc2']},
+  {id:'top_esp1',  name:'Tópicos Especiais em ECA I',           code:'ESTMA100',  period:9,  hours:'60h',  pre:['com_exp','fis1','quim','alglin1','prog1','intro_amb','intro_eca','calc1','intro_econ','fis2','intro_adm','alglin2','prog2','des_bas','prob_est','calc2','mec1','fis3','lab_fis1','mec_flu','prat_prof','intro_mat','empreend','calc3','intro_ca','mec_sol','fis4','lab_fis2','circ1','lab_circ1','calc_num','sist_din','calc4','cont1','lab_cont1','circ2','elet_ana','inst_ind','lab_inst','lab_circ2','lab_elet_ana','sinais','cont2','lab_cont2','sist_pot','elet_dig','lab_elet_dig','proc_trans','eletromag','mod_sim'], unlocks:['top_esp2']},
+  {id:'opt5_14',   name:'Optativa V',                           code:'—',         period:9,  hours:'—',    pre:[],                              unlocks:[]},
+  {id:'lab_cmd',   name:'Lab. Comandos Eletropneumáticos e Hid.',code:'ESTMA820', period:9,  hours:'30h',  pre:['cmd_elet'],                    unlocks:[]},
+  {id:'opt6_14',   name:'Optativa VI',                          code:'—',         period:9,  hours:'—',    pre:[],                              unlocks:[]},
+  {id:'opt7_14',   name:'Optativa VII',                         code:'—',         period:9,  hours:'—',    pre:[],                              unlocks:[]},
+  {id:'auto_sup',  name:'Automação e Supervisão de Proc.',      code:'ESTMA026',  period:9,  hours:'45h',  pre:['mod_sim'],                     unlocks:[]},
   // ── 10º PERÍODO ──
-  {id:'tcc2',      name:'TCC II',                                code:'ESTEMA046', period:10, hours:'45h',  pre:['tcc1'],                        unlocks:[]},
-  {id:'top_esp2',  name:'Tópicos Especiais em ECA II',           code:'ESTEMA102', period:10, hours:'60h',  pre:['top_esp1'],                    unlocks:[]},
-  {id:'opt8_14',   name:'Optativa VIII',                         code:'—',         period:10, hours:'—',    pre:[],                              unlocks:[]},
-  {id:'opt9_14',   name:'Optativa IX',                           code:'—',         period:10, hours:'—',    pre:[],                              unlocks:[]},
-  {id:'opt10_14',  name:'Optativa X',                            code:'—',         period:10, hours:'—',    pre:[],                              unlocks:[]},
+  {id:'tcc2',      name:'TCC II',                               code:'ESTEMA046', period:10, hours:'45h',  pre:['tcc1'],                        unlocks:[]},
+  {id:'top_esp2',  name:'Tópicos Especiais em ECA II',          code:'ESTEMA102', period:10, hours:'60h',  pre:['top_esp1'],                    unlocks:[]},
+  {id:'opt8_14',   name:'Optativa VIII',                        code:'—',         period:10, hours:'—',    pre:[],                              unlocks:[]},
+  {id:'opt9_14',   name:'Optativa IX',                          code:'—',         period:10, hours:'—',    pre:[],                              unlocks:[]},
+  {id:'opt10_14',  name:'Optativa X',                           code:'—',         period:10, hours:'—',    pre:[],                              unlocks:[]},
 ],
 "2023":[
-  {id:'com_exp_23',  name:'Comunicação e Expressão',        code:'ESTBAS006', period:1,hours:'60h', pre:[],unlocks:['prat_prof_23']},
-  {id:'intro_eca_23',name:'Intro. Eng. Controle e Aut.',    code:'ESTEMA103', period:1,hours:'30h', pre:[],unlocks:[]},
-  {id:'intro_amb_23',name:'Intro. Ciências do Ambiente',    code:'ESTEBAS004',period:1,hours:'30h', pre:[],unlocks:[]},
-  {id:'fis1_23',     name:'Física I',                       code:'ESTBAS007', period:1,hours:'60h', pre:[],unlocks:['fis2_23','lab_fis1_23','mec_sol_23']},
-  {id:'quim_23',     name:'Química Geral',                  code:'ESTBAS005', period:1,hours:'60h', pre:[],unlocks:['intro_mat_23']},
-  {id:'alglin1_23',  name:'Álgebra Linear I',               code:'ESTBAS001', period:1,hours:'60h', pre:[],unlocks:['alglin2_23']},
-  {id:'prog1_23',    name:'Ling. de Programação I',         code:'ESTECP001', period:1,hours:'60h', pre:[],unlocks:['prog2_23']},
-  {id:'calc1_23',    name:'Cálculo I',                      code:'ESTBAS002', period:1,hours:'90h', pre:[],unlocks:['calc2_23','prob_est_23']},
-  {id:'intro_econ_23',name:'Introdução à Economia',         code:'ESTBAS017', period:1,hours:'45h', pre:[],unlocks:[]},
-  {id:'fis2_23',     name:'Física II',                      code:'ESTBAS013', period:2,hours:'60h', pre:['fis1_23'],unlocks:['fis3_23','lab_fis2_23','fen_trans_23']},
-  {id:'alglin2_23',  name:'Álgebra Linear II',              code:'ESTBAS008', period:2,hours:'60h', pre:['alglin1_23'],unlocks:['met_mat_23']},
-  {id:'prog2_23',    name:'Ling. de Programação II',        code:'ESTECP002', period:2,hours:'60h', pre:['prog1_23'],unlocks:['calc_num_23']},
-  {id:'prob_est_23', name:'Probabilidade e Estatística',    code:'ESTBAS012', period:2,hours:'60h', pre:['calc1_23'],unlocks:[]},
-  {id:'calc2_23',    name:'Cálculo II',                     code:'ESTBAS009', period:2,hours:'75h', pre:['calc1_23'],unlocks:['met_mat_23','calc_vet_23']},
-  {id:'des_tec_23',  name:'Desenho Técnico Ass. Comp.',     code:'ESTEMA201', period:2,hours:'60h', pre:[],unlocks:[]},
-  {id:'intro_adm_23',name:'Introdução à Administração',     code:'ESTBAS011', period:2,hours:'45h', pre:[],unlocks:[]},
-  {id:'fis3_23',     name:'Física III',                     code:'ESTBAS015', period:3,hours:'60h', pre:['fis2_23'],unlocks:['fis4_23','circ1_23']},
-  {id:'lab_fis1_23', name:'Lab. Física I',                  code:'ESTBAS016', period:3,hours:'30h', pre:['fis1_23'],unlocks:[]},
-  {id:'mec_sol_23',  name:'Mecânica dos Sólidos',           code:'ESTEMA301', period:3,hours:'60h', pre:['fis1_23'],unlocks:[]},
-  {id:'fen_trans_23',name:'Fenômenos de Transporte',        code:'ESTEMA302', period:3,hours:'60h', pre:['fis2_23'],unlocks:['proc_fab_23']},
-  {id:'intro_mat_23',name:'Intro. Ciências dos Materiais',  code:'ESTEMA305', period:3,hours:'60h', pre:['quim_23'],unlocks:[]},
-  {id:'inst_bas_23', name:'Instrumentação Básica',          code:'ESTEMA304', period:3,hours:'45h', pre:[],unlocks:['inst_ind_23']},
-  {id:'intro_ca_23', name:'Intro. Controle e Automação',    code:'ESTEMA303', period:3,hours:'30h', pre:[],unlocks:[]},
-  {id:'met_mat_23',  name:'Métodos Matemáticos',            code:'ESTEMA300', period:3,hours:'60h', pre:['calc2_23','alglin2_23'],unlocks:['sist_din_23']},
-  {id:'prat_prof_23',name:'Prática Profissional e Ética',   code:'ESTBAS022', period:3,hours:'60h', pre:['com_exp_23'],unlocks:[]},
-  {id:'fis4_23',     name:'Física IV',                      code:'ESTBAS018', period:4,hours:'60h', pre:['fis3_23'],unlocks:[]},
-  {id:'lab_fis2_23', name:'Lab. Física II',                 code:'ESTBAS020', period:4,hours:'30h', pre:['fis2_23'],unlocks:[]},
-  {id:'circ1_23',    name:'Circuitos Elétricos I',          code:'ESTEEL001', period:4,hours:'60h', pre:['fis3_23'],unlocks:['circ2_23','lab_circ1_23','elet_ana_23']},
-  {id:'lab_circ1_23',name:'Lab. Circuitos Elétricos I',     code:'ESTEMA403', period:4,hours:'30h', pre:['circ1_23'],unlocks:['lab_circ2_23']},
-  {id:'calc_vet_23', name:'Cálculo Vetorial',               code:'ESTEMA400', period:4,hours:'75h', pre:['calc2_23'],unlocks:['sinais_23']},
-  {id:'sinais_23',   name:'Sinais e Sistemas',              code:'ESTEMA401', period:4,hours:'60h', pre:['calc_vet_23'],unlocks:['elet_dig_23','sist_ev_23']},
-  {id:'sist_din_23', name:'Sistemas Dinâmicos',             code:'ESTEMA007', period:4,hours:'60h', pre:['met_mat_23'],unlocks:['cont1_23']},
-  {id:'calc_num_23', name:'Cálculo Numérico',               code:'ESTBAS049', period:4,hours:'60h', pre:['prog2_23'],unlocks:[]},
-  {id:'circ2_23',    name:'Circuitos Elétricos II',         code:'ESTEEL003', period:5,hours:'60h', pre:['circ1_23'],unlocks:['sist_pot_23','lab_circ2_23']},
-  {id:'elet_ana_23', name:'Eletrônica Analógica',           code:'ESTEMA003', period:5,hours:'60h', pre:['circ1_23'],unlocks:['lab_elet_ana_23','sist_pot_23','elet_dig_23']},
-  {id:'inst_ind_23', name:'Instrumentação Industrial',      code:'ESTEMA005', period:5,hours:'60h', pre:['inst_bas_23'],unlocks:['lab_inst_23']},
-  {id:'cont1_23',    name:'Controle I',                     code:'ESTEMA500', period:5,hours:'60h', pre:['sist_din_23'],unlocks:['cont2_23','lab_cont1_23','auto_sist1_23']},
-  {id:'lab_cont1_23',name:'Lab. Controle I',                code:'ESTEMA501', period:5,hours:'45h', pre:['cont1_23'],unlocks:['lab_cont2_23']},
-  {id:'sist_ev_23',  name:'Sist. a Eventos Discretos',      code:'ESTEMA402', period:5,hours:'60h', pre:['sinais_23'],unlocks:[]},
-  {id:'lab_circ2_23',name:'Lab. Circuitos Elétricos II',    code:'ESTEEL004', period:6,hours:'30h', pre:['circ2_23','lab_circ1_23'],unlocks:[]},
-  {id:'lab_elet_ana_23',name:'Lab. Eletrônica Analógica',   code:'ESTEMA004', period:6,hours:'45h', pre:['elet_ana_23'],unlocks:[]},
-  {id:'lab_inst_23', name:'Lab. Instrumentação Industrial', code:'ESTEMA006', period:6,hours:'30h', pre:['inst_ind_23'],unlocks:[]},
-  {id:'sist_pot_23', name:'Sist. Eletrônicos de Potência',  code:'ESTEMA006B',period:6,hours:'60h', pre:['circ2_23','elet_ana_23'],unlocks:['maq_elet_23']},
-  {id:'elet_dig_23', name:'Eletrônica Digital',             code:'ESTEMA009', period:6,hours:'60h', pre:['elet_ana_23','sinais_23'],unlocks:['lab_elet_dig_23','micro_23']},
-  {id:'hig_seg_23',  name:'Higiene e Segurança',            code:'ESTECI024', period:6,hours:'60h', pre:[],unlocks:[]},
-  {id:'proc_fab_23', name:'Proc. de Fabricação Mecânica',   code:'ESTEMA502', period:6,hours:'60h', pre:['fen_trans_23'],unlocks:[]},
-  {id:'cont2_23',    name:'Controle II',                    code:'ESTEMA600', period:6,hours:'60h', pre:['cont1_23'],unlocks:['cont3_23','lab_cont2_23']},
-  {id:'auto_sist1_23',name:'Automação de Sistemas I',       code:'ESTEMA503', period:6,hours:'60h', pre:['cont1_23'],unlocks:['auto_sist2_23']},
-  {id:'lab_elet_dig_23',name:'Lab. Eletrônica Digital',     code:'ESTEMA061', period:7,hours:'45h', pre:['elet_dig_23'],unlocks:[]},
-  {id:'maq_elet_23', name:'Máquinas Elétricas e Acion.',    code:'ESTEEL027', period:7,hours:'60h', pre:['sist_pot_23'],unlocks:['lab_maq_23']},
-  {id:'micro_23',    name:'Microcontroladores',             code:'ESTEMA700', period:7,hours:'45h', pre:['elet_dig_23'],unlocks:[]},
-  {id:'lab_cont2_23',name:'Lab. Controle II',               code:'ESTEMA601', period:7,hours:'30h', pre:['cont2_23','lab_cont1_23'],unlocks:['lab_cont3_23']},
-  {id:'cont3_23',    name:'Controle III',                   code:'ESTEMA701', period:7,hours:'60h', pre:['cont2_23'],unlocks:['lab_cont3_23','cont_dig_23','robotica_23','cont_proc_23']},
-  {id:'estagio1_23', name:'Estágio Supervisionado I em ECA',code:'ESTEMA602', period:7,hours:'390h',pre:[],unlocks:['estagio2_23']},
-  {id:'auto_sist2_23',name:'Automação de Sistemas II',      code:'ESTEMA802', period:7,hours:'45h', pre:['auto_sist1_23'],unlocks:['auto_sist3_23']},
-  {id:'lab_maq_23',  name:'Lab. Máq. Elétricas e Acion.',   code:'ESTEMA704', period:8,hours:'45h', pre:['maq_elet_23'],unlocks:[]},
-  {id:'lab_cont3_23',name:'Lab. Controle III',              code:'ESTEMA702', period:8,hours:'30h', pre:['cont3_23'],unlocks:[]},
-  {id:'cmd_pn_23',   name:'Comandos Pneumáticos e Hid.',    code:'ESTMA603',  period:8,hours:'60h', pre:[],unlocks:['lab_cmd_23']},
-  {id:'lab_cmd_23',  name:'Lab. Comandos Eletropneumáticos',code:'ESTEMA020', period:8,hours:'30h', pre:['cmd_pn_23'],unlocks:[]},
-  {id:'cont_dig_23', name:'Controle Digital',               code:'ESTEMA705', period:8,hours:'60h', pre:['cont3_23'],unlocks:[]},
-  {id:'gest_op_23',  name:'Gestão de Operações de Manuf.',  code:'ESTEMA801', period:8,hours:'30h', pre:[],unlocks:[]},
-  {id:'estagio2_23', name:'Estágio Supervisionado II em ECA',code:'ESTEMA703',period:8,hours:'390h',pre:['estagio1_23'],unlocks:[]},
-  {id:'opt1_23',     name:'Optativa I',                     code:'—',         period:8,hours:'—',   pre:[],unlocks:[]},
-  {id:'tcc1_23',     name:'TCC I',                          code:'ESTMA803',  period:9,hours:'45h', pre:[],unlocks:['tcc2_23']},
-  {id:'redes_ind_23',name:'Redes Industriais de Comunic.',  code:'ESTEMA024', period:9,hours:'60h', pre:[],unlocks:[]},
-  {id:'auto_sist3_23',name:'Automação de Sistemas III',     code:'ESTEMA900', period:9,hours:'60h', pre:['auto_sist2_23'],unlocks:[]},
-  {id:'top_esp1_23', name:'Tópicos Especiais em ECA I',     code:'ESTMA804',  period:9,hours:'60h', pre:[],unlocks:[]},
-  {id:'empr_23',     name:'Empreendedorismo e Inovação',    code:'ESTEMA904', period:9,hours:'60h', pre:[],unlocks:[]},
-  {id:'opt2_23',     name:'Optativa II',                    code:'—',         period:9,hours:'—',   pre:[],unlocks:[]},
-  {id:'opt3_23',     name:'Optativa III',                   code:'—',         period:9,hours:'—',   pre:[],unlocks:[]},
-  {id:'tcc2_23',     name:'TCC II',                         code:'ESTEMA902', period:10,hours:'45h',pre:['tcc1_23'],unlocks:[]},
-  {id:'cont_proc_23',name:'Controle de Processos',          code:'ESTEMA901', period:10,hours:'60h',pre:['cont3_23'],unlocks:[]},
-  {id:'gest_proj_23',name:'Gestão de Projetos',             code:'ESTEMT048', period:10,hours:'60h',pre:[],unlocks:[]},
-  {id:'robotica_23', name:'Robótica Industrial',            code:'ESTEMT015', period:10,hours:'60h',pre:['cont3_23'],unlocks:[]},
-  {id:'top_esp2_23', name:'Tópicos Especiais em ECA II',    code:'ESTEMA903', period:10,hours:'60h',pre:[],unlocks:[]},
-  {id:'opt4_23',     name:'Optativa IV',                    code:'—',         period:10,hours:'—',  pre:[],unlocks:[]},
-  {id:'opt5_23',     name:'Optativa V',                     code:'—',         period:10,hours:'—',  pre:[],unlocks:[]},
+  // ── 1º PERÍODO ──
+  {id:'com_exp_23',   name:'Comunicação e Expressão',             code:'ESTBAS006', period:1,  hours:'60h',  pre:[],                          unlocks:[]},
+  {id:'fis1_23',      name:'Física I',                            code:'ESTBAS007', period:1,  hours:'60h',  pre:[],                          unlocks:['fis2_23','mec_sol_23']},
+  {id:'quim_23',      name:'Química Geral',                       code:'ESTBAS005', period:1,  hours:'60h',  pre:[],                          unlocks:['intro_mat_23']},
+  {id:'alglin1_23',   name:'Álgebra Linear I',                    code:'ESTBAS001', period:1,  hours:'60h',  pre:[],                          unlocks:['alglin2_23']},
+  {id:'prog1_23',     name:'Ling. de Programação I',              code:'ESTECP001', period:1,  hours:'60h',  pre:[],                          unlocks:['prog2_23']},
+  {id:'intro_amb_23', name:'Intro. Ciências do Ambiente',         code:'ESTEBAS004',period:1,  hours:'30h',  pre:[],                          unlocks:[]},
+  {id:'intro_eca_23', name:'Intro. à Eng. Controle e Automação',  code:'ESTEMA103', period:1,  hours:'30h',  pre:[],                          unlocks:['intro_ca_23','inst_bas_23']},
+  {id:'calc1_23',     name:'Cálculo I',                           code:'ESTBAS002', period:1,  hours:'90h',  pre:[],                          unlocks:['calc2_23','intro_econ_23','prob_est_23']},
+  // ── 2º PERÍODO ──
+  {id:'intro_econ_23',name:'Introdução à Economia',               code:'ESTBAS017', period:2,  hours:'45h',  pre:['calc1_23'],                unlocks:[]},
+  {id:'fis2_23',      name:'Física II',                           code:'ESTBAS013', period:2,  hours:'60h',  pre:['fis1_23'],                 unlocks:['fis3_23','fen_trans_23']},
+  {id:'des_tec_23',   name:'Desenho Técnico Ass. Computador',     code:'ESTEMA201', period:2,  hours:'60h',  pre:[],                          unlocks:[]},
+  {id:'alglin2_23',   name:'Álgebra Linear II',                   code:'ESTBAS008', period:2,  hours:'60h',  pre:['alglin1_23'],              unlocks:['met_mat_23']},
+  {id:'prog2_23',     name:'Ling. de Programação II',             code:'ESTECP002', period:2,  hours:'60h',  pre:['prog1_23'],                unlocks:[]},
+  {id:'intro_adm_23', name:'Introdução à Administração',          code:'ESTBAS011', period:2,  hours:'45h',  pre:[],                          unlocks:[]},
+  {id:'prob_est_23',  name:'Probabilidade e Estatística',         code:'ESTBAS012', period:2,  hours:'60h',  pre:['calc1_23'],                unlocks:[]},
+  {id:'calc2_23',     name:'Cálculo II',                          code:'ESTBAS009', period:2,  hours:'75h',  pre:['calc1_23'],                unlocks:['met_mat_23','calc_vet_23']},
+  // ── 3º PERÍODO ──
+  {id:'mec_sol_23',   name:'Mecânica dos Sólidos',                code:'ESTEMA301', period:3,  hours:'60h',  pre:['fis1_23'],                 unlocks:[]},
+  {id:'fis3_23',      name:'Física III',                          code:'ESTBAS015', period:3,  hours:'60h',  pre:['fis2_23'],                 unlocks:['fis4_23','lab_fis1_23','circ1_23','lab_circ1_23']},
+  {id:'lab_fis1_23',  name:'Lab. de Física I',                    code:'ESTBAS016', period:3,  hours:'30h',  pre:['fis3_23'],                 unlocks:['lab_fis2_23']},
+  {id:'fen_trans_23', name:'Fenômenos de Transporte',             code:'ESTEMA302', period:3,  hours:'60h',  pre:['fis2_23'],                 unlocks:['proc_fab_23','cmd_pn_23']},
+  {id:'intro_mat_23', name:'Intro. Ciências dos Materiais',       code:'ESTEMA305', period:3,  hours:'60h',  pre:['quim_23'],                 unlocks:[]},
+  {id:'inst_bas_23',  name:'Instrumentação Básica',               code:'ESTEMA304', period:3,  hours:'45h',  pre:['intro_eca_23'],            unlocks:['inst_ind_23']},
+  {id:'intro_ca_23',  name:'Introdução ao Controle e Automação',  code:'ESTEMA303', period:3,  hours:'30h',  pre:['intro_eca_23'],            unlocks:['sist_ev_23']},
+  {id:'met_mat_23',   name:'Métodos Matemáticos',                 code:'ESTEMA300', period:3,  hours:'60h',  pre:['calc2_23','alglin2_23'],   unlocks:['sinais_23','sist_din_23','calc_num_23']},
+  {id:'prat_prof_23', name:'Prática Profissional e Ética',        code:'ESTBAS022', period:3,  hours:'60h',  pre:['com_exp_23'],              unlocks:[]},
+  // ── 4º PERÍODO ──
+  {id:'fis4_23',      name:'Física IV',                           code:'ESTBAS018', period:4,  hours:'60h',  pre:['fis3_23'],                 unlocks:[]},
+  {id:'lab_fis2_23',  name:'Lab. de Física II',                   code:'ESTBAS020', period:4,  hours:'30h',  pre:['lab_fis1_23'],             unlocks:[]},
+  {id:'circ1_23',     name:'Circuitos Elétricos I',               code:'ESTEEL001', period:4,  hours:'60h',  pre:['fis3_23'],                 unlocks:['circ2_23','elet_ana_23']},
+  {id:'lab_circ1_23', name:'Lab. Circuitos Elétricos I',          code:'ESTEMA403', period:4,  hours:'30h',  pre:['fis3_23'],                 unlocks:['lab_circ2_23','lab_inst_23']},
+  {id:'calc_vet_23',  name:'Cálculo Vetorial',                    code:'ESTEMA400', period:4,  hours:'75h',  pre:['calc2_23'],                unlocks:['sinais_23']},
+  {id:'sinais_23',    name:'Sinais e Sistemas',                   code:'ESTEMA401', period:4,  hours:'60h',  pre:['met_mat_23','calc_vet_23'],unlocks:[]},
+  {id:'sist_din_23',  name:'Sistemas Dinâmicos',                  code:'ESTEMA007', period:4,  hours:'60h',  pre:['met_mat_23'],              unlocks:['cont1_23']},
+  {id:'calc_num_23',  name:'Cálculo Numérico',                    code:'ESTEBAS049',period:4,  hours:'60h',  pre:['met_mat_23'],              unlocks:[]},
+  // ── 5º PERÍODO ──
+  {id:'inst_ind_23',  name:'Instrumentação Industrial',           code:'ESTEMA005', period:5,  hours:'60h',  pre:['inst_bas_23'],             unlocks:['lab_inst_23']},
+  {id:'elet_ana_23',  name:'Eletrônica Analógica',                code:'ESTEMA003', period:5,  hours:'60h',  pre:['circ1_23'],                unlocks:['lab_elet_ana_23','elet_dig_23','sist_pot_23']},
+  {id:'circ2_23',     name:'Circuitos Elétricos II',              code:'ESTEEL003', period:5,  hours:'60h',  pre:['circ1_23'],                unlocks:['sist_pot_23']},
+  {id:'lab_circ2_23', name:'Lab. Circuitos Elétricos II',         code:'ESTEEL004', period:5,  hours:'30h',  pre:['circ2_23','lab_circ1_23'],unlocks:[]},
+  {id:'lab_elet_ana_23',name:'Lab. Eletrônica Analógica',         code:'ESTEMA004', period:5,  hours:'45h',  pre:['elet_ana_23'],             unlocks:[]},
+  {id:'lab_inst_23',  name:'Lab. Instrumentação Industrial',      code:'ESTEMA006', period:5,  hours:'30h',  pre:['inst_ind_23','lab_circ1_23'], unlocks:[]},
+  {id:'cont1_23',     name:'Controle I',                          code:'ESTEMA500', period:5,  hours:'60h',  pre:['sist_din_23'],             unlocks:['cont2_23','lab_cont1_23']},
+  {id:'lab_cont1_23', name:'Lab. Controle I',                     code:'ESTEMA501', period:5,  hours:'45h',  pre:['cont1_23'],                unlocks:['lab_cont2_23']},
+  {id:'sist_ev_23',   name:'Sist. a Eventos Discretos',          code:'ESTEMA402', period:5,  hours:'60h',  pre:['intro_ca_23'],             unlocks:['auto_sist1_23']},
+  // ── 6º PERÍODO ──
+  {id:'elet_dig_23',  name:'Eletrônica Digital',                  code:'ESTEMA009', period:6,  hours:'60h',  pre:['elet_ana_23'],             unlocks:['lab_elet_dig_23','micro_23']},
+  {id:'lab_elet_dig_23',name:'Lab. Eletrônica Digital',           code:'ESTEMA061', period:6,  hours:'45h',  pre:['elet_dig_23'],             unlocks:[]},
+  {id:'sist_pot_23',  name:'Sist. Eletrônicos de Potência',       code:'ESTEMT006', period:6,  hours:'60h',  pre:['circ2_23','elet_ana_23'],  unlocks:['maq_elet_23']},
+  {id:'hig_seg_23',   name:'Higiene e Segurança do Trabalho',     code:'ESTECI024', period:6,  hours:'60h',  pre:[],                          unlocks:[]},
+  {id:'proc_fab_23',  name:'Proc. de Fabricação Mecânica',        code:'ESTEMA502', period:6,  hours:'60h',  pre:['fen_trans_23'],            unlocks:['gest_op_23']},
+  {id:'cont2_23',     name:'Controle II',                         code:'ESTEMA600', period:6,  hours:'60h',  pre:['cont1_23'],                unlocks:['cont3_23','lab_cont2_23']},
+  {id:'lab_cont2_23', name:'Lab. Controle II',                    code:'ESTEMA601', period:6,  hours:'30h',  pre:['cont2_23','lab_cont1_23'],unlocks:['lab_cont3_23']},
+  {id:'auto_sist1_23',name:'Automação de Sistemas I',             code:'ESTEMA503', period:6,  hours:'60h',  pre:['sist_ev_23'],              unlocks:['redes_ind_23','auto_sist2_23']},
+  {id:'opt1_23',      name:'Optativa I',                          code:'—',         period:6,  hours:'—',    pre:[],                          unlocks:[]},
+  // ── 7º PERÍODO ──
+  {id:'maq_elet_23',  name:'Máquinas Elétricas e Acionamentos',   code:'ESTEEL027', period:7,  hours:'60h',  pre:['sist_pot_23'],             unlocks:['lab_maq_23']},
+  {id:'cmd_pn_23',    name:'Comandos Pneumáticos e Hidráulicos',  code:'ESTMA603',  period:7,  hours:'60h',  pre:['fen_trans_23'],            unlocks:['lab_cmd_23']},
+  {id:'cont3_23',     name:'Controle III',                        code:'ESTEMA701', period:7,  hours:'60h',  pre:['cont2_23'],                unlocks:['lab_cont3_23','cont_dig_23','cont_proc_23','robotica_23']},
+  {id:'lab_cont3_23', name:'Lab. Controle III',                   code:'ESTEMA702', period:7,  hours:'30h',  pre:['cont3_23','lab_cont2_23'],unlocks:[]},
+  {id:'estagio1_23',  name:'Estágio Supervisionado I em ECA',     code:'ESTEMA602', period:7,  hours:'390h', pre:[],                          unlocks:['estagio2_23']},
+  {id:'micro_23',     name:'Microcontroladores',                  code:'ESTEMA700', period:7,  hours:'45h',  pre:['elet_dig_23'],             unlocks:['auto_sist2_23']},
+  {id:'opt2_23',      name:'Optativa II',                         code:'—',         period:7,  hours:'—',    pre:[],                          unlocks:[]},
+  // ── 8º PERÍODO ──
+  {id:'lab_maq_23',   name:'Lab. Máquinas Elétricas e Acion.',    code:'ESTEMA704', period:8,  hours:'45h',  pre:['maq_elet_23'],             unlocks:[]},
+  {id:'lab_cmd_23',   name:'Lab. Comandos Eletropneumáticos',     code:'ESTEMA020', period:8,  hours:'30h',  pre:['cmd_pn_23'],               unlocks:[]},
+  {id:'cont_dig_23',  name:'Controle Digital',                    code:'ESTEMA705', period:8,  hours:'60h',  pre:['cont3_23'],                unlocks:[]},
+  {id:'gest_op_23',   name:'Gestão de Operações de Manufatura',   code:'ESTEMA801', period:8,  hours:'30h',  pre:['proc_fab_23'],             unlocks:[]},
+  {id:'estagio2_23',  name:'Estágio Supervisionado II em ECA',    code:'ESTEMA703', period:8,  hours:'390h', pre:['estagio1_23'],             unlocks:[]},
+  {id:'redes_ind_23', name:'Redes Industriais de Comunicação',    code:'ESTEMA024', period:8,  hours:'60h',  pre:['auto_sist1_23'],           unlocks:[]},
+  {id:'auto_sist2_23',name:'Automação de Sistemas II',            code:'ESTEMA802', period:8,  hours:'45h',  pre:['micro_23','auto_sist1_23'],unlocks:['auto_sist3_23']},
+  {id:'opt3_23',      name:'Optativa III',                        code:'—',         period:8,  hours:'—',    pre:[],                          unlocks:[]},
+  // ── 9º PERÍODO ──
+  {id:'auto_sist3_23',name:'Automação de Sistemas III',           code:'ESTEMA900', period:9,  hours:'60h',  pre:['auto_sist2_23'],           unlocks:[]},
+  {id:'top_esp1_23',  name:'Tópicos Especiais em ECA I',          code:'ESTMA804',  period:9,  hours:'60h',  pre:[],                          unlocks:[]},
+  {id:'cont_proc_23', name:'Controle de Processos',               code:'ESTEMA901', period:9,  hours:'60h',  pre:['cont3_23'],                unlocks:[]},
+  {id:'tcc1_23',      name:'TCC I',                               code:'ESTMA803',  period:9,  hours:'45h',  pre:[],                          unlocks:['tcc2_23']},
+  {id:'empr_23',      name:'Empreendedorismo e Inovação',         code:'ESTEMA904', period:9,  hours:'60h',  pre:[],                          unlocks:[]},
+  {id:'opt4_23',      name:'Optativa IV',                         code:'—',         period:9,  hours:'—',    pre:[],                          unlocks:[]},
+  {id:'opt5_23',      name:'Optativa V',                          code:'—',         period:9,  hours:'—',    pre:[],                          unlocks:[]},
+  // ── 10º PERÍODO ──
+  {id:'gest_proj_23', name:'Gestão de Projetos',                  code:'ESTEMT048', period:10, hours:'60h',  pre:[],                          unlocks:[]},
+  {id:'top_esp2_23',  name:'Tópicos Especiais em ECA II',         code:'ESTEMA903', period:10, hours:'60h',  pre:[],                          unlocks:[]},
+  {id:'robotica_23',  name:'Robótica Industrial',                 code:'ESTEMT015', period:10, hours:'60h',  pre:['cont3_23'],                unlocks:[]},
+  {id:'tcc2_23',      name:'TCC II',                              code:'ESTEMA902', period:10, hours:'45h',  pre:['tcc1_23'],                 unlocks:[]},
 ]
 };
 
-// ── STORAGE com cache em memória ─────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// STORAGE
+// ════════════════════════════════════════════════════════════════════════════
 const SK='eca_data_v2';
-let _cache=null; // cache em memória — carregado uma vez
-
-function _loadStore(){
-  if(_cache!==null)return _cache;
-  try{_cache=JSON.parse(localStorage.getItem(SK)||'{}');}catch{_cache={};}
-  return _cache;
-}
-function _saveStore(d){
-  _cache=d;
-  localStorage.setItem(SK,JSON.stringify(d));
-}
+let _cache=null;
+function _loadStore(){if(_cache!==null)return _cache;try{_cache=JSON.parse(localStorage.getItem(SK)||'{}');}catch{_cache={};}return _cache;}
+function _saveStore(d){_cache=d;localStorage.setItem(SK,JSON.stringify(d));}
 const load=()=>_loadStore();
 const save=d=>_saveStore(d);
-const getSub=id=>{const s=load();return s[id]||{status:'pending',grade:'',semester:'',teachers:'',materials:'',notes:''}};
+const getSub=id=>{const s=load();return s[id]||{status:'pending',grade:'',semester:'',teachers:'',materials:'',notes:'',realCode:'',realName:''}};
 const setSub=(id,p)=>{const s=load();s[id]={...getSub(id),...p};save(s);};
 
-// ── CODE MAP (histórico code → subject id in grade 2014) ────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// CODE MAP — GRADE 2014 (expandido com aliases do amigo + originais)
+// ════════════════════════════════════════════════════════════════════════════
 const CM={
-  // 1º Período
-  'ESTBAS006':'com_exp', 'EST0103':'com_exp', 'EST0415':'com_exp', 'EST0570':'com_exp',
-  'ESTBAS007':'fis1', 'EST0120':'fis1', 'EST0248':'fis1', 'ESTBAS044':'fis1',
-  'ESTBAS005':'quim', 'EST0135':'quim', 'EST0134':'quim',
-  'ESTBAS001':'alglin1', 'EST0105':'alglin1', 'EST0106':'alglin1', 'EST0122':'alglin1', 'EST0206':'alglin1', 'ESTBAS040':'alglin1',
-  'ESTECP001':'prog1', 'EST0125':'prog1',
-  'ESTEBAS004':'intro_amb', 'ESTBAS004':'intro_amb', 'EST0240':'intro_amb',
-  'ESTEBAS003':'intro_eca', 'ESTBAS003':'intro_eca', 'EST0130':'intro_eca', 'EST0239':'intro_eca', 'ESTEMA103':'intro_eca',
-  'ESTBAS002':'calc1', 'EST0104':'calc1', 'EST0110':'calc1', 'EST0161':'calc1', 'ESTBAS037':'calc1',
-
-  // 2º Período
-  'ESTBAS017':'intro_econ', 'EST0358':'intro_econ',
-  'ESTBAS013':'fis2', 'EST0220':'fis2', 'ESTBAS045':'fis2', 'ESN0428':'fis2',
-  'ESTBAS011':'intro_adm', 'EST0837':'intro_adm',
-  'ESTBAS008':'alglin2', 'EST0215':'alglin2', 'ESN0307':'alglin2',
-  'ESTECP002':'prog2', 'EST0646':'prog2',
-  'ESTBAS010':'des_bas', 'EST0115':'des_bas', 'EST0114':'des_bas', 'ESTEMA201':'des_bas',
-  'ESTBAS012':'prob_est', 'EST0124':'prob_est', 'EST0364':'prob_est', 'EST0449':'prob_est', 'EST0521':'prob_est', 'EST0780':'prob_est',
+  'ESTBAS006':'com_exp','EST0103':'com_exp','EST0415':'com_exp','EST0570':'com_exp',
+  'ESTBAS007':'fis1','EST0120':'fis1','EST0248':'fis1','ESTBAS044':'fis1',
+  'ESTBAS005':'quim','EST0135':'quim','EST0134':'quim',
+  'ESTBAS001':'alglin1','EST0105':'alglin1','EST0106':'alglin1','EST0122':'alglin1','EST0206':'alglin1','ESTBAS040':'alglin1',
+  'ESTECP001':'prog1','EST0125':'prog1',
+  'ESTEBAS004':'intro_amb','ESTBAS004':'intro_amb','EST0240':'intro_amb',
+  'ESTEBAS003':'intro_eca','ESTBAS003':'intro_eca','EST0130':'intro_eca','EST0239':'intro_eca',
+  'ESTBAS002':'calc1','EST0104':'calc1','EST0110':'calc1','EST0161':'calc1','ESTBAS037':'calc1',
+  'ESTBAS017':'intro_econ','EST0358':'intro_econ',
+  'ESTBAS013':'fis2','EST0220':'fis2','ESTBAS045':'fis2','ESN0428':'fis2',
+  'ESTBAS011':'intro_adm','EST0837':'intro_adm',
+  'ESTBAS008':'alglin2','EST0215':'alglin2','ESN0307':'alglin2',
+  'ESTECP002':'prog2','EST0646':'prog2',
+  'ESTBAS010':'des_bas','EST0115':'des_bas','EST0114':'des_bas',
+  'ESTBAS012':'prob_est','EST0124':'prob_est','EST0364':'prob_est','EST0449':'prob_est','EST0521':'prob_est','EST0780':'prob_est',
   'ESTBAS009':'calc2',
-
-  // 3º Período
-  'ESTECI002':'mec1', 'ESTEC1002':'mec1', 'EST0260':'mec1',
-  'ESTBAS015':'fis3', 'ESTBAS046':'fis3', 'EST0338':'fis3',
-  'ESTBAS016':'lab_fis1', 'EST0250':'lab_fis1',
-  'ESTEME004':'mec_flu', 'EST0360':'mec_flu', 'EST0460':'mec_flu', 'ESTTME340':'mec_flu', 'ESTTME442':'mec_flu', 'ESTEMA302':'mec_flu',
-  'ESTBAS022':'prat_prof', 'EST0445':'prat_prof', 'EST0685':'prat_prof', 'EST0876':'prat_prof', 'EST0771':'prat_prof',
-  'ESTBAS025':'intro_mat', 'ESTEMA305':'intro_mat',
-  'ESTEMA062':'empreend', 'EST0334':'empreend', 'ESTBAS035':'empreend', 'EST0717':'empreend', 'EST0532':'empreend', 'EST0249':'empreend', 'EST00033':'empreend', 'ESTEMA904':'empreend',
-  'ESTBAS014':'calc3', 'EST0312':'calc3', 'ESTEMA400':'calc3',
+  'ESTECI002':'mec1','ESTEC1002':'mec1','EST0260':'mec1',
+  'ESTBAS015':'fis3','ESTBAS046':'fis3','EST0338':'fis3',
+  'ESTBAS016':'lab_fis1','EST0250':'lab_fis1',
+  'ESTEME004':'mec_flu','EST0360':'mec_flu','EST0460':'mec_flu','ESTTME340':'mec_flu','ESTTME442':'mec_flu',
+  'ESTEMA302':'mec_flu',   // alias mais novo para Mecânica dos Fluídos
+  'ESTBAS022':'prat_prof','EST0445':'prat_prof','EST0685':'prat_prof','EST0876':'prat_prof','EST0771':'prat_prof',
+  'ESTBAS025':'intro_mat','ESTEMA305':'intro_mat',
+  'ESTEMA062':'empreend','EST0334':'empreend','ESTBAS035':'empreend','EST0717':'empreend','EST0532':'empreend','EST0249':'empreend','EST00033':'empreend',
+  'ESTEMA904':'empreend',  // alias mais novo para Empreendedorismo
+  'ESTBAS014':'calc3','EST0312':'calc3','ESTEMA400':'calc3',  // ESTEMA400 = Cálculo III no histórico novo
   'ESTEMA001':'intro_ca',
-
-  // 4º Período
-  'ESTEME01':'mec_sol', 'ESTEME001':'mec_sol', 'EST0366':'mec_sol', 'ESTEQM140':'mec_sol', 'ESTEMA301':'mec_sol',
-  'ESTBAS018':'fis4', 'EST0444':'fis4',
-  'ESTBAS020':'lab_fis2', 'EST0374':'lab_fis2',
-  'ESTEEL001':'circ1', 'EST0322':'circ1', 'ESTTEL238':'circ1',
-  'ESTEEL002':'lab_circ1', 'EST0368':'lab_circ1', 'ESTEMA403':'lab_circ1',
-  'ESTEBAS049':'calc_num', 'ESTBAS049':'calc_num', 'EST0314':'calc_num', 'ESTECP003':'calc_num',
-  'ESTEMA007':'sist_din', 'ESTEMT002':'sist_din', 'EST0553':'sist_din',
-  'ESTBAS019':'calc4', 'EST0410':'calc4', 'ESTEMA300':'calc4',
-
-  // 5º Período
-  'ESTEMT003':'cont1', 'ESTEMA500':'cont1',
-  'ESTEMA008':'lab_cont1', 'ESTEMA501':'lab_cont1',
-  'ESTEEL003':'circ2', 'EEN45':'circ2',
-  'ESTEMA003':'elet_ana', 'ESTEEL054':'elet_ana',
-  'ESTEMA005':'inst_ind', 'ESTEEL057':'inst_ind', 'EEN62':'inst_ind',
+  'ESTEME01':'mec_sol','ESTEME001':'mec_sol','EST0366':'mec_sol','ESTEQM140':'mec_sol','ESTEMA301':'mec_sol',
+  'ESTBAS018':'fis4','EST0444':'fis4',
+  'ESTBAS020':'lab_fis2','EST0374':'lab_fis2',
+  'ESTEEL001':'circ1','EST0322':'circ1','ESTTEL238':'circ1',
+  'ESTEEL002':'lab_circ1','EST0368':'lab_circ1','ESTEMA403':'lab_circ1',  // alias novo para Lab. Circuitos I
+  'ESTEBAS049':'calc_num','ESTBAS049':'calc_num','EST0314':'calc_num','ESTECP003':'calc_num',
+  'ESTEMA007':'sist_din','ESTEMT002':'sist_din','EST0553':'sist_din',
+  'ESTBAS019':'calc4','EST0410':'calc4','ESTEMA300':'calc4',  // ESTEMA300 = Cálculo IV no histórico novo
+  'ESTEMT003':'cont1','ESTEMA500':'cont1',
+  'ESTEMA008':'lab_cont1','ESTEMA501':'lab_cont1',
+  'ESTEEL003':'circ2','EEN45':'circ2',
+  'ESTEMA003':'elet_ana','ESTEEL054':'elet_ana',
+  'ESTEMA005':'inst_ind','ESTEEL057':'inst_ind','EEN62':'inst_ind',
   'ESTEMA006':'lab_inst',
-  'ESTEEL004':'lab_circ2', 'ESTEEL0206':'lab_circ2',
+  'ESTEEL004':'lab_circ2','ESTEEL0206':'lab_circ2',
   'ESTEMA004':'lab_elet_ana',
-  'ESTEMA002':'sinais', 'ESTEEL012':'sinais', 'ESTEMA401':'sinais',
-
-  // 6º Período
-  'ESTEMT004':'cont2', 'ESTEMA600':'cont2',
-  'ESTEMA010':'lab_cont2', 'ESTEMA601':'lab_cont2',
-  'ESTEMT006':'sist_pot', 'ESTEEL022':'sist_pot',
-  'ESTMA009':'elet_dig', 'ESTEMA009':'elet_dig', 'ESTEEL009':'elet_dig', 'ESTEMT030':'elet_dig',
-  'ESTEMA061':'lab_elet_dig', 'ESTEEL010':'lab_elet_dig', 'ESTEMA060':'lab_elet_dig',
-  'ESTEMA013':'proc_trans', 'ESTEME012':'proc_trans', 'ESTEMA502':'proc_trans',
-  'ESTEEL013':'eletromag', 'ESTEEL0503':'eletromag',
-  'ESTEMT001':'mod_sim', 'ESTEMA402':'mod_sim',
-
-  // 7º Período
-  'ESTEMAS015':'cont3', 'ESTEMA015':'cont3', 'ESTEMA701':'cont3', 'ESTEMT049':'cont3',
-  'ESTEMAS018':'lab_cont3', 'ESTEMA018':'lab_cont3', 'ESTEMA702':'lab_cont3',
-  'ESTEMA011':'estagio1', 'ESTEMT007':'estagio1',
-  'ESTECI024':'hig_seg', 'ESTEC1024':'hig_seg',
+  'ESTEMA002':'sinais','ESTEEL012':'sinais','ESTEMA401':'sinais',  // alias novo para Sinais e Sistemas
+  'ESTEMT004':'cont2','ESTEMA600':'cont2',
+  'ESTEMA010':'lab_cont2','ESTEMA601':'lab_cont2',
+  'ESTEMT006':'sist_pot','ESTEEL022':'sist_pot',
+  'ESTMA009':'elet_dig','ESTEMA009':'elet_dig','ESTEEL009':'elet_dig','ESTEMT030':'elet_dig',
+  'ESTEMA061':'lab_elet_dig','ESTEEL010':'lab_elet_dig','ESTEMA060':'lab_elet_dig',
+  'ESTEMA013':'proc_trans','ESTEME012':'proc_trans','ESTEMA502':'proc_trans',  // alias novo para Proc. Transformação
+  'ESTEEL013':'eletromag','ESTEEL0503':'eletromag',
+  'ESTEMT001':'mod_sim','ESTEMA402':'mod_sim',  // alias novo para Modelagem e Simulação
+  'ESTEMAS015':'cont3','ESTEMA015':'cont3','ESTEMA701':'cont3','ESTEMT049':'cont3',  // ESTEMA701 = Controle III novo
+  'ESTEMAS018':'lab_cont3','ESTEMA018':'lab_cont3','ESTEMA702':'lab_cont3',  // alias novo para Lab. Controle III
+  'ESTEMA011':'estagio1','ESTEMT007':'estagio1',
+  'ESTECI024':'hig_seg','ESTEC1024':'hig_seg',
   'ESTEEL027':'maq_elet',
-  'ESTEMA012':'lab_maq', 'ESTEMA704':'lab_maq',
-
-  // 8º Período
-  'ESTEMA021':'estagio2', 'ESTEMT009':'estagio2',
-  'ESTEMA031':'cmd_elet', 'ESTEME042':'cmd_elet', 'ESTEMT016':'cmd_elet', 'ESTEMA603':'cmd_elet',
+  'ESTEMA012':'lab_maq','ESTEMA704':'lab_maq',  // alias novo para Lab. Máquinas
+  'ESTEMA021':'estagio2','ESTEMT009':'estagio2',
+  'ESTEMA031':'cmd_elet','ESTEME042':'cmd_elet','ESTEMT016':'cmd_elet','ESTEMA603':'cmd_elet',  // alias novo para Cmd. Eletropneumáticos
   'ESTEMA017':'gest_op',
-
-  // 9º Período
-  'ESTMA036':'tcc1', 'ESTEMA036':'tcc1', 'ESTEMA023':'tcc1', 'ESTEMT018':'tcc1', 'ESTEMA803':'tcc1',
-  'ESTMA100':'top_esp1', 'ESTEMA100':'top_esp1', 'ESTEMA101':'top_esp1', 'ESTEMT028':'top_esp1', 'ESTEMA804':'top_esp1',
-  'ESTMA820':'lab_cmd', 'ESTEMA020':'lab_cmd',
-  'ESTMA026':'auto_sup', 'ESTEMA026':'auto_sup', 'ESTEMA900':'auto_sup',
-
-  // 10º Período
-  'ESTEMA046':'tcc2', 'ESTEMA025':'tcc2', 'ESTEMT022':'tcc2', 'ESTEMA902':'tcc2',
-  'ESTEMA102':'top_esp2', 'ESTEMA903':'top_esp2'
+  'ESTMA036':'tcc1','ESTEMA036':'tcc1','ESTEMA023':'tcc1','ESTEMT018':'tcc1','ESTEMA803':'tcc1',  // ESTEMA803 = TCC I novo
+  'ESTMA100':'top_esp1','ESTEMA100':'top_esp1','ESTEMA101':'top_esp1','ESTEMT028':'top_esp1','ESTEMA804':'top_esp1',
+  'ESTMA820':'lab_cmd','ESTEMA020':'lab_cmd',
+  'ESTMA026':'auto_sup','ESTEMA026':'auto_sup','ESTEMA900':'auto_sup',  // ESTEMA900 = Automação e Supervisão novo (grade 2014)
+  'ESTEMA046':'tcc2','ESTEMA025':'tcc2','ESTEMT022':'tcc2','ESTEMA902':'tcc2',  // ESTEMA902 = TCC II novo
+  'ESTEMA102':'top_esp2','ESTEMA903':'top_esp2',  // alias novo para Tópicos Especiais II
+  // ESTEMA103 e ESTEMA201 também aparecem como aliás na grade 2014
+  'ESTEMA103':'intro_eca',  // alias para Intro. ECA na grade 2014
+  'ESTEMA201':'des_bas',    // alias para Desenho Básico na grade 2014
 };
 
-// ── DICIONÁRIO DE OPTATIVAS E EQUIVALÊNCIAS (Mapeamento Dinâmico) ────────────
-const OPT_DICT = {
-  'EST0826': 'Língua Brasileira de Sinais (Libras)',
-  'ESTECP014': 'Redes de Computadores I',
-  'ESTEMA016': 'Redes de Computadores I',
-  'ESTECP018': 'Redes de Computadores II',
-  'ESTECP024': 'Tecnologia WEB',
-  'ESTECP025': 'Interface Usuário e Sist. Comp.',
-  'ESTECP038': 'Projeto de Sistemas Embarcados',
-  'ESTEEL007': 'Eletrônica II',
-  'ESTEEL008': 'Laboratório de Eletrônica II',
-  'ESTEEL021': 'Tecnologia de Hardware Reprogramável',
-  'ESTEEL029': 'Sistemas de Comunicações Móveis',
-  'ESTEEL044': 'Processamento Digital de Imagens',
-  'ESTEEL046': 'Instalações Elétricas',
-  'ESTEEL063': 'Manutenção de Equip. Elétricos',
-  'ESTEMA019': 'Processamento e Controle Digital',
-  'ESTECP037': 'Processamento e Controle Digital',
-  'ESTEMA022': 'Microprocessadores e Microcontroladores',
-  'ESTEMT035': 'Microprocessadores e Microcontroladores',
-  'ESTEMA024': 'Redes Industriais de Comunicação',
-  'ESTTEL531': 'Redes Industriais de Comunicação',
-  'ESTEMA029': 'Manufatura Integrada por Computador e Robótica',
-  'ESTEMA030': 'Inteligência Artificial Aplicada a Automação',
-  'ESTEMT025': 'Inteligência Artificial Aplicada a Automação',
-  'ESTEMA033': 'Planejamento e Gestão da Qualidade',
-  'ESTEMA034': 'Estágio Supervisionado III em ECA',
-  'ESTEMA035': 'Estágio Supervisionado IV em ECA',
-  'ESTEMA037': 'Controle Robusto',
-  'ESTEMA038': 'Controle Preditivo',
-  'ESTEMA039': 'Controle Não Linear',
-  'ESTEMA040': 'Identificação de Sistemas de Controle',
-  'ESTEMA042': 'Estágio Supervisionado III em ECA',
-  'ESTEMT011': 'Estágio Supervisionado III em ECA',
-  'ESTEMA044': 'Comandos Eletropneumáticos I',
-  'ESTEMA067': 'Sistema Supervisório',
-  'ESTEEL067': 'Sistema Supervisório',
-  'ESTEME005': 'Introd. ao Projeto de Sistemas Mecânicos',
-  'ESTEME036': 'Introd. ao Método dos Elementos Finitos',
-  'ESTEME041': 'Programação e Operação de CNC',
-  'ESTEMT013': 'Projetos de Exp. e Confiabilidade de Produto',
-  'ESTEMT015': 'Robótica Industrial',
-  'ESTEMT019': 'Nanotecnologia',
-  'ESTEMT020': 'Programação de Robôs',
-  'ESTEMT024': 'Introdução à Biomecânica',
-  'ESTEMT027': 'Sistemas Microprocessados',
-  'ESTEMT048': 'Gestão de Projeto',
-  'ESTEPR016': 'Projeto do Produto e Processo',
-  'ESTEPR023': 'Sistemas de Gestão Ambiental',
-  'ESTEPR026': 'Gestão de Manutenção',
-  'ESTEPR203': 'Legislação da ZFM'
+// ════════════════════════════════════════════════════════════════════════════
+// CODE MAP — GRADE 2023 (mantido do código original)
+// ════════════════════════════════════════════════════════════════════════════
+const CM_2023={
+  'ESTBAS006':'com_exp_23','ESTBAS007':'fis1_23','ESTBAS005':'quim_23',
+  'ESTBAS001':'alglin1_23','ESTECP001':'prog1_23','ESTEBAS004':'intro_amb_23',
+  'ESTBAS004':'intro_amb_23','ESTEMA103':'intro_eca_23','ESTBAS002':'calc1_23',
+  'ESTBAS017':'intro_econ_23',
+  'ESTBAS013':'fis2_23','ESTEMA201':'des_tec_23','ESTBAS008':'alglin2_23',
+  'ESTECP002':'prog2_23','ESTBAS011':'intro_adm_23','ESTBAS012':'prob_est_23',
+  'ESTBAS009':'calc2_23',
+  'ESTEMA301':'mec_sol_23','ESTBAS015':'fis3_23','ESTBAS016':'lab_fis1_23',
+  'ESTEMA302':'fen_trans_23','ESTEMA305':'intro_mat_23','ESTEMA304':'inst_bas_23',
+  'ESTEMA303':'intro_ca_23','ESTEMA300':'met_mat_23','ESTBAS022':'prat_prof_23',
+  'ESTBAS018':'fis4_23','ESTBAS020':'lab_fis2_23','ESTEEL001':'circ1_23',
+  'ESTEMA403':'lab_circ1_23','ESTEMA400':'calc_vet_23','ESTEMA401':'sinais_23',
+  'ESTEMA007':'sist_din_23','ESTEBAS049':'calc_num_23','ESTBAS049':'calc_num_23',
+  'ESTEMA005':'inst_ind_23','ESTEMA003':'elet_ana_23','ESTEEL003':'circ2_23',
+  'ESTEEL004':'lab_circ2_23','ESTEMA004':'lab_elet_ana_23','ESTEMA006':'lab_inst_23',
+  'ESTEMA500':'cont1_23','ESTEMA501':'lab_cont1_23','ESTEMA402':'sist_ev_23',
+  'ESTEMA009':'elet_dig_23','ESTEMA061':'lab_elet_dig_23','ESTEMT006':'sist_pot_23',
+  'ESTECI024':'hig_seg_23','ESTEMA502':'proc_fab_23','ESTEMA600':'cont2_23',
+  'ESTEMA601':'lab_cont2_23','ESTEMA503':'auto_sist1_23',
+  'ESTEEL027':'maq_elet_23','ESTMA603':'cmd_pn_23','ESTEMA603':'cmd_pn_23',
+  'ESTEMA701':'cont3_23','ESTEMA702':'lab_cont3_23','ESTEMA602':'estagio1_23',
+  'ESTEMA700':'micro_23',
+  'ESTEMA704':'lab_maq_23','ESTEMA020':'lab_cmd_23','ESTEMA705':'cont_dig_23',
+  'ESTEMA801':'gest_op_23','ESTEMA703':'estagio2_23','ESTEMA024':'redes_ind_23',
+  'ESTEMA802':'auto_sist2_23',
+  'ESTEMA900':'auto_sist3_23','ESTMA804':'top_esp1_23','ESTEMA901':'cont_proc_23',
+  'ESTMA803':'tcc1_23','ESTEMA904':'empr_23',
+  'ESTEMT048':'gest_proj_23','ESTEMA903':'top_esp2_23','ESTEMT015':'robotica_23',
+  'ESTEMA902':'tcc2_23',
 };
 
-// ── STATE ────────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// DICIONÁRIO DE OPTATIVAS / EQUIVALÊNCIAS UEA (do amigo)
+// ════════════════════════════════════════════════════════════════════════════
+const OPT_DICT={
+  'EST0826':'Língua Brasileira de Sinais (Libras)',
+  'ESTECP014':'Redes de Computadores I','ESTEMA016':'Redes de Computadores I',
+  'ESTECP018':'Redes de Computadores II',
+  'ESTECP024':'Tecnologia WEB',
+  'ESTECP025':'Interface Usuário e Sist. Comp.',
+  'ESTECP038':'Projeto de Sistemas Embarcados',
+  'ESTEEL007':'Eletrônica II','ESTEEL008':'Laboratório de Eletrônica II',
+  'ESTEEL021':'Tecnologia de Hardware Reprogramável',
+  'ESTEEL029':'Sistemas de Comunicações Móveis',
+  'ESTEEL044':'Processamento Digital de Imagens',
+  'ESTEEL046':'Instalações Elétricas',
+  'ESTEEL063':'Manutenção de Equip. Elétricos',
+  'ESTEMA019':'Processamento e Controle Digital','ESTECP037':'Processamento e Controle Digital',
+  'ESTEMA022':'Microprocessadores e Microcontroladores','ESTEMT035':'Microprocessadores e Microcontroladores',
+  'ESTEMA024':'Redes Industriais de Comunicação','ESTTEL531':'Redes Industriais de Comunicação',
+  'ESTEMA029':'Manufatura Integrada por Computador e Robótica',
+  'ESTEMA030':'Inteligência Artificial Aplicada a Automação','ESTEMT025':'Inteligência Artificial Aplicada a Automação',
+  'ESTEMA033':'Planejamento e Gestão da Qualidade',
+  'ESTEMA034':'Estágio Supervisionado III em ECA',
+  'ESTEMA035':'Estágio Supervisionado IV em ECA',
+  'ESTEMA037':'Controle Robusto','ESTEMA038':'Controle Preditivo',
+  'ESTEMA039':'Controle Não Linear',
+  'ESTEMA040':'Identificação de Sistemas de Controle',
+  'ESTEMA042':'Estágio Supervisionado III em ECA','ESTEMT011':'Estágio Supervisionado III em ECA',
+  'ESTEMA044':'Comandos Eletropneumáticos I',
+  'ESTEMA067':'Sistema Supervisório','ESTEEL067':'Sistema Supervisório',
+  'ESTEME005':'Introd. ao Projeto de Sistemas Mecânicos',
+  'ESTEME036':'Introd. ao Método dos Elementos Finitos',
+  'ESTEME041':'Programação e Operação de CNC',
+  'ESTEMT013':'Projetos de Exp. e Confiabilidade de Produto',
+  'ESTEMT015':'Robótica Industrial',
+  'ESTEMT019':'Nanotecnologia','ESTEMT020':'Programação de Robôs',
+  'ESTEMT024':'Introdução à Biomecânica',
+  'ESTEMT027':'Sistemas Microprocessados',
+  'ESTEMT048':'Gestão de Projeto',
+  'ESTEPR016':'Projeto do Produto e Processo',
+  'ESTEPR023':'Sistemas de Gestão Ambiental',
+  'ESTEPR026':'Gestão de Manutenção',
+  'ESTEPR203':'Legislação da ZFM',
+};
+
+// ════════════════════════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════════════════════════
 let G='2014', activeSub=null, pendingImport=[];
+let importGrade='2014';
 
-// ── INIT ─────────────────────────────────────────────────────────────────────
+function setImportGrade(grade,btn){
+  importGrade=grade;
+  document.querySelectorAll('.import-grade-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  resetImport();
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════════════════════════
 function init(){
   applyCfgOnLoad();
   buildLegend();
-  // Gera os chips de período via JS (evita template literal no HTML)
-  const chipsEl = document.getElementById('period-chips');
+  const chipsEl=document.getElementById('period-chips');
   for(let p=1;p<=10;p++){
-    const chip = document.createElement('div');
-    chip.className = 'period-chip';
-    chip.textContent = p+'º';
-    chip.dataset.p = p;
-    chip.onclick = ()=>togglePeriod(p);
+    const chip=document.createElement('div');
+    chip.className='period-chip';
+    chip.textContent=p+'º';
+    chip.dataset.p=p;
+    chip.onclick=()=>togglePeriod(p);
     chipsEl.appendChild(chip);
   }
-  // data-p no chip "Todos"
-  chipsEl.querySelector('.all-chip').dataset.p = 0;
+  chipsEl.querySelector('.all-chip').dataset.p=0;
   render();
   window.addEventListener('resize',drawArrows);
   document.getElementById('scroll').addEventListener('scroll',drawArrows);
@@ -1019,7 +1028,7 @@ function buildLegend(){
   l.innerHTML=PC.slice(1).map((c,i)=>`<div class="legend-item"><div class="legend-dot" style="background:${c.main}"></div>${i+1}º Per.</div>`).join('')+
   `<div class="legend-item" style="margin-left:10px"><div class="legend-dot" style="background:var(--green)"></div>Concluída</div>
    <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>Cursando</div>
-   <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div>Reprovada (já tentei)</div>`;
+   <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div>Reprovada</div>`;
 }
 
 function switchGrade(g,btn){
@@ -1030,19 +1039,21 @@ function switchGrade(g,btn){
   render();
 }
 
-// ── RENDER ───────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// RENDER
+// ════════════════════════════════════════════════════════════════════════════
 function render(){
   const track=document.getElementById('track');
   track.innerHTML='<svg id="svg-layer"></svg>';
-  track.classList.toggle('vertical', CFG.orientation==='v');
+  track.classList.toggle('vertical',CFG.orientation==='v');
   track.style.gap=({tight:'8px',normal:'17px',loose:'30px'})[CFG.spacing]||'17px';
-  
+
   const scroll=document.getElementById('scroll');
   if(CFG.orientation==='v'){
     scroll.style.overflowX='hidden';
     track.style.minWidth='unset';
     track.style.width='100%';
-  } else {
+  }else{
     scroll.style.overflowX='auto';
     track.style.minWidth='max-content';
     track.style.width='';
@@ -1050,73 +1061,56 @@ function render(){
 
   const subs=DATA[G];
 
-  // Compute "next available": pending subjects whose ALL pre-reqs are done
+  // Next available
   const nextAvailSet=new Set();
   if(CFG.nextAvail){
     subs.forEach(sub=>{
       const d=getSub(sub.id);
-      if(d.status!=='pending') return;
+      if(d.status!=='pending')return;
       const allPreDone=(sub.pre||[]).every(pid=>getSub(pid).status==='done');
-      if(allPreDone && (sub.pre||[]).length>0) nextAvailSet.add(sub.id);
+      if(allPreDone&&(sub.pre||[]).length>0)nextAvailSet.add(sub.id);
     });
   }
 
-  // Classify subject type for grouping
   const typeOf=sub=>{
-    if(sub.code==='—') return 'opt';
-    if(sub.name.toLowerCase().startsWith('lab')) return 'lab';
+    if(sub.code==='—')return 'opt';
+    if(sub.name.toLowerCase().startsWith('lab'))return 'lab';
     return 'req';
   };
 
-  const maxPeriod=10;
-  for(let p=1;p<=maxPeriod;p++){
-    // Period filter
-    if(CFG.periods.length>0 && !CFG.periods.includes(p)) continue;
-
+  for(let p=1;p<=10;p++){
+    if(CFG.periods.length>0&&!CFG.periods.includes(p))continue;
     let periodSubs=subs.filter(s=>s.period===p);
-
-    // Hide optativas
-    if(CFG.hideOpt) periodSubs=periodSubs.filter(s=>s.code!=='—');
-
-    // Hide done
-    if(CFG.hideDone) periodSubs=periodSubs.filter(s=>getSub(s.id).status!=='done');
-
-    if(periodSubs.length===0) continue;
+    if(CFG.hideOpt)periodSubs=periodSubs.filter(s=>s.code!=='—');
+    if(CFG.hideDone)periodSubs=periodSubs.filter(s=>getSub(s.id).status!=='done');
+    if(periodSubs.length===0)continue;
 
     const col=document.createElement('div');
     col.className='period-col';
     const c=PC[p];
-    const isV = CFG.orientation==='v';
+    const isV=CFG.orientation==='v';
+    if(!isV) col.style.width=({compact:'140px',normal:'166px',large:'200px'})[CFG.cardSize]||'166px';
 
-    if(!isV){
-      col.style.width=({compact:'140px',normal:'166px',large:'200px'})[CFG.cardSize]||'166px';
-    }
-
-    // Period header
     const head=document.createElement('div');
     head.className='period-head';
     head.style.background=c.light;
     head.style.borderColor=c.main+'35';
     head.style.color=c.main;
-    head.textContent=isV ? `${p}º` : `${p}º Período`;
-    if(isV) head.style.borderRightColor=c.main;
+    head.textContent=isV?`${p}º`:`${p}º Período`;
+    if(isV)head.style.borderRightColor=c.main;
     col.appendChild(head);
 
-    // Container for cards
     const cardsContainer=document.createElement('div');
-    if(isV){
-      cardsContainer.className='v-cards-row';
-    }
+    if(isV)cardsContainer.className='v-cards-row';
 
-    // Grouping
     const groups=CFG.group
-      ? [['req','Obrigatórias'],['lab','Laboratórios'],['opt','Optativas']]
-      : [['all','']];
+      ?[['req','Obrigatórias'],['lab','Laboratórios'],['opt','Optativas']]
+      :[['all','']];
 
     groups.forEach(([gtype,glabel])=>{
       const groupSubs=gtype==='all'?periodSubs:periodSubs.filter(s=>typeOf(s)===gtype);
-      if(groupSubs.length===0) return;
-      if(CFG.group && glabel){
+      if(groupSubs.length===0)return;
+      if(CFG.group&&glabel){
         const sep=document.createElement('div');
         sep.className='group-sep';
         sep.textContent=glabel;
@@ -1124,46 +1118,42 @@ function render(){
       }
       groupSubs.forEach(sub=>{
         const d=getSub(sub.id);
+        const isOpt=typeOf(sub)==='opt';
         let cls='card';
-        if(d.status!=='pending') cls+=' '+d.status;
-        if(CFG.cardSize==='compact') cls+=' sz-compact';
-        if(CFG.cardSize==='large')   cls+=' sz-large';
-        if(nextAvailSet.has(sub.id)) cls+=' next-available';
-        
-        // NOVO: Adiciona a classe 'is-opt' no card se for optativa
-        if(typeOf(sub) === 'opt') cls+=' is-opt'; 
+        if(d.status!=='pending')cls+=' '+d.status;
+        if(CFG.cardSize==='compact')cls+=' sz-compact';
+        if(CFG.cardSize==='large')cls+=' sz-large';
+        if(nextAvailSet.has(sub.id))cls+=' next-available';
+        if(isOpt)cls+=' is-opt';
 
         const card=document.createElement('div');
         card.className=cls;
         card.id='card-'+sub.id;
         card.style.borderColor=c.main+'25';
 
-        // Usa o nome/código real se for uma optativa já preenchida
-        let displayCode = d.realCode || sub.code;
-        let displayName = d.realName || sub.name;
+        // Se optativa com realCode/realName, mostra info real
+        const displayCode=d.realCode||sub.code;
+        const displayName=d.realName||sub.name;
+        const optBadge=isOpt?`<span class="opt-badge">OPT</span>`:'';
 
-        // NOVO: Cria o crachá visual (badge) se for optativa
-        let optBadge = typeOf(sub) === 'opt' ? `<span class="opt-badge" title="Disciplina Optativa">OPT</span>` : '';
-
-        let codeHtml=CFG.showCode?`<div class="card-code" style="color:${c.main}">${displayCode}</div>`:'';
-        let hoursHtml=CFG.showHours?`<div class="card-hours">${sub.hours}</div>`:'';
+        const codeHtml=CFG.showCode?`<div class="card-code" style="color:${c.main}">${displayCode}</div>`:'';
+        const hoursHtml=CFG.showHours?`<div class="card-hours">${sub.hours}</div>`:'';
         let gradeHtml='';
-        if(CFG.showGrade && d.grade && d.status!=='pending'){
+        if(CFG.showGrade&&d.grade&&d.status!=='pending'){
           const gv=parseFloat(d.grade);
           const gc=gv>=7?'gg':gv>=5?'gk':'gb';
           gradeHtml=`<div class="card-grade"><span class="grade-badge ${gc}">${d.grade}</span></div>`;
         }
 
-        // NOVO: Renderiza o ${optBadge} logo após o displayName
         card.innerHTML=`<div class="card-stripe" style="background:${c.main}"></div>
           ${codeHtml}
-          <div class="card-name">${displayName} ${optBadge}</div>
+          <div class="card-name">${displayName}${optBadge}</div>
           ${hoursHtml}${gradeHtml}`;
 
         if(CFG.arrowVis==='hover'){
           card.addEventListener('mouseenter',()=>{document.querySelectorAll('.arrow-line').forEach(l=>l.style.opacity='0');hlChain(sub.id,true);});
           card.addEventListener('mouseleave',()=>{document.querySelectorAll('.arrow-line').forEach(l=>l.style.opacity='');hlChain(sub.id,false);});
-        } else {
+        }else{
           card.addEventListener('mouseenter',()=>hlChain(sub.id,true));
           card.addEventListener('mouseleave',()=>hlChain(sub.id,false));
         }
@@ -1172,24 +1162,22 @@ function render(){
       });
     });
 
-    if(isV){
-      col.appendChild(cardsContainer);
-    } else {
-      Array.from(cardsContainer.children).forEach(el=>col.appendChild(el));
-    }
+    if(isV){col.appendChild(cardsContainer);}
+    else{Array.from(cardsContainer.children).forEach(el=>col.appendChild(el));}
     track.appendChild(col);
   }
 
-  // Arrow visibility
   if(CFG.arrowVis==='never'){
-    setTimeout(()=>{ document.getElementById('svg-layer').style.display='none'; },130);
-  } else {
-    setTimeout(()=>{ const sl=document.getElementById('svg-layer'); if(sl)sl.style.display=''; drawArrows(); },120);
+    setTimeout(()=>{const sl=document.getElementById('svg-layer');if(sl)sl.style.display='none';},130);
+  }else{
+    setTimeout(()=>{const sl=document.getElementById('svg-layer');if(sl)sl.style.display='';drawArrows();},120);
   }
   updateStats();
 }
 
-// ── STATS ────────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// STATS
+// ════════════════════════════════════════════════════════════════════════════
 function updateStats(){
   const subs=DATA[G];
   let done=0,enr=0,fail=0,pend=0;
@@ -1200,7 +1188,7 @@ function updateStats(){
     else if(st==='failed')fail++;
     else pend++;
   });
-  const total=subs.length, pct=Math.round(done/total*100);
+  const total=subs.length,pct=Math.round(done/total*100);
   document.getElementById('s-done').textContent=done;
   document.getElementById('s-enr').textContent=enr;
   document.getElementById('s-fail').textContent=fail;
@@ -1209,7 +1197,9 @@ function updateStats(){
   document.getElementById('prog-fill').style.width=pct+'%';
 }
 
-// ── ARROWS ───────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// ARROWS
+// ════════════════════════════════════════════════════════════════════════════
 function drawArrows(){
   const svg=document.getElementById('svg-layer');
   const track=document.getElementById('track');
@@ -1219,11 +1209,9 @@ function drawArrows(){
   svg.style.height=track.scrollHeight+'px';
   const tR=track.getBoundingClientRect();
 
-  // Cache de status para evitar múltiplas leituras de localStorage
   const statusCache={};
-  DATA[G].forEach(s=>{ statusCache[s.id]=getSub(s.id).status; });
+  DATA[G].forEach(s=>{statusCache[s.id]=getSub(s.id).status;});
 
-  // Build deduplicated edges from pre[] (source of truth)
   const edges=new Set();
   DATA[G].forEach(sub=>{
     (sub.unlocks||[]).forEach(tid=>edges.add(sub.id+'→'+tid));
@@ -1232,53 +1220,33 @@ function drawArrows(){
 
   edges.forEach(edge=>{
     const [fromId,toId]=edge.split('→');
-
-    // ── Só desenha seta se AMBAS as pontas estão pendentes ou cursando ──
-    const fromStatus = statusCache[fromId] || 'pending';
-    const toStatus   = statusCache[toId]   || 'pending';
-    const active = s => s === 'pending' || s === 'enrolled';
-    if(!active(fromStatus) || !active(toStatus)) return;
+    const fromStatus=statusCache[fromId]||'pending';
+    const toStatus=statusCache[toId]||'pending';
+    const active=s=>s==='pending'||s==='enrolled';
+    if(!active(fromStatus)||!active(toStatus))return;
 
     const e1=document.getElementById('card-'+fromId);
     const e2=document.getElementById('card-'+toId);
     if(!e1||!e2)return;
     const r1=e1.getBoundingClientRect(),r2=e2.getBoundingClientRect();
-
     let x1,y1,x2,y2,cp,d;
 
     if(CFG.orientation==='v'){
-      // Modo vertical: seta sai da parte de baixo do card e entra pelo topo
-      x1 = r1.left + r1.width/2  - tR.left;
-      y1 = r1.bottom              - tR.top;
-      x2 = r2.left + r2.width/2  - tR.left;
-      y2 = r2.top                 - tR.top;
-      // Ignora setas para cima (destino acima da origem)
-      if(y2 <= y1 + 10) return;
-      cp = Math.abs(y2-y1) * 0.4;
-      if(CFG.arrowStyle==='straight'){
-        d=`M${x1} ${y1} L${x2} ${y2}`;
-      } else if(CFG.arrowStyle==='step'){
-        const my=(y1+y2)/2;
-        d=`M${x1} ${y1} L${x1} ${my} L${x2} ${my} L${x2} ${y2}`;
-      } else {
-        d=`M${x1} ${y1} C${x1} ${y1+cp},${x2} ${y2-cp},${x2} ${y2}`;
-      }
-    } else {
-      // Modo horizontal: seta sai da lateral direita e entra pela esquerda
-      x1 = r1.right               - tR.left;
-      y1 = r1.top + r1.height/2   - tR.top;
-      x2 = r2.left                - tR.left;
-      y2 = r2.top + r2.height/2   - tR.top;
-      if(x2 <= x1+10) return;
-      cp = Math.abs(x2-x1) * 0.4;
-      if(CFG.arrowStyle==='straight'){
-        d=`M${x1} ${y1} L${x2} ${y2}`;
-      } else if(CFG.arrowStyle==='step'){
-        const mx=(x1+x2)/2;
-        d=`M${x1} ${y1} L${mx} ${y1} L${mx} ${y2} L${x2} ${y2}`;
-      } else {
-        d=`M${x1} ${y1} C${x1+cp} ${y1},${x2-cp} ${y2},${x2} ${y2}`;
-      }
+      x1=r1.left+r1.width/2-tR.left; y1=r1.bottom-tR.top;
+      x2=r2.left+r2.width/2-tR.left; y2=r2.top-tR.top;
+      if(y2<=y1+10)return;
+      cp=Math.abs(y2-y1)*0.4;
+      if(CFG.arrowStyle==='straight')d=`M${x1} ${y1} L${x2} ${y2}`;
+      else if(CFG.arrowStyle==='step'){const my=(y1+y2)/2;d=`M${x1} ${y1} L${x1} ${my} L${x2} ${my} L${x2} ${y2}`;}
+      else d=`M${x1} ${y1} C${x1} ${y1+cp},${x2} ${y2-cp},${x2} ${y2}`;
+    }else{
+      x1=r1.right-tR.left; y1=r1.top+r1.height/2-tR.top;
+      x2=r2.left-tR.left;  y2=r2.top+r2.height/2-tR.top;
+      if(x2<=x1+10)return;
+      cp=Math.abs(x2-x1)*0.4;
+      if(CFG.arrowStyle==='straight')d=`M${x1} ${y1} L${x2} ${y2}`;
+      else if(CFG.arrowStyle==='step'){const mx=(x1+x2)/2;d=`M${x1} ${y1} L${mx} ${y1} L${mx} ${y2} L${x2} ${y2}`;}
+      else d=`M${x1} ${y1} C${x1+cp} ${y1},${x2-cp} ${y2},${x2} ${y2}`;
     }
     const sw={thin:1,normal:1.5,thick:3}[CFG.arrowSize]||1.5;
     const path=document.createElementNS('http://www.w3.org/2000/svg','path');
@@ -1291,7 +1259,9 @@ function drawArrows(){
   });
 }
 
-// ── HIGHLIGHT ────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// HIGHLIGHT CHAIN
+// ════════════════════════════════════════════════════════════════════════════
 function hlChain(id,on){
   const track=document.getElementById('track');
   if(!on){
@@ -1301,47 +1271,22 @@ function hlChain(id,on){
     return;
   }
   track.classList.add('dimmed');
-
-  // Cache de status (1 leitura de localStorage por hover)
-  const statusCache={};
-  DATA[G].forEach(s=>{ statusCache[s.id]=getSub(s.id).status; });
-
-  // Forward: follow unlocks downstream
-  const chain=new Set();
-  const fw=cid=>{
-    if(chain.has(cid))return;
-    chain.add(cid);
-    DATA[G].find(x=>x.id===cid)?.unlocks?.forEach(fw);
-  };
-
-  // Backward: follow pre[] upstream usando pre[] direto
-  const upstream=new Set();
-  const bk=cid=>{
-    if(upstream.has(cid))return;
-    upstream.add(cid);
-    const sub=DATA[G].find(x=>x.id===cid);
-    (sub?.pre||[]).forEach(bk);
-  };
-
-  fw(id);
-  bk(id);
-
+  const chain=new Set(),upstream=new Set();
+  const fw=cid=>{if(chain.has(cid))return;chain.add(cid);DATA[G].find(x=>x.id===cid)?.unlocks?.forEach(fw);};
+  const bk=cid=>{if(upstream.has(cid))return;upstream.add(cid);const sub=DATA[G].find(x=>x.id===cid);(sub?.pre||[]).forEach(bk);};
+  fw(id);bk(id);
   const all=new Set([...chain,...upstream]);
   all.forEach(cid=>document.getElementById('card-'+cid)?.classList.add('lit'));
-
   const c=PC[DATA[G].find(s=>s.id===id)?.period||1];
   document.querySelectorAll('.arrow-line').forEach(l=>{
-    const from=l.getAttribute('data-from');
-    const to=l.getAttribute('data-to');
-    // Só anima setas onde pelo menos uma ponta está pendente/cursando
-    if(all.has(from)&&all.has(to)){
-      l.classList.add('active');
-      l.style.stroke=c.main;
-    }
+    const from=l.getAttribute('data-from'),to=l.getAttribute('data-to');
+    if(all.has(from)&&all.has(to)){l.classList.add('active');l.style.stroke=c.main;}
   });
 }
 
-// ── SEARCH ───────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// SEARCH
+// ════════════════════════════════════════════════════════════════════════════
 function doSearch(q){
   q=q.toLowerCase().trim();
   const track=document.getElementById('track');
@@ -1349,12 +1294,14 @@ function doSearch(q){
   track.classList.add('dimmed');
   document.querySelectorAll('.card').forEach(card=>{
     const n=card.querySelector('.card-name').textContent.toLowerCase();
-    const co=card.querySelector('.card-code').textContent.toLowerCase();
+    const co=card.querySelector('.card-code')?.textContent.toLowerCase()||'';
     card.classList.toggle('lit',n.includes(q)||co.includes(q));
   });
 }
 
-// ── MODAL ────────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// MODAL
+// ════════════════════════════════════════════════════════════════════════════
 function openModal(sub){
   activeSub=sub;
   const d=getSub(sub.id);
@@ -1362,26 +1309,22 @@ function openModal(sub){
   document.getElementById('modal-top').style.background=`linear-gradient(135deg,${c.main}28,${c.light})`;
   document.getElementById('m-period').textContent=`${sub.period}º Período`;
   document.getElementById('m-period').style.color=c.main;
-  document.getElementById('m-title').textContent = d.realName || sub.name;
-  document.getElementById('m-code').textContent = d.realCode || sub.code;
+  document.getElementById('m-title').textContent=d.realName||sub.name;
+  document.getElementById('m-code').textContent=d.realCode||sub.code;
   document.getElementById('m-hours').textContent=sub.hours;
-  // grade
   const gc=document.getElementById('m-gc'),sc=document.getElementById('m-sc');
   if(d.grade){gc.style.display='block';const gv=parseFloat(d.grade);const gcls=gv>=7?'gg':gv>=5?'gk':'gb';document.getElementById('m-grade').innerHTML=`<span class="grade-badge ${gcls}">${d.grade}</span>`;}
   else gc.style.display='none';
   if(d.semester){sc.style.display='block';document.getElementById('m-sem').textContent=d.semester;}
   else sc.style.display='none';
-  // status badge
   const slabels={done:'✓ Concluída',enrolled:'▶ Cursando',failed:'↺ Já reprovei',pending:'⬜ Pendente'};
   const scolors={done:'var(--green)',enrolled:'var(--accent)',failed:'var(--yellow)',pending:'var(--muted)'};
   const sb=document.getElementById('m-sbadge');
   sb.textContent=slabels[d.status];
   sb.style.cssText=`background:${scolors[d.status]}22;color:${scolors[d.status]};border:1px solid ${scolors[d.status]}44;font-size:.68rem;padding:2px 8px;border-radius:5px;`;
-  // toggle buttons
   ['pending','enrolled','done','failed'].forEach(s=>{
     document.getElementById('st-'+s).className='st-btn'+(d.status===s?' s-'+s:'');
   });
-  // chips
   const gn=id=>DATA[G].find(x=>x.id===id)?.name||id;
   document.getElementById('m-pre').innerHTML=(sub.pre||[]).length
     ?sub.pre.map(p=>`<span class="chip pre">${gn(p)}</span>`).join('')
@@ -1389,7 +1332,6 @@ function openModal(sub){
   document.getElementById('m-post').innerHTML=(sub.unlocks||[]).length
     ?sub.unlocks.map(p=>`<span class="chip post">${gn(p)}</span>`).join('')
     :'<span class="chip none">Não libera outras matérias</span>';
-  // extra fields
   document.getElementById('m-teachers').value=d.teachers||'';
   document.getElementById('m-materials').value=d.materials||'';
   document.getElementById('m-notes').value=d.notes||'';
@@ -1401,13 +1343,14 @@ function closeModal(){document.getElementById('overlay').classList.remove('open'
 function setStatus(st){
   if(!activeSub)return;
   setSub(activeSub.id,{status:st});
-  // refresh card class
   const card=document.getElementById('card-'+activeSub.id);
   if(card){card.classList.remove('done','enrolled','failed');if(st!=='pending')card.classList.add(st);}
-  openModal(activeSub); // refresh modal
+  openModal(activeSub);
   updateStats();
   const msgs={done:'✓ Marcada como concluída!',enrolled:'▶ Marcada como cursando!',failed:'↺ Marcada como reprovada!',pending:'⬜ Status removido'};
   showToast(msgs[st],st==='done'?'ok':'');
+  // Redesenha setas após mudar status (setas somem/aparecem)
+  setTimeout(drawArrows,80);
 }
 
 function saveExtra(){
@@ -1420,10 +1363,164 @@ function saveExtra(){
   showToast('💾 Informações salvas!','ok');
 }
 
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeImport();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeImport();closeCfg();}});
 
-// ── IMPORT ───────────────────────────────────────────────────────────────────
-function openImport(){document.getElementById('import-overlay').classList.add('open');resetImport();}
+// ════════════════════════════════════════════════════════════════════════════
+// BULK SELECT MODE (do código original — totalmente mantido)
+// ════════════════════════════════════════════════════════════════════════════
+let selectMode=false;
+let selectedIds=new Set();
+
+function toggleSelectMode(){
+  selectMode=!selectMode;
+  selectedIds.clear();
+  const btn=document.getElementById('btn-select');
+  const bar=document.getElementById('bulk-bar');
+  if(selectMode){
+    document.body.classList.add('select-mode');
+    btn.classList.add('selecting');
+    btn.innerHTML=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> Selecionando...`;
+    bar.classList.add('open');
+    updateBulkCount();
+    rebindCards();
+  }else{
+    document.body.classList.remove('select-mode');
+    btn.classList.remove('selecting');
+    btn.innerHTML=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> Selecionar`;
+    bar.classList.remove('open');
+    document.querySelectorAll('.card.sel-pick').forEach(c=>c.classList.remove('sel-pick'));
+    render();
+  }
+}
+
+function rebindCards(){
+  document.querySelectorAll('.card').forEach(card=>{
+    const id=card.id.replace('card-','');
+    const clone=card.cloneNode(true);
+    clone.addEventListener('click',e=>{e.stopPropagation();toggleCardSelect(id);});
+    clone.addEventListener('mouseenter',()=>{});
+    clone.addEventListener('mouseleave',()=>{});
+    card.parentNode.replaceChild(clone,card);
+  });
+}
+
+function toggleCardSelect(id){
+  const card=document.getElementById('card-'+id);
+  if(!card)return;
+  if(selectedIds.has(id)){selectedIds.delete(id);card.classList.remove('sel-pick');}
+  else{selectedIds.add(id);card.classList.add('sel-pick');}
+  updateBulkCount();
+}
+
+function updateBulkCount(){
+  const el=document.getElementById('bulk-count');
+  el.textContent=selectedIds.size;
+  el.classList.remove('bump');
+  void el.offsetWidth;
+  el.classList.add('bump');
+  setTimeout(()=>el.classList.remove('bump'),200);
+}
+
+function bulkSelectAll(){
+  const allCards=document.querySelectorAll('.card');
+  const allIds=[...allCards].map(c=>c.id.replace('card-',''));
+  const allSelected=allIds.every(id=>selectedIds.has(id));
+  if(allSelected){
+    allIds.forEach(id=>{selectedIds.delete(id);document.getElementById('card-'+id)?.classList.remove('sel-pick');});
+  }else{
+    allIds.forEach(id=>{selectedIds.add(id);document.getElementById('card-'+id)?.classList.add('sel-pick');});
+  }
+  updateBulkCount();
+}
+
+function applyBulk(status){
+  if(selectedIds.size===0){showToast('Nenhuma matéria selecionada.');return;}
+  const count=selectedIds.size;
+  selectedIds.forEach(id=>setSub(id,{status}));
+  const labels={done:'✓ Concluída',enrolled:'▶ Cursando',failed:'↺ Reprovada',pending:'⬜ Pendente'};
+  showToast(`${labels[status]} — ${count} matéria(s) atualizadas!`,'ok');
+  toggleSelectMode();
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// EXPORT PNG (do amigo — com correção de fonte)
+// ════════════════════════════════════════════════════════════════════════════
+function exportToPNG(){
+  const trackElement=document.getElementById('track');
+  if(!trackElement)return;
+  showToast('📸 Gerando imagem… pode demorar alguns segundos.','ok');
+  const bgColor=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#0d0f14';
+  const textColor=getComputedStyle(document.documentElement).getPropertyValue('--text').trim()||'#e8eaf0';
+  const accentColor=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#4f8ef7';
+  const currentPct=document.getElementById('s-pct').textContent;
+  const currentDone=document.getElementById('s-done').textContent;
+  const currentTotal=DATA[G].length;
+
+  html2canvas(trackElement,{
+    scale:3,
+    backgroundColor:bgColor,
+    useCORS:true,
+    logging:false,
+    windowWidth:trackElement.scrollWidth,
+    windowHeight:trackElement.scrollHeight,
+  }).then(originalCanvas=>{
+    const headerH=120;
+    const finalCanvas=document.createElement('canvas');
+    finalCanvas.width=Math.max(originalCanvas.width,1800);
+    finalCanvas.height=originalCanvas.height+headerH;
+    const ctx=finalCanvas.getContext('2d');
+
+    // Fundo
+    ctx.fillStyle=bgColor;
+    ctx.fillRect(0,0,finalCanvas.width,finalCanvas.height);
+
+    // Linha divisória decorativa
+    const grad=ctx.createLinearGradient(0,0,finalCanvas.width,0);
+    grad.addColorStop(0,'transparent');
+    grad.addColorStop(0.3,accentColor);
+    grad.addColorStop(0.7,accentColor);
+    grad.addColorStop(1,'transparent');
+    ctx.fillStyle=grad;
+    ctx.fillRect(0,headerH-2,finalCanvas.width,2);
+
+    // Textos (fontes do sistema como fallback seguro)
+    ctx.textAlign='left';
+    ctx.textBaseline='middle';
+    const pad=48;
+
+    ctx.fillStyle=textColor;
+    ctx.font=`bold 42px "Space Grotesk", Arial, sans-serif`;
+    ctx.fillText(`Engenharia de Controle e Automação — Grade ${G}`,pad,headerH/2-18);
+
+    ctx.fillStyle=accentColor;
+    ctx.font=`600 28px "Space Grotesk", Arial, sans-serif`;
+    ctx.fillText(`Progresso: ${currentPct} concluído  ·  ${currentDone} de ${currentTotal} matérias`,pad,headerH/2+20);
+
+    // Cola matriz
+    const xOffset=Math.max(0,(finalCanvas.width-originalCanvas.width)/2);
+    ctx.drawImage(originalCanvas,xOffset,headerH);
+
+    const link=document.createElement('a');
+    link.download=`Matriz_ECA_${G}_${currentPct.replace('%','pct')}.png`;
+    link.href=finalCanvas.toDataURL('image/png',1.0);
+    link.click();
+    showToast('✅ PNG exportado com sucesso!','ok');
+  }).catch(err=>{
+    console.error('Erro ao gerar PNG:',err);
+    showToast('❌ Erro ao exportar imagem.','');
+  });
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// IMPORT PDF
+// ════════════════════════════════════════════════════════════════════════════
+function openImport(){
+  importGrade=G;
+  document.querySelectorAll('.import-grade-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('igbtn-'+G)?.classList.add('active');
+  document.getElementById('import-overlay').classList.add('open');
+  resetImport();
+}
 function closeImport(){document.getElementById('import-overlay').classList.remove('open');}
 function resetImport(){
   document.getElementById('import-progress').classList.remove('show');
@@ -1441,261 +1538,210 @@ function handleDrop(e){
 }
 function handleFileSelect(e){const f=e.target.files[0];if(f)processFile(f);}
 
-// ── Extract text from PDF using PDF.js (100% local, no API) ─────────────────
-// ── Extract text from PDF using PDF.js (100% local, no API) ─────────────────
 async function processFile(f){
   const prog=document.getElementById('import-progress');
   const statusEl=document.getElementById('import-status');
   prog.classList.add('show');
   statusEl.innerHTML=`<span style="color:var(--accent)">📄 Lendo PDF localmente...</span>`;
 
-  console.group("📥 Iniciando Importação de PDF");
-  console.log("Arquivo:", f.name, "| Tamanho:", f.size, "bytes");
-
-  try {
-    // Configure PDF.js worker from CDN
-    pdfjsLib.GlobalWorkerOptions.workerSrc =
-      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-    // Read file as ArrayBuffer
-    const arrayBuffer = await f.arrayBuffer();
-
-    // Load PDF
-    const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
-    console.log("PDF carregado com sucesso. Total de páginas:", pdf.numPages);
+  try{
+    pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    const arrayBuffer=await f.arrayBuffer();
+    const pdf=await pdfjsLib.getDocument({data:arrayBuffer}).promise;
     statusEl.innerHTML=`<span style="color:var(--accent)">📄 PDF carregado (${pdf.numPages} página(s)) — extraindo texto...</span>`;
 
-    // Extract text from all pages
-    let fullText = '';
-    for(let pageNum=1; pageNum<=pdf.numPages; pageNum++){
-      console.log(`Lendo página ${pageNum}...`);
-      const page = await pdf.getPage(pageNum);
-      const content = await page.getTextContent();
-
-      // Reconstruct lines by grouping items by Y position
-      const items = content.items;
-      const lineMap = new Map();
-      items.forEach(item => {
-        if(!item.str.trim()) return;
-        // Round Y to group items on same line (tolerance of 3px)
-        const y = Math.round(item.transform[5] / 3) * 3;
-        if(!lineMap.has(y)) lineMap.set(y, []);
-        lineMap.get(y).push({x: item.transform[4], text: item.str});
+    let fullText='';
+    for(let pageNum=1;pageNum<=pdf.numPages;pageNum++){
+      const page=await pdf.getPage(pageNum);
+      const content=await page.getTextContent();
+      const items=content.items;
+      const lineMap=new Map();
+      items.forEach(item=>{
+        if(!item.str.trim())return;
+        const y=Math.round(item.transform[5]/3)*3;
+        if(!lineMap.has(y))lineMap.set(y,[]);
+        lineMap.get(y).push({x:item.transform[4],text:item.str});
       });
-
-      // Sort lines top-to-bottom (PDF coords: higher Y = higher on page)
-      const sortedYs = [...lineMap.keys()].sort((a,b) => b-a);
-      sortedYs.forEach(y => {
-        const lineItems = lineMap.get(y).sort((a,b) => a.x-b.x);
-        const lineText = lineItems.map(i=>i.text).join(' ');
-        fullText += lineText + '\n';
+      const sortedYs=[...lineMap.keys()].sort((a,b)=>b-a);
+      sortedYs.forEach(y=>{
+        const lineItems=lineMap.get(y).sort((a,b)=>a.x-b.x);
+        fullText+=lineItems.map(i=>i.text).join(' ')+'\n';
       });
     }
 
-    console.log("Extração de texto concluída. Tamanho total:", fullText.length, "caracteres.");
-    console.groupEnd();
-    
     statusEl.innerHTML=`<span style="color:var(--accent)">🔍 Analisando disciplinas...</span>`;
     parseHistorico(fullText);
-
-  } catch(err) {
-    statusEl.innerHTML=`<span style="color:var(--red)">❌ Erro ao ler PDF: ${err.message}</span><br>
-    <small style="opacity:.6">Certifique-se de que o arquivo é um PDF válido do histórico da UEA.</small>`;
-    console.error("Erro crítico no processFile:", err);
-    console.groupEnd();
+  }catch(err){
+    statusEl.innerHTML=`<span style="color:var(--red)">❌ Erro ao ler PDF: ${err.message}</span><br><small style="opacity:.6">Certifique-se de que o arquivo é um PDF válido do histórico da UEA.</small>`;
+    console.error(err);
   }
 }
 
-// ── Parse extracted text and match to grade subjects ─────────────────────────
 function parseHistorico(text){
   const resultsEl=document.getElementById('import-results');
   const statusEl=document.getElementById('import-status');
   resultsEl.innerHTML='';
   pendingImport=[];
 
-  const lines = text.split('\n').map(l=>l.trim()).filter(Boolean);
+  const lines=text.split('\n').map(l=>l.trim()).filter(Boolean);
+  const codeRe=/\b(EST[A-Z]{2,6}\d{3,6}[A-Z0-9]*|ESTECP\d{3}|EEN\d{2,})\b/i;
+  const APROV=['Aprov','Dispe','Dispensado','Aprovado'];
+  const REPROV=['Rep N','Rep F','Reprovado'];
+  const MATRIC=['Matriculado'];
+  const SKIP=['Cance','Tranc','Cancelado','Trancado'];
 
-  // Patterns
-  const codeRe = /\b(EST[A-Z]{2,6}\d{3,6}[A-Z0-9]*|ESTECP\d{3}|EEN\d{2,})\b/i;
-  const APROV  = ['Aprov','Dispe','Dispensado','Aprovado'];
-  const REPROV = ['Rep N','Rep F','Reprovado'];
-  const MATRIC = ['Matriculado'];
-  const SKIP   = ['Cance','Tranc','Cancelado','Trancado'];
+  const matched=new Map();
+  const unmatched=[];
+  let currentSemester='';
+  const processedLines=new Set();
 
-  const matched  = new Map(); // subId → best entry
-  const unmatched = [];
+  // Seleciona o code map correto conforme grade de importação
+  const codeMap=importGrade==='2023'?CM_2023:CM;
 
-  let currentSemester = '';
-  const processedLines = new Set();
+  for(let i=0;i<lines.length;i++){
+    const line=lines[i];
+    const semM=line.match(/^(\d{4})\s*[\/\\]\s*(\d)\b/);
+    if(semM)currentSemester=semM[1]+'/'+semM[2];
 
-  for(let i=0; i<lines.length; i++){
-    const line = lines[i];
+    const codeMatch=line.match(codeRe);
+    if(!codeMatch)continue;
+    const code=codeMatch[1].toUpperCase();
+    if(processedLines.has(code+currentSemester))continue;
 
-    // Atualiza o semestre corrente
-    const semM = line.match(/^(\d{4})\s*[\/\\]\s*(\d)\b/);
-    if(semM) currentSemester = semM[1]+'/'+semM[2];
-
-    const codeMatch = line.match(codeRe);
-    if(!codeMatch) continue;
-    
-    const code = codeMatch[1].toUpperCase();
-    if(processedLines.has(code+currentSemester)) continue;
-
-    // --- CORREÇÃO DA JANELA DE BUSCA BLINDADA ---
-    let windowLines = [line];
-    
-    // 1. Checa se o status e a nota já estão na MESMA linha (ocorre em 95% das matérias)
-    let foundStatus = [...APROV, ...REPROV, ...MATRIC, ...SKIP].some(s => line.includes(s));
-    
-    // 2. Se a matéria quebrou de linha no PDF, procura nas próximas
-    if (!foundStatus) {
-        for(let j = i + 1; j < lines.length && j < i + 15; j++) {
-            // Se esbarrar no código da próxima matéria, a atual era só um "fantasma" (ex: Grade no final do PDF). Para!
-            if (lines[j].match(codeRe)) break; 
-            
-            windowLines.push(lines[j]);
-            if ([...APROV, ...REPROV, ...MATRIC, ...SKIP].some(s => lines[j].includes(s))) {
-                foundStatus = true;
-                break; 
-            }
-        }
+    // Janela de busca blindada (do amigo): busca progressiva, para ao encontrar próximo código
+    let windowLines=[line];
+    let foundStatus=[...APROV,...REPROV,...MATRIC,...SKIP].some(s=>line.includes(s));
+    if(!foundStatus){
+      for(let j=i+1;j<lines.length&&j<i+15;j++){
+        if(lines[j].match(codeRe))break;
+        windowLines.push(lines[j]);
+        if([...APROV,...REPROV,...MATRIC,...SKIP].some(s=>lines[j].includes(s))){foundStatus=true;break;}
+      }
     }
+    if(!foundStatus)continue;
 
-    // Se depois de tudo não tem status, ignora.
-    if (!foundStatus) continue;
+    const windowN=windowLines.join(' ');
+    if(SKIP.some(s=>windowN.includes(s)))continue;
 
-    const windowN = windowLines.join(' ');
-
-    if(SKIP.some(s=>windowN.includes(s))) continue;
-
-    let status = '';
-    if(APROV.some(s=>windowN.includes(s))) status='done';
-    else if(REPROV.some(s=>windowN.includes(s))) status='failed';
-    else if(MATRIC.some(s=>windowN.includes(s))) status='enrolled';
-    
-    if(!status) continue;
+    let status='';
+    if(APROV.some(s=>windowN.includes(s)))status='done';
+    else if(REPROV.some(s=>windowN.includes(s)))status='failed';
+    else if(MATRIC.some(s=>windowN.includes(s)))status='enrolled';
+    if(!status)continue;
 
     processedLines.add(code+currentSemester);
 
-    // Extrai a nota sem o perigo de pegar do vizinho
-    let grade = '';
-    const gradeRe = /\b(\d{1,2}[.,]\d{1,2})\s*(?:Aprov|Rep|Dispe)/i;
-    const gm = windowN.match(gradeRe);
-    if(gm) grade = gm[1].replace(',','.');
-    if(!grade){
-      const gm2 = windowN.match(/\b(\.\d{2})\s*(?:Rep)/i);
-      if(gm2) grade = '0'+gm2[1];
+    let grade='';
+    const gradeRe=/\b(\d{1,2}[.,]\d{1,2})\s*(?:Aprov|Rep|Dispe)/i;
+    const gm=windowN.match(gradeRe);
+    if(gm)grade=gm[1].replace(',','.');
+    if(!grade){const gm2=windowN.match(/\b(\.\d{2})\s*(?:Rep)/i);if(gm2)grade='0'+gm2[1];}
+
+    const semester=currentSemester;
+
+    // Mapeamento: primeiro tenta no code map da grade, depois na data diretamente
+    let subId=codeMap.hasOwnProperty(code)?codeMap[code]:undefined;
+    let realName=undefined,realCode=undefined;
+
+    if(subId===undefined){
+      const found=DATA[importGrade].find(s=>s.code===code);
+      if(found)subId=found.id;
     }
 
-    const semester = currentSemester;
+    // Se não encontrou na grade, tenta OPT_DICT (optativas)
+    if(subId===undefined&&OPT_DICT[code]){
+      realCode=code;
+      realName=OPT_DICT[code];
+      const optSuffix=importGrade==='2014'?'_14':'_23';
 
-    // --- LÓGICA DINÂMICA DE OPTATIVAS E EQUIVALÊNCIAS ---
-    let subId = CM.hasOwnProperty(code) ? CM[code] : undefined;
-    let realName = undefined;
-    let realCode = undefined;
-
-    if (subId === undefined) {
-      const found = DATA[G].find(s => s.code === code || s.code === code.replace(/^EST/, 'EST'));
-      if (found) subId = found.id;
-    }
-
-    if (subId === undefined && OPT_DICT[code]) {
-      realCode = code;
-      realName = OPT_DICT[code];
-      const optSuffix = G === '2014' ? '_14' : '_23';
-      
-      for (let k = 1; k <= 10; k++) {
-        let testId = `opt${k}${optSuffix}`;
-        if (getSub(testId).realCode === code) {
-          subId = testId;
-          break;
-        }
+      // Procura slot já associado a este código
+      for(let k=1;k<=10;k++){
+        const testId=`opt${k}${optSuffix}`;
+        if(getSub(testId).realCode===code){subId=testId;break;}
       }
-      
-      if (!subId) {
-        for (let k = 1; k <= 10; k++) {
-          let testId = `opt${k}${optSuffix}`;
-          let isSlotFree = getSub(testId).status === 'pending' && !getSub(testId).realCode;
-          let isSlotNotPendingInImport = ![...matched.values()].some(m => m.subId === testId);
-          
-          if (isSlotFree && isSlotNotPendingInImport) {
-            subId = testId;
-            break;
-          }
+      // Procura slot livre
+      if(!subId){
+        for(let k=1;k<=10;k++){
+          const testId=`opt${k}${optSuffix}`;
+          const isSlotFree=getSub(testId).status==='pending'&&!getSub(testId).realCode;
+          const notInImport=![...matched.values()].some(m=>m.subId===testId);
+          if(isSlotFree&&notInImport){subId=testId;break;}
         }
       }
     }
 
-    // Resolve as prioridades e salva
-    if (subId && subId !== null) {
-      const existing = matched.get(subId);
-      const priority = {done: 3, enrolled: 2, failed: 1};
-      const np = priority[status] || 0, ep = existing ? priority[existing.status] || 0 : 0;
-      if (!existing || np > ep) {
-        matched.set(subId, { subId, code: realCode || code, realName, status, grade, semester });
-      }
-    } else if (subId === null) {
-      // Ignora silenciosamente (Ex: EEN45 cancelada)
-    } else {
-      if (!unmatched.find(u => u.code === code)) unmatched.push({ code, status, grade });
+    if(subId&&subId!==null){
+      const existing=matched.get(subId);
+      const priority={done:3,enrolled:2,failed:1};
+      const np=priority[status]||0,ep=existing?priority[existing.status]||0:0;
+      if(!existing||np>ep)matched.set(subId,{subId,code:realCode||code,realName,status,grade,semester});
+    }else if(subId===null){
+      // código nulo = explicitamente fora da grade, ignora
+    }else{
+      if(!unmatched.find(u=>u.code===code))unmatched.push({code,status,grade});
     }
   }
 
-  // Renderiza as matérias reconhecidas no Modal do Import:
-  matched.forEach(({subId, code, status, grade, semester, realName}) => {
-    const name = realName || DATA[G].find(s => s.id === subId)?.name || subId;
-    const icon = status === 'done' ? '✓' : status === 'enrolled' ? '▶' : '↺';
-    const cls  = status === 'failed' ? 'unmatched' : 'matched';
-    resultsEl.innerHTML += `<div class="iri ${cls}">${icon} <strong>${code}</strong> <span class="sub-name">${name}</span> ${grade ? `<span style="color:var(--muted);margin-left:auto">${grade}</span>` : ''}</div>`;
+  // Render resultados
+  matched.forEach(({subId,code,status,grade,realName})=>{
+    const name=realName||DATA[importGrade].find(s=>s.id===subId)?.name||subId;
+    const icon=status==='done'?'✓':status==='enrolled'?'▶':'↺';
+    const cls=status==='failed'?'unmatched':'matched';
+    resultsEl.innerHTML+=`<div class="iri ${cls}">${icon} <strong>${code}</strong> <span class="sub-name">${name}</span>${grade?` <span style="color:var(--muted);margin-left:auto">${grade}</span>`:''}</div>`;
   });
 
   if(unmatched.length>0){
     resultsEl.innerHTML+=`<div style="margin-top:10px;padding:8px 10px;border-radius:7px;background:rgba(255,255,255,.03);border:1px solid var(--border);">
-      <div style="font-size:.63rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px">Optativas / fora da grade ${G}</div>`;
+      <div style="font-size:.63rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px">Optativas / fora da grade ${importGrade}</div>`;
     unmatched.forEach(({code,grade})=>{
-      resultsEl.innerHTML+=`<div class="iri unmatched" style="background:transparent;margin-bottom:2px;opacity:.7">⚠ <strong>${code}</strong> ${grade?`<span style="margin-left:auto">${grade}</span>`:''}</div>`;
+      resultsEl.innerHTML+=`<div class="iri unmatched" style="background:transparent;margin-bottom:2px;opacity:.7">⚠ <strong>${code}</strong>${grade?` <span style="margin-left:auto">${grade}</span>`:''}</div>`;
     });
     resultsEl.innerHTML+=`</div>`;
   }
 
-  pendingImport = [...matched.values()];
-  const total = pendingImport.length;
-
+  pendingImport=[...matched.values()];
+  const total=pendingImport.length;
   if(total>0){
-    statusEl.innerHTML=`<span style="color:var(--green)">✓ ${total} matéria(s) identificada(s) na grade ${G}</span>${unmatched.length>0?` <span style="color:var(--muted);font-size:.75rem">+ ${unmatched.length} externas</span>`:''}`;
+    statusEl.innerHTML=`<span style="color:var(--green)">✓ ${total} matéria(s) identificada(s) na grade ${importGrade}</span>${unmatched.length>0?` <span style="color:var(--muted);font-size:.75rem">+ ${unmatched.length} externa(s)</span>`:''}`;
     document.getElementById('import-confirm-btn').classList.add('show');
-  } else {
-    const foundCodes = [...text.matchAll(/\b(EST[A-Z]{2,6}\d{3,})\b/gi)].map(m=>m[1]).slice(0,5);
-    statusEl.innerHTML=`<span style="color:var(--yellow)">⚠ Nenhuma matéria da grade ${G} identificada.</span><br>
-    <small style="opacity:.6">Códigos detectados no PDF: ${foundCodes.length>0?foundCodes.join(', '):'nenhum'}<br>
-    Verifique se a grade selecionada (${G}) está correta.</small>`;
+  }else{
+    const foundCodes=[...text.matchAll(/\b(EST[A-Z]{2,6}\d{3,})\b/gi)].map(m=>m[1]).slice(0,5);
+    statusEl.innerHTML=`<span style="color:var(--yellow)">⚠ Nenhuma matéria da grade ${importGrade} identificada.</span><br>
+    <small style="opacity:.6">Códigos detectados: ${foundCodes.length>0?foundCodes.join(', '):'nenhum'}<br>Verifique se a grade selecionada (${importGrade}) está correta.</small>`;
   }
 }
 
 function confirmImport(){
-  pendingImport.forEach(({subId, status, grade, semester, code, realName}) => {
-    let updateObj = { status, grade: grade || '', semester: semester || '' };
-    if (realName) {
-        updateObj.realCode = code;
-        updateObj.realName = realName;
-    }
-    setSub(subId, updateObj);
+  pendingImport.forEach(({subId,status,grade,semester,code,realName})=>{
+    const upd={status,grade:grade||'',semester:semester||''};
+    if(realName){upd.realCode=code;upd.realName=realName;}
+    setSub(subId,upd);
   });
+  if(importGrade!==G){
+    G=importGrade;
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    const targetBtn=[...document.querySelectorAll('.tab-btn')].find(b=>b.textContent.includes(importGrade));
+    if(targetBtn)targetBtn.classList.add('active');
+  }
   render();
   closeImport();
-  showToast(`✓ ${pendingImport.length} matérias importadas com sucesso!`, 'ok');
+  showToast(`✓ ${pendingImport.length} matérias importadas na grade ${importGrade}!`,'ok');
 }
 
-// ── CLEAR ────────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// CLEAR
+// ════════════════════════════════════════════════════════════════════════════
 function clearAll(){
   if(!confirm('Remover todas as marcações? Não pode ser desfeito.'))return;
   localStorage.removeItem(SK);
-  _cache={}; // limpa o cache em memória também
+  _cache={};
   render();
   showToast('Histórico limpo.');
 }
 
-// ── TOAST ────────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// TOAST
+// ════════════════════════════════════════════════════════════════════════════
 let tt;
 function showToast(msg,type=''){
   const t=document.getElementById('toast');
@@ -1703,26 +1749,22 @@ function showToast(msg,type=''){
   clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2800);
 }
 
-// ── SETTINGS ─────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+// SETTINGS
+// ════════════════════════════════════════════════════════════════════════════
 const CFG_KEY='eca_cfg_v1';
 let CFG={
-  theme:'dark', colorMode:'period',
-  hideDone:false, nextAvail:false, hideOpt:false, periods:[], // [] = all
-  showCode:true, showHours:true, showGrade:true,
-  arrowVis:'always', arrowStyle:'curve', arrowAnim:'flow', arrowSize:'normal',
-  orientation:'h', cardSize:'normal', spacing:'normal', group:false,
+  theme:'dark',colorMode:'period',
+  hideDone:false,nextAvail:false,hideOpt:false,periods:[],
+  showCode:true,showHours:true,showGrade:true,
+  arrowVis:'always',arrowStyle:'curve',arrowAnim:'flow',arrowSize:'normal',
+  orientation:'h',cardSize:'normal',spacing:'normal',group:false,
 };
 
-function loadCfg(){
-  try{ const s=localStorage.getItem(CFG_KEY); if(s) CFG={...CFG,...JSON.parse(s)}; }catch{}
-}
-function saveCfg(){ localStorage.setItem(CFG_KEY,JSON.stringify(CFG)); }
-
-function openCfg(){
-  syncCfgUI();
-  document.getElementById('cfg-overlay').classList.add('open');
-}
-function closeCfg(){ document.getElementById('cfg-overlay').classList.remove('open'); }
+function loadCfg(){try{const s=localStorage.getItem(CFG_KEY);if(s)CFG={...CFG,...JSON.parse(s)};}catch{}}
+function saveCfg(){localStorage.setItem(CFG_KEY,JSON.stringify(CFG));}
+function openCfg(){syncCfgUI();document.getElementById('cfg-overlay').classList.add('open');}
+function closeCfg(){document.getElementById('cfg-overlay').classList.remove('open');}
 
 function syncCfgUI(){
   document.getElementById('cfg-hide-done').checked=CFG.hideDone;
@@ -1732,10 +1774,9 @@ function syncCfgUI(){
   document.getElementById('cfg-show-hours').checked=CFG.showHours;
   document.getElementById('cfg-show-grade').checked=CFG.showGrade;
   document.getElementById('cfg-group').checked=CFG.group;
-  // period chips
   document.querySelectorAll('.period-chip').forEach(chip=>{
     const p=parseInt(chip.dataset.p||'0');
-    chip.classList.toggle('active', CFG.periods.length===0?p===0:CFG.periods.includes(p));
+    chip.classList.toggle('active',CFG.periods.length===0?p===0:CFG.periods.includes(p));
   });
 }
 
@@ -1747,148 +1788,121 @@ function applyCfg(){
   CFG.showHours=document.getElementById('cfg-show-hours').checked;
   CFG.showGrade=document.getElementById('cfg-show-grade').checked;
   CFG.group=document.getElementById('cfg-group').checked;
-  saveCfg();
-  render();
+  saveCfg();render();
 }
 
-// Period chip filter
 function togglePeriod(p){
-  if(p===0){ CFG.periods=[]; }
+  if(p===0){CFG.periods=[];}
   else{
     const idx=CFG.periods.indexOf(p);
-    if(idx>=0) CFG.periods.splice(idx,1);
+    if(idx>=0)CFG.periods.splice(idx,1);
     else CFG.periods.push(p);
-    if(CFG.periods.length===0||CFG.periods.length===10) CFG.periods=[];
+    if(CFG.periods.length===0||CFG.periods.length===10)CFG.periods=[];
   }
-  syncCfgUI();
-  saveCfg(); render();
+  syncCfgUI();saveCfg();render();
 }
 
-// Theme
 function setTheme(t,btn){
   CFG.theme=t;
   document.body.classList.remove('theme-light','theme-hc');
-  if(t==='light') document.body.classList.add('theme-light');
-  if(t==='hc')    document.body.classList.add('theme-hc');
+  if(t==='light')document.body.classList.add('theme-light');
+  if(t==='hc')document.body.classList.add('theme-hc');
   btn.closest('.cfg-seg').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  saveCfg();
+  btn.classList.add('active');saveCfg();
 }
 
-// Color mode
 function setColorMode(m,btn){
   CFG.colorMode=m;
   document.body.classList.remove('color-status','color-mono');
-  if(m==='status') document.body.classList.add('color-status');
-  if(m==='mono')   document.body.classList.add('color-mono');
+  if(m==='status')document.body.classList.add('color-status');
+  if(m==='mono')document.body.classList.add('color-mono');
   btn.closest('.cfg-seg').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  saveCfg();
+  btn.classList.add('active');saveCfg();
 }
 
-// Arrow visibility
 function setArrowVis(v,btn){
   CFG.arrowVis=v;
   btn.closest('.cfg-seg').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  saveCfg(); drawArrows();
-  // toggle hover-only class on track
-  document.getElementById('track').classList.toggle('arrows-hover-only', v==='hover');
-  document.getElementById('track').classList.toggle('arrows-never', v==='never');
+  btn.classList.add('active');saveCfg();
+  const sl=document.getElementById('svg-layer');
+  if(v==='never'&&sl)sl.style.display='none';
+  else{if(sl)sl.style.display='';drawArrows();}
 }
 
-// Arrow style
 function setArrowStyle(s,btn){
   CFG.arrowStyle=s;
   btn.closest('.cfg-seg').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  saveCfg(); drawArrows();
+  btn.classList.add('active');saveCfg();drawArrows();
 }
 
-// Arrow animation
 function setArrowAnim(a,btn){
   CFG.arrowAnim=a;
   btn.closest('.cfg-seg').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  saveCfg();
-  // update CSS
+  btn.classList.add('active');saveCfg();
   const style=document.getElementById('arrow-anim-style')||document.createElement('style');
   style.id='arrow-anim-style';
-  if(a==='none')   style.textContent='.arrow-line.active{animation:none!important;}';
-  else if(a==='pulse') style.textContent='@keyframes flow{0%,100%{opacity:.4}50%{opacity:1}} .arrow-line.active{animation:flow 1s ease-in-out infinite;stroke-dasharray:none!important;}';
+  if(a==='none')style.textContent='.arrow-line.active{animation:none!important;}';
+  else if(a==='pulse')style.textContent='@keyframes flow{0%,100%{opacity:.4}50%{opacity:1}} .arrow-line.active{animation:flow 1s ease-in-out infinite;stroke-dasharray:none!important;}';
   else style.textContent='';
   document.head.appendChild(style);
 }
 
-// Arrow thickness
 function setArrowSize(s,btn){
   CFG.arrowSize=s;
   btn.closest('.cfg-seg').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  saveCfg(); drawArrows();
+  btn.classList.add('active');saveCfg();drawArrows();
 }
 
-// Orientation
 function setOrientation(o,btn){
   CFG.orientation=o;
   btn.closest('.cfg-seg').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  saveCfg(); render();
+  btn.classList.add('active');saveCfg();render();
 }
 
-// Card size
 function setCardSize(s,btn){
   CFG.cardSize=s;
   const w={compact:140,normal:166,large:200}[s];
   document.documentElement.style.setProperty('--card-w',w+'px');
   btn.closest('.cfg-seg').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  saveCfg(); render();
+  btn.classList.add('active');saveCfg();render();
 }
 
-// Spacing
 function setSpacing(s,btn){
   CFG.spacing=s;
   const g={tight:8,normal:17,loose:30}[s];
   document.documentElement.style.setProperty('--col-gap',g+'px');
   btn.closest('.cfg-seg').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  saveCfg();
+  btn.classList.add('active');saveCfg();
   document.getElementById('track').style.gap=g+'px';
   setTimeout(drawArrows,60);
 }
 
-// Reset
 function resetCfg(){
   if(!confirm('Restaurar todas as configurações padrão?'))return;
   CFG={theme:'dark',colorMode:'period',hideDone:false,nextAvail:false,hideOpt:false,periods:[],showCode:true,showHours:true,showGrade:true,arrowVis:'always',arrowStyle:'curve',arrowAnim:'flow',arrowSize:'normal',orientation:'h',cardSize:'normal',spacing:'normal',group:false};
   saveCfg();
-  // reset body classes
   document.body.classList.remove('theme-light','theme-hc','color-status','color-mono');
   document.documentElement.style.setProperty('--card-w','166px');
   document.documentElement.style.setProperty('--col-gap','17px');
-  syncCfgUI();
-  render();
+  syncCfgUI();render();
   showToast('Configurações restauradas.');
 }
 
-// Apply saved CFG on startup
 function applyCfgOnLoad(){
   loadCfg();
-  if(CFG.theme==='light') document.body.classList.add('theme-light');
-  if(CFG.theme==='hc')    document.body.classList.add('theme-hc');
-  if(CFG.colorMode==='status') document.body.classList.add('color-status');
-  if(CFG.colorMode==='mono')   document.body.classList.add('color-mono');
+  if(CFG.theme==='light')document.body.classList.add('theme-light');
+  if(CFG.theme==='hc')document.body.classList.add('theme-hc');
+  if(CFG.colorMode==='status')document.body.classList.add('color-status');
+  if(CFG.colorMode==='mono')document.body.classList.add('color-mono');
   const w={compact:140,normal:166,large:200}[CFG.cardSize]||166;
   document.documentElement.style.setProperty('--card-w',w+'px');
   const g={tight:8,normal:17,loose:30}[CFG.spacing]||17;
   document.documentElement.style.setProperty('--col-gap',g+'px');
-  // arrow anim
   if(CFG.arrowAnim!=='flow'){
     const style=document.createElement('style');
     style.id='arrow-anim-style';
-    if(CFG.arrowAnim==='none') style.textContent='.arrow-line.active{animation:none!important;}';
-    else if(CFG.arrowAnim==='pulse') style.textContent='@keyframes flow{0%,100%{opacity:.4}50%{opacity:1}} .arrow-line.active{animation:flow 1s ease-in-out infinite;stroke-dasharray:none!important;}';
+    if(CFG.arrowAnim==='none')style.textContent='.arrow-line.active{animation:none!important;}';
+    else if(CFG.arrowAnim==='pulse')style.textContent='@keyframes flow{0%,100%{opacity:.4}50%{opacity:1}} .arrow-line.active{animation:flow 1s ease-in-out infinite;stroke-dasharray:none!important;}';
     document.head.appendChild(style);
   }
 }
