@@ -6,6 +6,7 @@
 <title>Matriz Curricular — ECA</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root{--bg:#0d0f14;--surface:#13161e;--surface2:#1a1e2a;--border:#1f2433;--text:#e8eaf0;--muted:#7a82a0;--accent:#4f8ef7;--accent2:#a78bfa;--green:#26de81;--red:#ff6b6b;--yellow:#fdcb6e;
   --card-w:166px; --col-gap:17px;}
@@ -62,6 +63,36 @@ body.theme-hc{--bg:#000;--surface:#111;--surface2:#1a1a1a;--border:#444;--text:#
 }
 .grid-track.vertical .card{width:156px;flex-shrink:0;}
 /* CARD SIZE */
+/* BADGE E ESTILO DAS OPTATIVAS */
+.card.is-opt {
+  border: 1px dashed rgba(122, 130, 160, 0.35);
+  background: rgba(255, 255, 255, 0.015);
+}
+body.theme-light .card.is-opt {
+  border-color: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.01);
+}
+.opt-badge {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 1px 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  font-size: 0.48rem;
+  font-weight: 700;
+  color: var(--muted);
+  vertical-align: middle;
+  letter-spacing: 0.05em;
+}
+body.theme-light .opt-badge {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+body.theme-hc .opt-badge {
+  border-color: var(--muted);
+  color: var(--text);
+}
 .card.sz-compact{padding:6px 7px;}
 .card.sz-compact .card-name{font-size:.65rem;}
 .card.sz-compact .card-code{font-size:.52rem;}
@@ -280,6 +311,10 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input id="search" type="text" placeholder="Buscar matéria..." oninput="doSearch(this.value)">
     </div>
+    <button class="hbtn" onclick="exportToPNG()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Exportar PNG
+    </button>
     <button class="hbtn" onclick="openImport()">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
       Importar Histórico
@@ -535,6 +570,74 @@ svg#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-even
 <div class="toast" id="toast"></div>
 
 <script>
+
+  // ── EXPORTAR PARA PNG ALTA RESOLUÇÃO COM PROGRESSO ───────────────────────────
+function exportToPNG() {
+  const trackElement = document.getElementById('track');
+  
+  if (!trackElement) return;
+
+  showToast('📸 A capturar a matriz em Alta Resolução... Aguarde.', 'ok');
+
+  // Vai buscar as cores do tema atual para a imagem combinar com o ecrã
+  const bgColor = getComputedStyle(document.body).getPropertyValue('--bg').trim() || '#0d0f14';
+  const textColor = getComputedStyle(document.body).getPropertyValue('--text').trim() || '#ffffff';
+  const accentColor = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#4f8ef7';
+  
+  // Vai buscar a percentagem atual que está na barra de estatísticas
+  const currentPct = document.getElementById('s-pct').textContent;
+
+  html2canvas(trackElement, {
+    scale: 3, // Resolução 3x para qualidade de impressão/zoom
+    backgroundColor: bgColor,
+    useCORS: true,
+    logging: false
+  }).then(originalCanvas => {
+    // Espaço em pixéis reservado para o cabeçalho no topo da imagem
+    const headerHeight = 280; 
+    
+    // Cria um novo "quadro" combinando o cabeçalho e a matriz capturada
+    const finalCanvas = document.createElement('canvas');
+    finalCanvas.width = Math.max(originalCanvas.width, 1400); // Garante largura mínima para o texto não cortar
+    finalCanvas.height = originalCanvas.height + headerHeight;
+    
+    const ctx = finalCanvas.getContext('2d');
+    
+    // 1. Pinta o fundo do quadro inteiro
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
+    
+    // 2. Prepara o estilo do texto
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    // 3. Escreve o Título Principal (Nome do Curso)
+    ctx.fillStyle = textColor;
+    ctx.font = 'bold 90px "Syne", sans-serif';
+    ctx.fillText('Engenharia de Controle e Automação', finalCanvas.width / 2, 100);
+    
+    // 4. Escreve a Percentagem em destaque com a cor de destaque (azul/roxo)
+    ctx.fillStyle = accentColor;
+    ctx.font = 'bold 75px "Space Grotesk", sans-serif';
+    ctx.fillText(`Progresso Concluído: ${currentPct}`, finalCanvas.width / 2, 190);
+    
+    // 5. Cola a imagem da matriz gerada logo abaixo do cabeçalho
+    // (Calcula o "xOffset" para garantir que a grelha fica perfeitamente centrada)
+    const xOffset = (finalCanvas.width - originalCanvas.width) / 2;
+    ctx.drawImage(originalCanvas, xOffset, headerHeight);
+    
+    // 6. Descarrega o resultado final
+    const link = document.createElement('a');
+    link.download = `Matriz_ECA_Progresso_${currentPct.replace('%','')}.png`;
+    link.href = finalCanvas.toDataURL('image/png', 1.0);
+    link.click();
+    
+    showToast('✅ Imagem exportada com sucesso!', 'ok');
+  }).catch(err => {
+    console.error('Erro ao gerar PNG:', err);
+    showToast('❌ Ocorreu um erro ao exportar a imagem.', '');
+  });
+}
 // ── PERIOD COLORS ────────────────────────────────────────────────────────────
 const PC=[null,
   {main:'#ff6b6b',light:'rgba(255,107,107,.11)'},
@@ -553,23 +656,23 @@ const PC=[null,
 const DATA={
 "2014":[
   // ── 1º PERÍODO ──
-  {id:'com_exp',   name:'Comunicação e Expressão',              code:'ESTBAS006', period:1,  hours:'60h',  pre:[],                              unlocks:[]},
+  {id:'com_exp',   name:'Comunicação e Expressão',               code:'ESTBAS006', period:1,  hours:'60h',  pre:[],                              unlocks:[]},
   {id:'fis1',      name:'Física I',                              code:'ESTBAS007', period:1,  hours:'60h',  pre:[],                              unlocks:['fis2','mec1','cont1','lab_cont1']},
   {id:'quim',      name:'Química Geral',                         code:'ESTBAS005', period:1,  hours:'60h',  pre:[],                              unlocks:[]},
   {id:'alglin1',   name:'Álgebra Linear I',                      code:'ESTBAS001', period:1,  hours:'60h',  pre:[],                              unlocks:['alglin2']},
   {id:'prog1',     name:'Ling. de Programação I',                code:'ESTECP001', period:1,  hours:'60h',  pre:[],                              unlocks:['prog2']},
   {id:'intro_amb', name:'Intro. Ciências do Ambiente',           code:'ESTEBAS004',period:1,  hours:'30h',  pre:[],                              unlocks:[]},
   {id:'intro_eca', name:'Intro. à Eng. Controle e Automação',    code:'ESTEBAS003',period:1,  hours:'30h',  pre:[],                              unlocks:[]},
-  {id:'calc1',     name:'Cálculo I',                             code:'ESTBAS002', period:1,  hours:'90h',  pre:[],                              unlocks:['calc2']},
+  {id:'calc1',     name:'Cálculo I',                             code:'ESTBAS002', period:1,  hours:'90h',  pre:[],                              unlocks:['calc2','prob_est']},
 
   // ── 2º PERÍODO ──
   {id:'intro_econ',name:'Introdução à Economia',                 code:'ESTBAS017', period:2,  hours:'45h',  pre:[],                              unlocks:[]},
   {id:'fis2',      name:'Física II',                             code:'ESTBAS013', period:2,  hours:'60h',  pre:['fis1'],                        unlocks:['fis3','mec_flu','lab_fis1']},
   {id:'intro_adm', name:'Introdução à Administração',            code:'ESTBAS011', period:2,  hours:'45h',  pre:[],                              unlocks:[]},
-  {id:'alglin2',   name:'Álgebra Linear II',                     code:'ESTBAS008', period:2,  hours:'60h',  pre:['alglin1'],                     unlocks:['sist_din']},
+  {id:'alglin2',   name:'Álgebra Linear II',                     code:'ESTBAS008', period:2,  hours:'60h',  pre:['alglin1'],                     unlocks:[]},
   {id:'prog2',     name:'Ling. de Programação II',               code:'ESTECP002', period:2,  hours:'60h',  pre:['prog1'],                       unlocks:[]},
   {id:'des_bas',   name:'Desenho Básico',                        code:'ESTBAS010', period:2,  hours:'60h',  pre:[],                              unlocks:[]},
-  {id:'prob_est',  name:'Probabilidade e Estatística',           code:'ESTBAS012', period:2,  hours:'60h',  pre:[],                              unlocks:[]},
+  {id:'prob_est',  name:'Probabilidade e Estatística',           code:'ESTBAS012', period:2,  hours:'60h',  pre:['calc1'],                       unlocks:[]},
   {id:'calc2',     name:'Cálculo II',                            code:'ESTBAS009', period:2,  hours:'75h',  pre:['calc1'],                       unlocks:['calc3']},
 
   // ── 3º PERÍODO ──
@@ -587,36 +690,36 @@ const DATA={
   {id:'mec_sol',   name:'Mecânica dos Sólidos',                  code:'ESTEME01',  period:4,  hours:'60h',  pre:['mec1'],                        unlocks:[]},
   {id:'fis4',      name:'Física IV',                             code:'ESTBAS018', period:4,  hours:'60h',  pre:['fis3'],                        unlocks:['eletromag']},
   {id:'lab_fis2',  name:'Lab. de Física II',                     code:'ESTBAS020', period:4,  hours:'30h',  pre:['fis3'],                        unlocks:[]},
-  {id:'circ1',     name:'Circuitos Elétricos I',                 code:'ESTEEL001', period:4,  hours:'60h',  pre:['fis3'],                        unlocks:['circ2','elet_ana','lab_elet_ana','inst_ind','lab_inst','lab_circ2']},
-  {id:'lab_circ1', name:'Lab. de Circuitos I',                   code:'ESTEEL002', period:4,  hours:'30h',  pre:['fis3'],                        unlocks:['lab_circ2']},
+  {id:'circ1',     name:'Circuitos Elétricos I',                 code:'ESTEEL001', period:4,  hours:'60h',  pre:['fis3'],                        unlocks:['circ2','elet_ana','inst_ind','lab_inst','lab_circ2']},
+  {id:'lab_circ1', name:'Lab. de Circuitos I',                   code:'ESTEEL002', period:4,  hours:'30h',  pre:['fis3'],                        unlocks:['lab_circ2','lab_elet_ana']},
   {id:'calc_num',  name:'Cálculo Numérico',                      code:'ESTEBAS049',period:4,  hours:'60h',  pre:['calc3'],                       unlocks:[]},
   {id:'sist_din',  name:'Sistemas Dinâmicos',                    code:'ESTEMA007', period:4,  hours:'60h',  pre:['calc3'],                       unlocks:[]},
   {id:'calc4',     name:'Cálculo IV',                            code:'ESTBAS019', period:4,  hours:'60h',  pre:['calc3'],                       unlocks:['sinais']},
 
   // ── 5º PERÍODO ──
-  {id:'cont1',     name:'Controle I',                            code:'ESTEMT003', period:5,  hours:'60h',  pre:['fis1'],                        unlocks:['cont2','lab_cont1']},
+  {id:'cont1',     name:'Controle I',                            code:'ESTEMT003', period:5,  hours:'60h',  pre:['fis1'],                        unlocks:['cont2','lab_cont2']},
   {id:'lab_cont1', name:'Lab. de Controle I',                    code:'ESTEMA008', period:5,  hours:'30h',  pre:['fis1'],                        unlocks:['lab_cont2']},
   {id:'circ2',     name:'Circuitos Elétricos II',                code:'ESTEEL003', period:5,  hours:'60h',  pre:['circ1'],                       unlocks:['sist_pot']},
   {id:'elet_ana',  name:'Eletrônica Analógica',                  code:'ESTEMA003', period:5,  hours:'60h',  pre:['circ1'],                       unlocks:['elet_dig','lab_elet_dig']},
   {id:'inst_ind',  name:'Instrumentação Industrial',             code:'ESTEMA005', period:5,  hours:'60h',  pre:['circ1'],                       unlocks:['lab_inst']},
   {id:'lab_inst',  name:'Lab. de Instrumentação Industrial',     code:'ESTEMA006', period:5,  hours:'30h',  pre:['circ1'],                       unlocks:[]},
   {id:'lab_circ2', name:'Lab. de Circuitos Elétricos II',        code:'ESTEEL004', period:5,  hours:'30h',  pre:['circ1','lab_circ1'],           unlocks:[]},
-  {id:'lab_elet_ana',name:'Lab. de Eletrônica Analógica',        code:'ESTEMA004', period:5,  hours:'45h',  pre:['circ1'],                       unlocks:[]},
+  {id:'lab_elet_ana',name:'Lab. de Eletrônica Analógica',        code:'ESTEMA004', period:5,  hours:'45h',  pre:['circ1','lab_circ1'],           unlocks:[]},
   {id:'sinais',    name:'Análise de Sinais e Sistemas',          code:'ESTEMA002', period:5,  hours:'60h',  pre:['calc4'],                       unlocks:['mod_sim']},
 
   // ── 6º PERÍODO ──
-  {id:'cont2',     name:'Controle II',                           code:'ESTEMT004', period:6,  hours:'60h',  pre:['cont1'],                       unlocks:['cont3','lab_cont2']},
-  {id:'lab_cont2', name:'Lab. de Controle II',                   code:'ESTEMA010', period:6,  hours:'30h',  pre:['cont2','lab_cont1'],           unlocks:['lab_cont3']},
+  {id:'cont2',     name:'Controle II',                           code:'ESTEMT004', period:6,  hours:'60h',  pre:['cont1'],                       unlocks:['cont3','lab_cont3']},
+  {id:'lab_cont2', name:'Lab. de Controle II',                   code:'ESTEMA010', period:6,  hours:'30h',  pre:['cont1','lab_cont1'],           unlocks:['lab_cont3']},
   {id:'sist_pot',  name:'Sist. Eletrônicos de Potência',         code:'ESTEMT006', period:6,  hours:'60h',  pre:['circ2'],                       unlocks:[]},
-  {id:'elet_dig',  name:'Eletrônica Digital',                    code:'ESTMA009',  period:6,  hours:'60h',  pre:['elet_ana'],                    unlocks:['lab_elet_dig']},
-  {id:'lab_elet_dig',name:'Lab. de Eletrônica Digital',          code:'ESTEMA061', period:6,  hours:'45h',  pre:['elet_dig'],                    unlocks:[]},
+  {id:'elet_dig',  name:'Eletrônica Digital',                    code:'ESTMA009',  period:6,  hours:'60h',  pre:['elet_ana'],                    unlocks:[]},
+  {id:'lab_elet_dig',name:'Lab. de Eletrônica Digital',          code:'ESTEMA061', period:6,  hours:'45h',  pre:['elet_ana'],                    unlocks:[]},
   {id:'proc_trans',name:'Processos de Transformação',            code:'ESTEMA013', period:6,  hours:'60h',  pre:['intro_mat'],                   unlocks:['gest_op']},
   {id:'eletromag', name:'Eletromagnetismo',                      code:'ESTEEL013', period:6,  hours:'60h',  pre:['fis4'],                        unlocks:['maq_elet','lab_maq']},
   {id:'mod_sim',   name:'Modelagem e Simulação de Sist. Disc.',  code:'ESTEMT001', period:6,  hours:'60h',  pre:['sinais'],                      unlocks:['auto_sup']},
 
   // ── 7º PERÍODO ──
-  {id:'cont3',     name:'Controle III',                          code:'ESTEMAS015',period:7,  hours:'45h',  pre:['cont2'],                       unlocks:['lab_cont3']},
-  {id:'lab_cont3', name:'Lab. de Controle III',                  code:'ESTEMAS018',period:7,  hours:'30h',  pre:['cont3','lab_cont2'],           unlocks:[]},
+  {id:'cont3',     name:'Controle III',                          code:'ESTEMAS015',period:7,  hours:'45h',  pre:['cont2'],                       unlocks:[]},
+  {id:'lab_cont3', name:'Lab. de Controle III',                  code:'ESTEMAS018',period:7,  hours:'30h',  pre:['cont2','lab_cont2'],           unlocks:[]},
   {id:'estagio1',  name:'Estágio em ECA I',                      code:'ESTEMA011', period:7,  hours:'450h', pre:['com_exp','fis1','quim','alglin1','prog1','intro_amb','intro_eca','calc1','intro_econ','fis2','intro_adm','alglin2','prog2','des_bas','prob_est','calc2','mec1','fis3','lab_fis1','mec_flu','prat_prof','intro_mat','empreend','calc3','intro_ca','mec_sol','fis4','lab_fis2','circ1','lab_circ1','calc_num','sist_din','calc4','cont1','lab_cont1','circ2','elet_ana','inst_ind','lab_inst','lab_circ2','lab_elet_ana','sinais','cont2','lab_cont2','sist_pot','elet_dig','lab_elet_dig','proc_trans','eletromag','mod_sim'], unlocks:['estagio2']},
   {id:'hig_seg',   name:'Higiene e Segurança do Trabalho',       code:'ESTECI024', period:7,  hours:'60h',  pre:[],                              unlocks:[]},
   {id:'opt1_14',   name:'Optativa I',                            code:'—',         period:7,  hours:'—',    pre:[],                              unlocks:[]},
@@ -632,20 +735,20 @@ const DATA={
   {id:'gest_op',   name:'Gestão de Operações',                   code:'ESTEMA017', period:8,  hours:'45h',  pre:['proc_trans'],                  unlocks:[]},
 
   // ── 9º PERÍODO ──
-  {id:'tcc1',      name:'TCC I',                                  code:'ESTMA036',  period:9,  hours:'45h',  pre:['com_exp','fis1','quim','alglin1','prog1','intro_amb','intro_eca','calc1','intro_econ','fis2','intro_adm','alglin2','prog2','des_bas','prob_est','calc2','mec1','fis3','lab_fis1','mec_flu','prat_prof','intro_mat','empreend','calc3','intro_ca','mec_sol','fis4','lab_fis2','circ1','lab_circ1','calc_num','sist_din','calc4','cont1','lab_cont1','circ2','elet_ana','inst_ind','lab_inst','lab_circ2','lab_elet_ana','sinais','cont2','lab_cont2','sist_pot','elet_dig','lab_elet_dig','proc_trans','eletromag','mod_sim','cont3','lab_cont3','hig_seg','opt1_14','maq_elet','lab_maq','opt2_14','opt3_14','cmd_elet','opt4_14','gest_op'], unlocks:['tcc2']},
-  {id:'top_esp1',  name:'Tópicos Especiais em ECA I',             code:'ESTMA100',  period:9,  hours:'60h',  pre:['com_exp','fis1','quim','alglin1','prog1','intro_amb','intro_eca','calc1','intro_econ','fis2','intro_adm','alglin2','prog2','des_bas','prob_est','calc2','mec1','fis3','lab_fis1','mec_flu','prat_prof','intro_mat','empreend','calc3','intro_ca','mec_sol','fis4','lab_fis2','circ1','lab_circ1','calc_num','sist_din','calc4','cont1','lab_cont1','circ2','elet_ana','inst_ind','lab_inst','lab_circ2','lab_elet_ana','sinais','cont2','lab_cont2','sist_pot','elet_dig','lab_elet_dig','proc_trans','eletromag','mod_sim'], unlocks:['top_esp2']},
-  {id:'opt5_14',   name:'Optativa V',                             code:'—',         period:9,  hours:'—',    pre:[],                              unlocks:[]},
-  {id:'lab_cmd',   name:'Lab. Comandos Eletropneumáticos e Hid.', code:'ESTMA820',  period:9,  hours:'30h',  pre:['cmd_elet'],                    unlocks:[]},
-  {id:'opt6_14',   name:'Optativa VI',                            code:'—',         period:9,  hours:'—',    pre:[],                              unlocks:[]},
-  {id:'opt7_14',   name:'Optativa VII',                           code:'—',         period:9,  hours:'—',    pre:[],                              unlocks:[]},
-  {id:'auto_sup',  name:'Automação e Supervisão de Proc.',        code:'ESTMA026',  period:9,  hours:'45h',  pre:['mod_sim'],                     unlocks:[]},
+  {id:'tcc1',      name:'TCC I',                                 code:'ESTMA036',  period:9,  hours:'45h',  pre:['com_exp','fis1','quim','alglin1','prog1','intro_amb','intro_eca','calc1','intro_econ','fis2','intro_adm','alglin2','prog2','des_bas','prob_est','calc2','mec1','fis3','lab_fis1','mec_flu','prat_prof','intro_mat','empreend','calc3','intro_ca','mec_sol','fis4','lab_fis2','circ1','lab_circ1','calc_num','sist_din','calc4','cont1','lab_cont1','circ2','elet_ana','inst_ind','lab_inst','lab_circ2','lab_elet_ana','sinais','cont2','lab_cont2','sist_pot','elet_dig','lab_elet_dig','proc_trans','eletromag','mod_sim','cont3','lab_cont3','hig_seg','opt1_14','maq_elet','lab_maq','opt2_14','opt3_14','cmd_elet','opt4_14','gest_op'], unlocks:['tcc2']},
+  {id:'top_esp1',  name:'Tópicos Especiais em ECA I',            code:'ESTMA100',  period:9,  hours:'60h',  pre:['com_exp','fis1','quim','alglin1','prog1','intro_amb','intro_eca','calc1','intro_econ','fis2','intro_adm','alglin2','prog2','des_bas','prob_est','calc2','mec1','fis3','lab_fis1','mec_flu','prat_prof','intro_mat','empreend','calc3','intro_ca','mec_sol','fis4','lab_fis2','circ1','lab_circ1','calc_num','sist_din','calc4','cont1','lab_cont1','circ2','elet_ana','inst_ind','lab_inst','lab_circ2','lab_elet_ana','sinais','cont2','lab_cont2','sist_pot','elet_dig','lab_elet_dig','proc_trans','eletromag','mod_sim'], unlocks:['top_esp2']},
+  {id:'opt5_14',   name:'Optativa V',                            code:'—',         period:9,  hours:'—',    pre:[],                              unlocks:[]},
+  {id:'lab_cmd',   name:'Lab. Comandos Eletropneumáticos e Hid.',code:'ESTMA820',  period:9,  hours:'30h',  pre:['cmd_elet'],                    unlocks:[]},
+  {id:'opt6_14',   name:'Optativa VI',                           code:'—',         period:9,  hours:'—',    pre:[],                              unlocks:[]},
+  {id:'opt7_14',   name:'Optativa VII',                          code:'—',         period:9,  hours:'—',    pre:[],                              unlocks:[]},
+  {id:'auto_sup',  name:'Automação e Supervisão de Proc.',       code:'ESTMA026',  period:9,  hours:'45h',  pre:['mod_sim'],                     unlocks:[]},
 
   // ── 10º PERÍODO ──
-  {id:'tcc2',      name:'TCC II',                                 code:'ESTEMA046', period:10, hours:'45h',  pre:['tcc1'],                        unlocks:[]},
-  {id:'top_esp2',  name:'Tópicos Especiais em ECA II',            code:'ESTEMA102', period:10, hours:'60h',  pre:['top_esp1'],                    unlocks:[]},
-  {id:'opt8_14',   name:'Optativa VIII',                          code:'—',         period:10, hours:'—',    pre:[],                              unlocks:[]},
-  {id:'opt9_14',   name:'Optativa IX',                            code:'—',         period:10, hours:'—',    pre:[],                              unlocks:[]},
-  {id:'opt10_14',  name:'Optativa X',                             code:'—',         period:10, hours:'—',    pre:[],                              unlocks:[]},
+  {id:'tcc2',      name:'TCC II',                                code:'ESTEMA046', period:10, hours:'45h',  pre:['tcc1'],                        unlocks:[]},
+  {id:'top_esp2',  name:'Tópicos Especiais em ECA II',           code:'ESTEMA102', period:10, hours:'60h',  pre:['top_esp1'],                    unlocks:[]},
+  {id:'opt8_14',   name:'Optativa VIII',                         code:'—',         period:10, hours:'—',    pre:[],                              unlocks:[]},
+  {id:'opt9_14',   name:'Optativa IX',                           code:'—',         period:10, hours:'—',    pre:[],                              unlocks:[]},
+  {id:'opt10_14',  name:'Optativa X',                            code:'—',         period:10, hours:'—',    pre:[],                              unlocks:[]},
 ],
 "2023":[
   {id:'com_exp_23',  name:'Comunicação e Expressão',        code:'ESTBAS006', period:1,hours:'60h', pre:[],unlocks:['prat_prof_23']},
@@ -749,60 +852,142 @@ const setSub=(id,p)=>{const s=load();s[id]={...getSub(id),...p};save(s);};
 // ── CODE MAP (histórico code → subject id in grade 2014) ────────────────────
 const CM={
   // 1º Período
-  'ESTBAS006':'com_exp',
-  'ESTBAS007':'fis1',
-  'ESTBAS005':'quim',
-  'ESTBAS001':'alglin1',
-  'ESTECP001':'prog1',
-  'ESTEBAS004':'intro_amb',
-  'ESTEBAS003':'intro_eca',
-  'ESTBAS003':'intro_eca',
-  'ESTBAS002':'calc1',
+  'ESTBAS006':'com_exp', 'EST0103':'com_exp', 'EST0415':'com_exp', 'EST0570':'com_exp',
+  'ESTBAS007':'fis1', 'EST0120':'fis1', 'EST0248':'fis1', 'ESTBAS044':'fis1',
+  'ESTBAS005':'quim', 'EST0135':'quim', 'EST0134':'quim',
+  'ESTBAS001':'alglin1', 'EST0105':'alglin1', 'EST0106':'alglin1', 'EST0122':'alglin1', 'EST0206':'alglin1', 'ESTBAS040':'alglin1',
+  'ESTECP001':'prog1', 'EST0125':'prog1',
+  'ESTEBAS004':'intro_amb', 'ESTBAS004':'intro_amb', 'EST0240':'intro_amb',
+  'ESTEBAS003':'intro_eca', 'ESTBAS003':'intro_eca', 'EST0130':'intro_eca', 'EST0239':'intro_eca', 'ESTEMA103':'intro_eca',
+  'ESTBAS002':'calc1', 'EST0104':'calc1', 'EST0110':'calc1', 'EST0161':'calc1', 'ESTBAS037':'calc1',
+
   // 2º Período
-  'ESTBAS017':'intro_econ',
-  'ESTBAS013':'fis2',
-  'ESTBAS011':'intro_adm',
-  'ESTBAS008':'alglin2',
-  'ESTECP002':'prog2',
-  'ESTBAS010':'des_bas',
-  'ESTBAS012':'prob_est',
+  'ESTBAS017':'intro_econ', 'EST0358':'intro_econ',
+  'ESTBAS013':'fis2', 'EST0220':'fis2', 'ESTBAS045':'fis2', 'ESN0428':'fis2',
+  'ESTBAS011':'intro_adm', 'EST0837':'intro_adm',
+  'ESTBAS008':'alglin2', 'EST0215':'alglin2', 'ESN0307':'alglin2',
+  'ESTECP002':'prog2', 'EST0646':'prog2',
+  'ESTBAS010':'des_bas', 'EST0115':'des_bas', 'EST0114':'des_bas', 'ESTEMA201':'des_bas',
+  'ESTBAS012':'prob_est', 'EST0124':'prob_est', 'EST0364':'prob_est', 'EST0449':'prob_est', 'EST0521':'prob_est', 'EST0780':'prob_est',
   'ESTBAS009':'calc2',
+
   // 3º Período
-  'ESTECI002':'mec1',     'ESTBAS015':'fis3',     'ESTBAS016':'lab_fis1',
-  'ESTEME004':'mec_flu',  'ESTBAS022':'prat_prof','ESTBAS025':'intro_mat',
-  'ESTEMA062':'empreend', 'ESTBAS014':'calc3',    'ESTEMA001':'intro_ca',
+  'ESTECI002':'mec1', 'ESTEC1002':'mec1', 'EST0260':'mec1',
+  'ESTBAS015':'fis3', 'ESTBAS046':'fis3', 'EST0338':'fis3',
+  'ESTBAS016':'lab_fis1', 'EST0250':'lab_fis1',
+  'ESTEME004':'mec_flu', 'EST0360':'mec_flu', 'EST0460':'mec_flu', 'ESTTME340':'mec_flu', 'ESTTME442':'mec_flu', 'ESTEMA302':'mec_flu',
+  'ESTBAS022':'prat_prof', 'EST0445':'prat_prof', 'EST0685':'prat_prof', 'EST0876':'prat_prof', 'EST0771':'prat_prof',
+  'ESTBAS025':'intro_mat', 'ESTEMA305':'intro_mat',
+  'ESTEMA062':'empreend', 'EST0334':'empreend', 'ESTBAS035':'empreend', 'EST0717':'empreend', 'EST0532':'empreend', 'EST0249':'empreend', 'EST00033':'empreend', 'ESTEMA904':'empreend',
+  'ESTBAS014':'calc3', 'EST0312':'calc3', 'ESTEMA400':'calc3',
+  'ESTEMA001':'intro_ca',
+
   // 4º Período
-  'ESTEME01':'mec_sol',   'ESTEME001':'mec_sol',  'ESTBAS018':'fis4',
-  'ESTBAS020':'lab_fis2', 'ESTEEL001':'circ1',    'ESTEEL002':'lab_circ1',
-  'ESTEBAS049':'calc_num','ESTBAS049':'calc_num', 'ESTEMA007':'sist_din',
-  'ESTBAS019':'calc4',
+  'ESTEME01':'mec_sol', 'ESTEME001':'mec_sol', 'EST0366':'mec_sol', 'ESTEQM140':'mec_sol', 'ESTEMA301':'mec_sol',
+  'ESTBAS018':'fis4', 'EST0444':'fis4',
+  'ESTBAS020':'lab_fis2', 'EST0374':'lab_fis2',
+  'ESTEEL001':'circ1', 'EST0322':'circ1', 'ESTTEL238':'circ1',
+  'ESTEEL002':'lab_circ1', 'EST0368':'lab_circ1', 'ESTEMA403':'lab_circ1',
+  'ESTEBAS049':'calc_num', 'ESTBAS049':'calc_num', 'EST0314':'calc_num', 'ESTECP003':'calc_num',
+  'ESTEMA007':'sist_din', 'ESTEMT002':'sist_din', 'EST0553':'sist_din',
+  'ESTBAS019':'calc4', 'EST0410':'calc4', 'ESTEMA300':'calc4',
+
   // 5º Período
-  'ESTEMT003':'cont1',    'ESTEMA008':'lab_cont1','ESTEEL003':'circ2',
-  'ESTEMA003':'elet_ana', 'ESTEMA005':'inst_ind', 'ESTEMA006':'lab_inst',
-  'ESTEEL004':'lab_circ2','ESTEEL0206':'lab_circ2','ESTEMA004':'lab_elet_ana',
-  'ESTEMA002':'sinais',
+  'ESTEMT003':'cont1', 'ESTEMA500':'cont1',
+  'ESTEMA008':'lab_cont1', 'ESTEMA501':'lab_cont1',
+  'ESTEEL003':'circ2', 'EEN45':'circ2',
+  'ESTEMA003':'elet_ana', 'ESTEEL054':'elet_ana',
+  'ESTEMA005':'inst_ind', 'ESTEEL057':'inst_ind', 'EEN62':'inst_ind',
+  'ESTEMA006':'lab_inst',
+  'ESTEEL004':'lab_circ2', 'ESTEEL0206':'lab_circ2',
+  'ESTEMA004':'lab_elet_ana',
+  'ESTEMA002':'sinais', 'ESTEEL012':'sinais', 'ESTEMA401':'sinais',
+
   // 6º Período
-  'ESTEMT004':'cont2',    'ESTEMA010':'lab_cont2','ESTEMT006':'sist_pot',
-  'ESTMA009':'elet_dig',  'ESTEMA009':'elet_dig', 'ESTEMA061':'lab_elet_dig',
-  'ESTEMA013':'proc_trans','ESTEEL013':'eletromag','ESTEMT001':'mod_sim',
+  'ESTEMT004':'cont2', 'ESTEMA600':'cont2',
+  'ESTEMA010':'lab_cont2', 'ESTEMA601':'lab_cont2',
+  'ESTEMT006':'sist_pot', 'ESTEEL022':'sist_pot',
+  'ESTMA009':'elet_dig', 'ESTEMA009':'elet_dig', 'ESTEEL009':'elet_dig', 'ESTEMT030':'elet_dig',
+  'ESTEMA061':'lab_elet_dig', 'ESTEEL010':'lab_elet_dig', 'ESTEMA060':'lab_elet_dig',
+  'ESTEMA013':'proc_trans', 'ESTEME012':'proc_trans', 'ESTEMA502':'proc_trans',
+  'ESTEEL013':'eletromag', 'ESTEEL0503':'eletromag',
+  'ESTEMT001':'mod_sim', 'ESTEMA402':'mod_sim',
+
   // 7º Período
-  'ESTEMAS015':'cont3',   'ESTEMA015':'cont3',    'ESTEMA701':'cont3',
-  'ESTEMAS018':'lab_cont3','ESTEMA018':'lab_cont3','ESTEMA702':'lab_cont3',
-  'ESTEMA011':'estagio1', 'ESTECI024':'hig_seg',
-  'ESTEEL027':'maq_elet', 'ESTEMA012':'lab_maq',
-  'ESTEMA601':'lab_cont2',
+  'ESTEMAS015':'cont3', 'ESTEMA015':'cont3', 'ESTEMA701':'cont3', 'ESTEMT049':'cont3',
+  'ESTEMAS018':'lab_cont3', 'ESTEMA018':'lab_cont3', 'ESTEMA702':'lab_cont3',
+  'ESTEMA011':'estagio1', 'ESTEMT007':'estagio1',
+  'ESTECI024':'hig_seg', 'ESTEC1024':'hig_seg',
+  'ESTEEL027':'maq_elet',
+  'ESTEMA012':'lab_maq', 'ESTEMA704':'lab_maq',
+
   // 8º Período
-  'ESTEMA021':'estagio2', 'ESTEMA031':'cmd_elet', 'ESTEMA017':'gest_op',
+  'ESTEMA021':'estagio2', 'ESTEMT009':'estagio2',
+  'ESTEMA031':'cmd_elet', 'ESTEME042':'cmd_elet', 'ESTEMT016':'cmd_elet', 'ESTEMA603':'cmd_elet',
+  'ESTEMA017':'gest_op',
+
   // 9º Período
-  'ESTMA036':'tcc1',      'ESTEMA036':'tcc1',     'ESTMA100':'top_esp1',
-  'ESTEMA100':'top_esp1', 'ESTMA820':'lab_cmd',
-  'ESTMA026':'auto_sup',  'ESTEMA026':'auto_sup',
+  'ESTMA036':'tcc1', 'ESTEMA036':'tcc1', 'ESTEMA023':'tcc1', 'ESTEMT018':'tcc1', 'ESTEMA803':'tcc1',
+  'ESTMA100':'top_esp1', 'ESTEMA100':'top_esp1', 'ESTEMA101':'top_esp1', 'ESTEMT028':'top_esp1', 'ESTEMA804':'top_esp1',
+  'ESTMA820':'lab_cmd', 'ESTEMA020':'lab_cmd',
+  'ESTMA026':'auto_sup', 'ESTEMA026':'auto_sup', 'ESTEMA900':'auto_sup',
+
   // 10º Período
-  'ESTEMA046':'tcc2',     'ESTEMA102':'top_esp2',
-  // Disciplinas fora da grade 2014 → null (optativas / grade 2023)
-  'ESTEMA300':null, 'ESTEMA302':null, 'ESTEEL0503':null, 'ESTEEL063':null,
-  'ESTEMA033':null, 'ESTEMA039':null, 'ESTEEL021':null,  'ESTEMA030':null,
-  'ESTEMT013':null, 'ESTEMT024':null, 'ESTEMA502':null,  'ESTEMA603':null,
+  'ESTEMA046':'tcc2', 'ESTEMA025':'tcc2', 'ESTEMT022':'tcc2', 'ESTEMA902':'tcc2',
+  'ESTEMA102':'top_esp2', 'ESTEMA903':'top_esp2'
+};
+
+// ── DICIONÁRIO DE OPTATIVAS E EQUIVALÊNCIAS (Mapeamento Dinâmico) ────────────
+const OPT_DICT = {
+  'EST0826': 'Língua Brasileira de Sinais (Libras)',
+  'ESTECP014': 'Redes de Computadores I',
+  'ESTEMA016': 'Redes de Computadores I',
+  'ESTECP018': 'Redes de Computadores II',
+  'ESTECP024': 'Tecnologia WEB',
+  'ESTECP025': 'Interface Usuário e Sist. Comp.',
+  'ESTECP038': 'Projeto de Sistemas Embarcados',
+  'ESTEEL007': 'Eletrônica II',
+  'ESTEEL008': 'Laboratório de Eletrônica II',
+  'ESTEEL021': 'Tecnologia de Hardware Reprogramável',
+  'ESTEEL029': 'Sistemas de Comunicações Móveis',
+  'ESTEEL044': 'Processamento Digital de Imagens',
+  'ESTEEL046': 'Instalações Elétricas',
+  'ESTEEL063': 'Manutenção de Equip. Elétricos',
+  'ESTEMA019': 'Processamento e Controle Digital',
+  'ESTECP037': 'Processamento e Controle Digital',
+  'ESTEMA022': 'Microprocessadores e Microcontroladores',
+  'ESTEMT035': 'Microprocessadores e Microcontroladores',
+  'ESTEMA024': 'Redes Industriais de Comunicação',
+  'ESTTEL531': 'Redes Industriais de Comunicação',
+  'ESTEMA029': 'Manufatura Integrada por Computador e Robótica',
+  'ESTEMA030': 'Inteligência Artificial Aplicada a Automação',
+  'ESTEMT025': 'Inteligência Artificial Aplicada a Automação',
+  'ESTEMA033': 'Planejamento e Gestão da Qualidade',
+  'ESTEMA034': 'Estágio Supervisionado III em ECA',
+  'ESTEMA035': 'Estágio Supervisionado IV em ECA',
+  'ESTEMA037': 'Controle Robusto',
+  'ESTEMA038': 'Controle Preditivo',
+  'ESTEMA039': 'Controle Não Linear',
+  'ESTEMA040': 'Identificação de Sistemas de Controle',
+  'ESTEMA042': 'Estágio Supervisionado III em ECA',
+  'ESTEMT011': 'Estágio Supervisionado III em ECA',
+  'ESTEMA044': 'Comandos Eletropneumáticos I',
+  'ESTEMA067': 'Sistema Supervisório',
+  'ESTEEL067': 'Sistema Supervisório',
+  'ESTEME005': 'Introd. ao Projeto de Sistemas Mecânicos',
+  'ESTEME036': 'Introd. ao Método dos Elementos Finitos',
+  'ESTEME041': 'Programação e Operação de CNC',
+  'ESTEMT013': 'Projetos de Exp. e Confiabilidade de Produto',
+  'ESTEMT015': 'Robótica Industrial',
+  'ESTEMT019': 'Nanotecnologia',
+  'ESTEMT020': 'Programação de Robôs',
+  'ESTEMT024': 'Introdução à Biomecânica',
+  'ESTEMT027': 'Sistemas Microprocessados',
+  'ESTEMT048': 'Gestão de Projeto',
+  'ESTEPR016': 'Projeto do Produto e Processo',
+  'ESTEPR023': 'Sistemas de Gestão Ambiental',
+  'ESTEPR026': 'Gestão de Manutenção',
+  'ESTEPR203': 'Legislação da ZFM'
 };
 
 // ── STATE ────────────────────────────────────────────────────────────────────
@@ -851,7 +1036,7 @@ function render(){
   track.innerHTML='<svg id="svg-layer"></svg>';
   track.classList.toggle('vertical', CFG.orientation==='v');
   track.style.gap=({tight:'8px',normal:'17px',loose:'30px'})[CFG.spacing]||'17px';
-  // No modo vertical, o scroll é só vertical; horizontal = scroll horizontal
+  
   const scroll=document.getElementById('scroll');
   if(CFG.orientation==='v'){
     scroll.style.overflowX='hidden';
@@ -917,7 +1102,7 @@ function render(){
     if(isV) head.style.borderRightColor=c.main;
     col.appendChild(head);
 
-    // Container for cards — in vertical mode use a dedicated row wrapper
+    // Container for cards
     const cardsContainer=document.createElement('div');
     if(isV){
       cardsContainer.className='v-cards-row';
@@ -944,13 +1129,23 @@ function render(){
         if(CFG.cardSize==='compact') cls+=' sz-compact';
         if(CFG.cardSize==='large')   cls+=' sz-large';
         if(nextAvailSet.has(sub.id)) cls+=' next-available';
+        
+        // NOVO: Adiciona a classe 'is-opt' no card se for optativa
+        if(typeOf(sub) === 'opt') cls+=' is-opt'; 
 
         const card=document.createElement('div');
         card.className=cls;
         card.id='card-'+sub.id;
         card.style.borderColor=c.main+'25';
 
-        let codeHtml=CFG.showCode?`<div class="card-code" style="color:${c.main}">${sub.code}</div>`:'';
+        // Usa o nome/código real se for uma optativa já preenchida
+        let displayCode = d.realCode || sub.code;
+        let displayName = d.realName || sub.name;
+
+        // NOVO: Cria o crachá visual (badge) se for optativa
+        let optBadge = typeOf(sub) === 'opt' ? `<span class="opt-badge" title="Disciplina Optativa">OPT</span>` : '';
+
+        let codeHtml=CFG.showCode?`<div class="card-code" style="color:${c.main}">${displayCode}</div>`:'';
         let hoursHtml=CFG.showHours?`<div class="card-hours">${sub.hours}</div>`:'';
         let gradeHtml='';
         if(CFG.showGrade && d.grade && d.status!=='pending'){
@@ -959,9 +1154,10 @@ function render(){
           gradeHtml=`<div class="card-grade"><span class="grade-badge ${gc}">${d.grade}</span></div>`;
         }
 
+        // NOVO: Renderiza o ${optBadge} logo após o displayName
         card.innerHTML=`<div class="card-stripe" style="background:${c.main}"></div>
           ${codeHtml}
-          <div class="card-name">${sub.name}</div>
+          <div class="card-name">${displayName} ${optBadge}</div>
           ${hoursHtml}${gradeHtml}`;
 
         if(CFG.arrowVis==='hover'){
@@ -979,7 +1175,6 @@ function render(){
     if(isV){
       col.appendChild(cardsContainer);
     } else {
-      // In horizontal mode, append cards directly (no wrapper needed)
       Array.from(cardsContainer.children).forEach(el=>col.appendChild(el));
     }
     track.appendChild(col);
@@ -1167,8 +1362,8 @@ function openModal(sub){
   document.getElementById('modal-top').style.background=`linear-gradient(135deg,${c.main}28,${c.light})`;
   document.getElementById('m-period').textContent=`${sub.period}º Período`;
   document.getElementById('m-period').style.color=c.main;
-  document.getElementById('m-title').textContent=sub.name;
-  document.getElementById('m-code').textContent=sub.code;
+  document.getElementById('m-title').textContent = d.realName || sub.name;
+  document.getElementById('m-code').textContent = d.realCode || sub.code;
   document.getElementById('m-hours').textContent=sub.hours;
   // grade
   const gc=document.getElementById('m-gc'),sc=document.getElementById('m-sc');
@@ -1247,11 +1442,15 @@ function handleDrop(e){
 function handleFileSelect(e){const f=e.target.files[0];if(f)processFile(f);}
 
 // ── Extract text from PDF using PDF.js (100% local, no API) ─────────────────
+// ── Extract text from PDF using PDF.js (100% local, no API) ─────────────────
 async function processFile(f){
   const prog=document.getElementById('import-progress');
   const statusEl=document.getElementById('import-status');
   prog.classList.add('show');
   statusEl.innerHTML=`<span style="color:var(--accent)">📄 Lendo PDF localmente...</span>`;
+
+  console.group("📥 Iniciando Importação de PDF");
+  console.log("Arquivo:", f.name, "| Tamanho:", f.size, "bytes");
 
   try {
     // Configure PDF.js worker from CDN
@@ -1263,11 +1462,13 @@ async function processFile(f){
 
     // Load PDF
     const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+    console.log("PDF carregado com sucesso. Total de páginas:", pdf.numPages);
     statusEl.innerHTML=`<span style="color:var(--accent)">📄 PDF carregado (${pdf.numPages} página(s)) — extraindo texto...</span>`;
 
     // Extract text from all pages
     let fullText = '';
     for(let pageNum=1; pageNum<=pdf.numPages; pageNum++){
+      console.log(`Lendo página ${pageNum}...`);
       const page = await pdf.getPage(pageNum);
       const content = await page.getTextContent();
 
@@ -1291,13 +1492,17 @@ async function processFile(f){
       });
     }
 
+    console.log("Extração de texto concluída. Tamanho total:", fullText.length, "caracteres.");
+    console.groupEnd();
+    
     statusEl.innerHTML=`<span style="color:var(--accent)">🔍 Analisando disciplinas...</span>`;
     parseHistorico(fullText);
 
   } catch(err) {
     statusEl.innerHTML=`<span style="color:var(--red)">❌ Erro ao ler PDF: ${err.message}</span><br>
     <small style="opacity:.6">Certifique-se de que o arquivo é um PDF válido do histórico da UEA.</small>`;
-    console.error(err);
+    console.error("Erro crítico no processFile:", err);
+    console.groupEnd();
   }
 }
 
@@ -1320,92 +1525,130 @@ function parseHistorico(text){
   const matched  = new Map(); // subId → best entry
   const unmatched = [];
 
-  // We'll track current semester from lines like "2022 / 1"
   let currentSemester = '';
-
-  // Reconstruct discipline records:
-  // The PDF often spreads a discipline across multiple items per line.
-  // Strategy: find any line containing a known discipline code + a status word.
-  // Also handle cases where code and status are on separate lines by sliding a window.
-
-  // Join everything into a big blob and use regex on that too
-  const bigBlob = lines.join(' | ');
-
-  // Primary: line-by-line
   const processedLines = new Set();
 
   for(let i=0; i<lines.length; i++){
     const line = lines[i];
 
-    // Update semester tracker
+    // Atualiza o semestre corrente
     const semM = line.match(/^(\d{4})\s*[\/\\]\s*(\d)\b/);
     if(semM) currentSemester = semM[1]+'/'+semM[2];
 
-    // Try combining this line with previous/next to catch split records
-    const window3 = [lines[i-1]||'', line, lines[i+1]||''].join(' ');
-
-    const codeMatch = window3.match(codeRe);
+    const codeMatch = line.match(codeRe);
     if(!codeMatch) continue;
+    
     const code = codeMatch[1].toUpperCase();
-
     if(processedLines.has(code+currentSemester)) continue;
 
-    // Check SKIP first
-    if(SKIP.some(s=>window3.includes(s))) continue;
+    // --- CORREÇÃO DA JANELA DE BUSCA BLINDADA ---
+    let windowLines = [line];
+    
+    // 1. Checa se o status e a nota já estão na MESMA linha (ocorre em 95% das matérias)
+    let foundStatus = [...APROV, ...REPROV, ...MATRIC, ...SKIP].some(s => line.includes(s));
+    
+    // 2. Se a matéria quebrou de linha no PDF, procura nas próximas
+    if (!foundStatus) {
+        for(let j = i + 1; j < lines.length && j < i + 15; j++) {
+            // Se esbarrar no código da próxima matéria, a atual era só um "fantasma" (ex: Grade no final do PDF). Para!
+            if (lines[j].match(codeRe)) break; 
+            
+            windowLines.push(lines[j]);
+            if ([...APROV, ...REPROV, ...MATRIC, ...SKIP].some(s => lines[j].includes(s))) {
+                foundStatus = true;
+                break; 
+            }
+        }
+    }
+
+    // Se depois de tudo não tem status, ignora.
+    if (!foundStatus) continue;
+
+    const windowN = windowLines.join(' ');
+
+    if(SKIP.some(s=>windowN.includes(s))) continue;
 
     let status = '';
-    if(APROV.some(s=>window3.includes(s))) status='done';
-    else if(REPROV.some(s=>window3.includes(s))) status='failed';
-    else if(MATRIC.some(s=>window3.includes(s))) status='enrolled';
+    if(APROV.some(s=>windowN.includes(s))) status='done';
+    else if(REPROV.some(s=>windowN.includes(s))) status='failed';
+    else if(MATRIC.some(s=>windowN.includes(s))) status='enrolled';
+    
     if(!status) continue;
 
     processedLines.add(code+currentSemester);
 
-    // Extract grade — look for number like 6.02 or 8.00 or 9.3 near status word
+    // Extrai a nota sem o perigo de pegar do vizinho
     let grade = '';
     const gradeRe = /\b(\d{1,2}[.,]\d{1,2})\s*(?:Aprov|Rep|Dispe)/i;
-    const gm = window3.match(gradeRe);
+    const gm = windowN.match(gradeRe);
     if(gm) grade = gm[1].replace(',','.');
-    // Also handle edge case ".13" (leading dot, as in Cálculo IV 0.13)
     if(!grade){
-      const gm2 = window3.match(/\b(\.\d{2})\s*(?:Rep)/i);
+      const gm2 = windowN.match(/\b(\.\d{2})\s*(?:Rep)/i);
       if(gm2) grade = '0'+gm2[1];
     }
 
     const semester = currentSemester;
 
-    // Map to subject ID
+    // --- LÓGICA DINÂMICA DE OPTATIVAS E EQUIVALÊNCIAS ---
     let subId = CM.hasOwnProperty(code) ? CM[code] : undefined;
-    if(subId===undefined){
-      const found = DATA[G].find(s=>s.code===code||s.code===code.replace(/^EST/,'EST'));
-      if(found) subId = found.id;
+    let realName = undefined;
+    let realCode = undefined;
+
+    if (subId === undefined) {
+      const found = DATA[G].find(s => s.code === code || s.code === code.replace(/^EST/, 'EST'));
+      if (found) subId = found.id;
     }
 
-    if(subId && subId!==null){
-      const existing = matched.get(subId);
-      const priority = {done:3,enrolled:2,failed:1};
-      const np = priority[status]||0, ep = existing ? priority[existing.status]||0 : 0;
-      if(!existing || np>ep){
-        matched.set(subId,{subId,code,status,grade,semester});
+    if (subId === undefined && OPT_DICT[code]) {
+      realCode = code;
+      realName = OPT_DICT[code];
+      const optSuffix = G === '2014' ? '_14' : '_23';
+      
+      for (let k = 1; k <= 10; k++) {
+        let testId = `opt${k}${optSuffix}`;
+        if (getSub(testId).realCode === code) {
+          subId = testId;
+          break;
+        }
       }
-    } else if(subId===null){
-      // known optativa — skip silently
+      
+      if (!subId) {
+        for (let k = 1; k <= 10; k++) {
+          let testId = `opt${k}${optSuffix}`;
+          let isSlotFree = getSub(testId).status === 'pending' && !getSub(testId).realCode;
+          let isSlotNotPendingInImport = ![...matched.values()].some(m => m.subId === testId);
+          
+          if (isSlotFree && isSlotNotPendingInImport) {
+            subId = testId;
+            break;
+          }
+        }
+      }
+    }
+
+    // Resolve as prioridades e salva
+    if (subId && subId !== null) {
+      const existing = matched.get(subId);
+      const priority = {done: 3, enrolled: 2, failed: 1};
+      const np = priority[status] || 0, ep = existing ? priority[existing.status] || 0 : 0;
+      if (!existing || np > ep) {
+        matched.set(subId, { subId, code: realCode || code, realName, status, grade, semester });
+      }
+    } else if (subId === null) {
+      // Ignora silenciosamente (Ex: EEN45 cancelada)
     } else {
-      // unknown — add to unmatched if not already
-      if(!unmatched.find(u=>u.code===code))
-        unmatched.push({code,status,grade});
+      if (!unmatched.find(u => u.code === code)) unmatched.push({ code, status, grade });
     }
   }
 
-  // Render matched
-  matched.forEach(({subId,code,status,grade,semester})=>{
-    const name = DATA[G].find(s=>s.id===subId)?.name||subId;
-    const icon = status==='done'?'✓':status==='enrolled'?'▶':'↺';
-    const cls  = status==='failed'?'unmatched':'matched';
-    resultsEl.innerHTML+=`<div class="iri ${cls}">${icon} <strong>${code}</strong> <span class="sub-name">${name}</span> ${grade?`<span style="color:var(--muted);margin-left:auto">${grade}</span>`:''}</div>`;
+  // Renderiza as matérias reconhecidas no Modal do Import:
+  matched.forEach(({subId, code, status, grade, semester, realName}) => {
+    const name = realName || DATA[G].find(s => s.id === subId)?.name || subId;
+    const icon = status === 'done' ? '✓' : status === 'enrolled' ? '▶' : '↺';
+    const cls  = status === 'failed' ? 'unmatched' : 'matched';
+    resultsEl.innerHTML += `<div class="iri ${cls}">${icon} <strong>${code}</strong> <span class="sub-name">${name}</span> ${grade ? `<span style="color:var(--muted);margin-left:auto">${grade}</span>` : ''}</div>`;
   });
 
-  // Render unmatched (optativas/outros cursos)
   if(unmatched.length>0){
     resultsEl.innerHTML+=`<div style="margin-top:10px;padding:8px 10px;border-radius:7px;background:rgba(255,255,255,.03);border:1px solid var(--border);">
       <div style="font-size:.63rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px">Optativas / fora da grade ${G}</div>`;
@@ -1422,7 +1665,6 @@ function parseHistorico(text){
     statusEl.innerHTML=`<span style="color:var(--green)">✓ ${total} matéria(s) identificada(s) na grade ${G}</span>${unmatched.length>0?` <span style="color:var(--muted);font-size:.75rem">+ ${unmatched.length} externas</span>`:''}`;
     document.getElementById('import-confirm-btn').classList.add('show');
   } else {
-    // Fallback message with debug info
     const foundCodes = [...text.matchAll(/\b(EST[A-Z]{2,6}\d{3,})\b/gi)].map(m=>m[1]).slice(0,5);
     statusEl.innerHTML=`<span style="color:var(--yellow)">⚠ Nenhuma matéria da grade ${G} identificada.</span><br>
     <small style="opacity:.6">Códigos detectados no PDF: ${foundCodes.length>0?foundCodes.join(', '):'nenhum'}<br>
@@ -1431,12 +1673,17 @@ function parseHistorico(text){
 }
 
 function confirmImport(){
-  pendingImport.forEach(({subId,status,grade,semester})=>{
-    setSub(subId,{status,grade:grade||'',semester:semester||''});
+  pendingImport.forEach(({subId, status, grade, semester, code, realName}) => {
+    let updateObj = { status, grade: grade || '', semester: semester || '' };
+    if (realName) {
+        updateObj.realCode = code;
+        updateObj.realName = realName;
+    }
+    setSub(subId, updateObj);
   });
   render();
   closeImport();
-  showToast(`✓ ${pendingImport.length} matérias importadas com sucesso!`,'ok');
+  showToast(`✓ ${pendingImport.length} matérias importadas com sucesso!`, 'ok');
 }
 
 // ── CLEAR ────────────────────────────────────────────────────────────────────
