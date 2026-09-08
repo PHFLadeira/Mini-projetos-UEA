@@ -1,0 +1,11 @@
+{
+  "pdfs": [
+    { "file": "horario-eletronica-2026_02.pdf",                          "label": "Eletrônica 2026/2",              "course": "Eng. Eletrônica" },
+    { "file": "horario-eletrica-2026_02.pdf",                            "label": "Elétrica 2026/2",                "course": "Eng. Elétrica" },
+    { "file": "Horário_VsFinal-ECP-2026_2.pdf",                          "label": "Eng. Computação 2026/2",         "course": "Eng. Computação" },
+    { "file": "2026_2_HORÁRIO ACADÊMICO-LICOMP_.pdf",                    "label": "Lic. Computação 2026/2",        "course": "Lic. Computação" },
+    { "file": "2026_2_HORÁRIO ACADÊMICO-2026_2.pdf",                     "label": "Sistemas de Informação 2026/2",  "course": "Sistemas de Informação" },
+    { "file": "quimica-2026_02.pdf",                                     "label": "Eng. Química 2026/2",            "course": "Eng. Química" },
+    { "file": "horario-controle-automação.pdf",                          "label": "Controle e Automação 2026/2",    "course": "Eng. Controle e Automação" }
+  ]
+}

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<meta name="theme-color" content="#08080f"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<title>AutoGrade — Grade + Montador de Horários</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     UNIFIED SHELL NAVIGATION
+════════════════════════════════════════════ -->
+<nav class="shell-nav">
+  <div class="shell-logo">
+    <div class="shell-logo-main">AutoGrade</div>
+  </div>
+  <div class="shell-tabs">
+    <div class="shell-tab active" id="stab-grade" onclick="shellSwitch('grade')">
+      🗺&nbsp; Grade Curricular
+    </div>
+    <div class="shell-tab" id="stab-horario" onclick="shellSwitch('horario')">
+      📅&nbsp; Montador de Horários
+      <span class="tab-badge hidden" id="horario-badge">0</span>
+    </div>
+    <div class="shell-tab" id="stab-consulta" onclick="shellSwitch('consulta')">
+      🔍&nbsp; Consulta de Horários
+    </div>
+  </div>
+  <div class="shell-right">
+    <button class="smart-btn hidden" id="smart-btn" onclick="smartAction()" title="Montar horário automaticamente com suas matérias disponíveis">
+      ⚡ Montar automaticamente
+      <span class="sb-cnt" id="smart-cnt">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     TAB 1: GRADE CURRICULAR (ECA)
+════════════════════════════════════════════ -->
+<div class="tab-view active" id="view-grade">
+
+  <header class="eca-header">
+    <div class="header-left">
+      <div class="tab-switcher">
+        <button class="tab-btn active" onclick="switchGrade('2014',this)">ECA 2014</button>
+        <button class="tab-btn" onclick="switchGrade('2023',this)">ECA 2023</button>
+        <button class="tab-btn" onclick="switchGrade('CMP_2018',this)">Comp. 2018</button>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="search-wrap">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="eca-search" type="text" placeholder="Buscar matéria..." oninput="doSearch(this.value)">
+      </div>
+      <button class="hbtn hbtn-select" id="btn-select" onclick="toggleSelectMode()">&#9638; Selecionar</button>
+      <button class="hbtn" onclick="exportToPNG()">&#8595; PNG</button>
+      <button class="hbtn" onclick="openImport()">&#8593; Histórico</button>
+      <button class="hbtn" onclick="openBackup()">&#128190; Backup</button>
+      <button class="hbtn danger" onclick="clearAll()">&#128465; Limpar</button>
+      <button class="hbtn" onclick="openCfg()">&#9881; Config</button>
+    </div>
+  </header>
+
+  <div class="eca-stats-bar">
+    <div class="stat-item"><div class="stat-dot" style="background:#26de81"></div><span class="stat-label">Concluídas</span><span class="stat-val" id="s-done">0</span></div>
+    <div class="stat-item"><div class="stat-dot" style="background:var(--ecaaccent)"></div><span class="stat-label">Cursando</span><span class="stat-val" id="s-enr">0</span></div>
+    <div class="stat-item"><div class="stat-dot" style="background:#fdcb6e"></div><span class="stat-label">Reprovadas</span><span class="stat-val" id="s-fail">0</span></div>
+    <div class="stat-item"><div class="stat-dot" style="background:#7a82a0"></div><span class="stat-label">Pendentes</span><span class="stat-val" id="s-pend">0</span></div>
+    <div class="stat-item"><div class="stat-dot" style="background:#34d399"></div><span class="stat-label" style="color:#34d399">Disponíveis</span><span class="stat-val" id="s-avail" style="color:#34d399">0</span></div>
+    <div class="prog-wrap">
+      <div class="prog-label"><span>Progresso</span><span id="s-pct">0%</span></div>
+      <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="eca-legend" id="eca-legend-bar"></div>
+
+  <div class="grid-scroll" id="scroll">
+    <div class="grid-track" id="track"><svg id="svg-layer"></svg></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     TAB 2: MONTADOR DE HORÁRIOS (GradeFlow)
+════════════════════════════════════════════ -->
+<div class="tab-view" id="view-horario">
+
+  <div id="autoload-bar" style="display:none;padding:6px 16px;font-size:.72rem;background:rgba(79,142,247,.13);color:#4f8ef7;border-bottom:1px solid rgba(79,142,247,.2);letter-spacing:.02em;"></div>
+
+  <div style="display:flex;flex:1;min-height:0;overflow:hidden;">
+
+    <!-- Available subjects sidebar -->
+    <div class="avail-sidebar">
+      <div class="avail-header">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:3px;">
+          <div class="avail-title">Matérias Disponíveis</div>
+          <button class="bridge-btn bb-p hidden" id="bridge-auto-btn" onclick="autoSchedule()" style="font-size:10px;padding:3px 8px;border-radius:6px;flex-shrink:0;">⚡ Auto</button>
+        </div>
+        <div class="avail-sub" id="avail-sub">Nenhuma ainda</div>
+      </div>
+      <div class="avail-list" id="avail-list">
+        <div class="avail-empty">
+          Importe seu histórico na<br>aba <b style="color:#9a9bff">Grade Curricular</b><br>para ver o que você pode<br>cursar este semestre
+        </div>
+      </div>
+    </div>
+
+    <!-- GradeFlow main area -->
+    <div class="mont-container">
+
+      <!-- GradeFlow nav -->
+      <div class="gf-nav">
+        <span class="gf-logo">GradeFlow</span>
+        <div class="gf-nav-right">
+          <span class="gf-nav-stat"><b id="nv-d">0</b> disciplinas</span>
+          <span class="gf-nav-stat">&nbsp;·&nbsp;<b id="nv-h">0</b> h/a</span>
+          <span id="nv-cf-wrap" class="gf-nav-stat hidden" style="color:var(--red)">&#9888; <b id="nv-cn">0</b> conflito(s)</span>
+          <button class="btn btn-g btn-sm" onclick="exportGrade()">&#128247; PNG</button>
+          <button class="btn btn-r btn-sm" onclick="confirmClearGF()">&#128465; Limpar</button>
+        </div>
+      </div>
+
+      <!-- GradeFlow layout -->
+      <div class="gf-layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="sb-tabs">
+            <div class="sb-tab active" id="sbt-upload" onclick="sbGo('upload')"><span class="sb-icon">&#128193;</span>PDFs</div>
+            <div class="sb-tab" id="sbt-discs" onclick="sbGo('discs')"><span class="sb-icon">&#128218;</span>Disciplinas</div>
+            <div class="sb-tab" id="sbt-prefs" onclick="sbGo('prefs')"><span class="sb-icon">&#9881;</span>Filtros</div>
+            <div class="sb-tab" id="sbt-prio" onclick="sbGo('prio')"><span class="sb-icon">&#127942;</span>Prio.</div>
+          </div>
+
+          <!-- PDFs tab -->
+          <div class="sb-body" id="sb-upload">
+            <div class="upload-zone" id="upzone"
+                 onclick="document.getElementById('fin').click()"
+                 ondragover="event.preventDefault();this.classList.add('drag')"
+                 ondragleave="this.classList.remove('drag')"
+                 ondrop="doDrop(event)">
+              <div style="font-size:22px;margin-bottom:5px;">&#128196;</div>
+              <h3>Arraste ou clique para PDFs</h3>
+              <p>Horários acadêmicos — múltiplos arquivos</p>
+              <input type="file" id="fin" multiple accept=".pdf" style="display:none" onchange="handleFiles(this.files)"/>
+            </div>
+            <div id="file-list"></div>
+            <div class="fbbox">
+              <h4>&#9888; PDF não lido? Insira manual</h4>
+              <div class="ftabs">
+                <div class="ftab active" id="ft-paste" onclick="ftGo('paste')">&#128203; Colar texto</div>
+                <div class="ftab" id="ft-form" onclick="ftGo('form')">&#9999; Formulário</div>
+              </div>
+              <div id="fb-paste">
+                <div class="fg">
+                  <label>Ctrl+A → Ctrl+C no PDF e cole aqui</label>
+                  <textarea id="paste-area" rows="4" placeholder="Cole o texto..."></textarea>
+                </div>
+                <div class="fg"><label>Nome do curso</label><input type="text" id="paste-course" placeholder="Ex: Eng. Elétrica"/></div>
+                <button class="btn btn-p btn-full btn-sm" onclick="parsePaste()">Interpretar</button>
+              </div>
+              <div id="fb-form" class="hidden">
+                <div class="fg"><label>Código</label><input type="text" id="f-code" placeholder="ESTEEL001"/></div>
+                <div class="fg"><label>Nome</label><input type="text" id="f-name" placeholder="Circuitos Elétricos I"/></div>
+                <div class="fg"><label>Curso</label><input type="text" id="f-course" placeholder="Eng. ECA"/></div>
+                <div class="form-row">
+                  <div class="fg"><label>CH</label><input type="number" id="f-ch" placeholder="60"/></div>
+                  <div class="fg"><label>Período</label><input type="text" id="f-period" placeholder="4º"/></div>
+                </div>
+                <div class="form-row">
+                  <div class="fg"><label>Sala</label><input type="text" id="f-room" placeholder="A16"/></div>
+                  <div class="fg"><label>Vagas</label><input type="number" id="f-vagas" placeholder="40"/></div>
+                </div>
+                <div class="fg"><label>Pré-requisito</label><input type="text" id="f-prereq" placeholder="ESTEEL000"/></div>
+                <hr class="divider"/>
+                <div class="fg"><label>Dias</label></div>
+                <div class="tg-grp" id="day-picker" style="margin-bottom:7px;"></div>
+                <div class="form-row">
+                  <div class="fg"><label>Início</label><select id="f-start"></select></div>
+                  <div class="fg"><label>Fim</label><select id="f-end"></select></div>
+                </div>
+                <div id="sched-preview" style="font-size:10px;color:var(--text2);margin-bottom:7px;min-height:13px;"></div>
+                <button class="btn btn-p btn-full btn-sm" onclick="addManual()">+ Adicionar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Disciplinas tab -->
+          <div class="sb-body hidden" id="sb-discs">
+            <div class="fg" style="margin-bottom:7px;">
+              <input type="search" id="disc-search" placeholder="Buscar nome, código ou curso..." oninput="renderDiscList()"/>
+            </div>
+            <div id="course-filters" style="display:flex;flex-wrap:wrap;gap:3px;margin-bottom:5px;"></div>
+            <div id="period-filters" style="display:flex;flex-wrap:wrap;gap:3px;margin-bottom:7px;"></div>
+            <div id="disc-list">
+              <div class="empty"><div class="empty-icon">&#128228;</div><p>Carregue PDFs de horários</p></div>
+            </div>
+          </div>
+
+          <!-- Filtros tab -->
+          <div class="sb-body hidden" id="sb-prefs">
+            <div style="margin-bottom:14px;">
+              <div class="fg" style="margin-bottom:5px;"><label>Turno</label></div>
+              <div class="tg-grp">
+                <div class="tg on" data-pref="turno" data-val="manha" onclick="tgToggle(this)">Manhã</div>
+                <div class="tg on" data-pref="turno" data-val="tarde" onclick="tgToggle(this)">Tarde</div>
+                <div class="tg on" data-pref="turno" data-val="noite" onclick="tgToggle(this)">Noite</div>
+              </div>
+            </div>
+            <div style="margin-bottom:14px;">
+              <div class="fg" style="margin-bottom:5px;"><label>Dias disponíveis</label></div>
+              <div class="tg-grp">
+                <div class="tg on" data-pref="dias" data-val="Seg" onclick="tgToggle(this)">Seg</div>
+                <div class="tg on" data-pref="dias" data-val="Ter" onclick="tgToggle(this)">Ter</div>
+                <div class="tg on" data-pref="dias" data-val="Qua" onclick="tgToggle(this)">Qua</div>
+                <div class="tg on" data-pref="dias" data-val="Qui" onclick="tgToggle(this)">Qui</div>
+                <div class="tg on" data-pref="dias" data-val="Sex" onclick="tgToggle(this)">Sex</div>
+                <div class="tg" data-pref="dias" data-val="Sab" onclick="tgToggle(this)">Sab</div>
+              </div>
+            </div>
+            <div style="margin-bottom:14px;">
+              <div class="fg" style="margin-bottom:5px;"><label>Só com horário definido</label></div>
+              <div class="tg-grp"><div class="tg on" id="pref-sched" onclick="this.classList.toggle('on');renderDiscList()">Ativo</div></div>
+            </div>
+            <div>
+              <div class="fg" style="margin-bottom:5px;"><label>CH máx. por semestre</label></div>
+              <div style="display:flex;align-items:center;gap:9px;">
+                <input type="range" min="30" max="600" step="15" value="300" id="ch-max" oninput="document.getElementById('ch-max-v').textContent=this.value;renderDiscList()" style="flex:1;"/>
+                <b id="ch-max-v" style="font-size:12px;min-width:26px;">300</b>
+                <span style="font-size:10px;color:var(--text3);">h/a</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prioridade tab -->
+          <div class="sb-body hidden" id="sb-prio">
+            <p style="font-size:10px;color:var(--text2);margin-bottom:10px;">Em conflito, disciplinas de maior prioridade são mantidas.</p>
+            <div id="prio-list"><div class="empty"><div class="empty-icon">&#127942;</div><p>Selecione disciplinas</p></div></div>
+          </div>
+        </aside>
+
+        <!-- Main content -->
+        <div class="main">
+          <div class="gf-stats-bar">
+            <div class="gf-stat"><div class="stat-n" id="st-tot">0</div><div class="stat-l">Disciplinas</div></div>
+            <div class="gf-stat"><div class="stat-n" id="st-ch">0</div><div class="stat-l">H/aula</div></div>
+            <div class="gf-stat"><div class="stat-n" id="st-days">0</div><div class="stat-l">Dias/sem.</div></div>
+            <div class="gf-stat"><div class="stat-n" id="st-cf" style="color:var(--red)">0</div><div class="stat-l">Conflitos</div></div>
+          </div>
+          <div class="main-tabs">
+            <div class="main-tab active" id="gf-mt-grade" onclick="mainGo('grade')">📅 Grade Semanal</div>
+            <div class="main-tab" id="gf-mt-cf" onclick="mainGo('cf')">⚠ Conflitos<span class="badge-n hidden" id="cf-badge">0</span></div>
+            <div class="main-tab" id="gf-mt-list" onclick="mainGo('list')">📋 Lista</div>
+            <div class="main-tab" id="gf-mt-info" onclick="mainGo('info')">ℹ Ajuda</div>
+          </div>
+
+          <!-- Grade Semanal view -->
+          <div id="view-grade-gf" class="grade-wrap">
+            <div id="grade-empty" class="empty" style="padding:60px 18px;">
+              <div class="empty-icon">📅</div>
+              <p>Carregue PDFs e selecione disciplinas para ver sua grade</p>
+              <small>Use a barra lateral esquerda</small>
+            </div>
+            <div id="grade-ok" class="hidden">
+              <div class="grade-hdr">
+                <div>
+                  <div class="grade-title">Grade Semanal</div>
+                  <div class="grade-sub" id="gf-grade-sub">0 disciplinas</div>
+                </div>
+                <select id="day-filter" onchange="renderGrade()" style="font-size:11px;padding:4px 7px;width:auto;background:var(--bg3);border:1px solid var(--border2);color:var(--text);border-radius:var(--rs);outline:none;">
+                  <option value="all">Todos os dias</option>
+                  <option value="Seg">Segunda</option><option value="Ter">Terça</option>
+                  <option value="Qua">Quarta</option><option value="Qui">Quinta</option>
+                  <option value="Sex">Sexta</option><option value="Sab">Sábado</option>
+                </select>
+              </div>
+              <div id="grid-tbl" class="grid-tbl"></div>
+              <div class="gf-legend" id="gf-legend"></div>
+              <div id="cf-warn-box" class="cf-warn-box hidden">
+                <b id="gf-cf-warn-n">0</b> conflito(s) — veja a aba Conflitos.
+              </div>
+            </div>
+          </div>
+
+          <!-- Conflitos view -->
+          <div id="view-cf" class="sec-pad hidden">
+            <div class="sec-title">Conflitos de Horário</div>
+            <div class="sec-sub">Disciplinas com sobreposição de horário</div>
+            <div id="cf-list"><div class="empty"><div class="empty-icon">&#9989;</div><p>Nenhum conflito!</p></div></div>
+          </div>
+
+          <!-- Lista view -->
+          <div id="view-list" class="sec-pad hidden">
+            <div class="sec-title">Disciplinas Selecionadas</div>
+            <div class="sec-sub" id="gf-list-sub">Nenhuma selecionada</div>
+            <div id="list-tbl"><div class="empty"><div class="empty-icon">&#128203;</div><p>Selecione disciplinas</p></div></div>
+          </div>
+
+          <!-- Ajuda view -->
+          <div id="view-info" class="sec-pad hidden" style="max-width:560px;">
+            <div class="sec-title">Como usar o ECA Flow</div>
+            <div class="sec-sub">Sistema integrado de Grade + Horários</div>
+            <div class="icard"><h4>🗺 1. Grade Curricular</h4><p>Marque as matérias já concluídas, em curso e reprovadas importando seu histórico PDF. O sistema detecta automaticamente quais matérias você pode cursar no próximo semestre com base nos pré-requisitos.</p></div>
+            <div class="icard"><h4>📅 2. Montador de Horários</h4><p>Carregue os PDFs de horário acadêmico. As matérias que você pode cursar aparecem na barra lateral esquerda. Clique nelas para adicioná-las ou use "Montar automaticamente" para criar uma grade sem conflitos.</p></div>
+            <div class="icard"><h4>⚡ 3. Montagem Automática</h4><p>O botão ⚡ monta a grade respeitando a aba <b>Filtros</b> (turno, dias, CH máx.) e a aba <b>Prioridade</b>: matérias de prioridade Alta entram primeiro, depois as de período mais baixo, sempre evitando conflitos. Você ainda pode ajustar manualmente depois.</p></div>
+            <div class="icard"><h4>📋 4. Resultados</h4><p>Veja a grade visual semanal, a lista completa de matérias e os conflitos. Exporte como imagem PNG para compartilhar com colegas.</p></div>
+            <div style="background:var(--abg);border:1px solid var(--aborder);border-radius:var(--r);padding:12px 14px;font-size:11px;color:var(--text2);">
+              💾 <b style="color:var(--text)">Dados salvos automaticamente.</b> Seus dados ficam no navegador — 100% privado, nada é enviado para servidores. Use <b style="color:var(--text)">Backup</b> (aba Grade Curricular) para salvar um arquivo e levar para outro dispositivo.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     TAB 3: CONSULTA DE HORÁRIOS
+════════════════════════════════════════════ -->
+<div class="tab-view" id="view-consulta">
+  <div class="consulta-header">
+    <div class="consulta-title-row">
+      <div class="consulta-title-block">
+        <div class="consulta-title">Consulta de Horários</div>
+        <div class="consulta-sub">Visualize todos os horários carregados dos PDFs</div>
+      </div>
+      <div class="consulta-controls">
+        <div class="search-wrap">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="consulta-search" type="text" placeholder="Buscar matéria, código ou curso..." oninput="filterConsulta()">
+        </div>
+        <select id="consulta-course-filter" onchange="filterConsulta()"><option value="all">Todos os cursos</option></select>
+        <select id="consulta-period-filter" onchange="filterConsulta()"><option value="all">Todos os períodos</option></select>
+        <select id="consulta-shift-filter" onchange="filterConsulta()">
+          <option value="all">Todos os turnos</option>
+          <option value="manha">Manhã</option>
+          <option value="tarde">Tarde</option>
+          <option value="noite">Noite</option>
+        </select>
+        <select id="consulta-view-mode" onchange="renderConsulta()">
+          <option value="pdf">Formato PDF</option>
+          <option value="grid">Grade Visual</option>
+          <option value="table">Tabela</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="consulta-stats" id="consulta-stats"></div>
+  <div class="consulta-body" id="consulta-body">
+    <div class="consulta-empty">
+      <div style="font-size:2.5rem;margin-bottom:12px;">📄</div>
+      <div style="font-size:1rem;font-weight:600;color:#e8eaf0;margin-bottom:6px;">Nenhum horário carregado</div>
+      <div style="color:#7a82a0;font-size:.8rem;line-height:1.6;">
+        Carregue PDFs de horários acadêmicos na aba<br>
+        <b style="color:#9a9bff;">Montador de Horários</b> → aba PDFs<br>
+        para visualizá-los aqui.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ECA CARD MODAL
+════════════════════════════════════════════ -->
+<div class="eca-overlay" id="eca-overlay" onclick="closeModal()">
+  <div class="eca-modal" onclick="event.stopPropagation()">
+    <div class="eca-modal-top" id="modal-top">
+      <div class="modal-badge"><span id="m-period"></span><span id="m-sbadge"></span></div>
+      <div class="modal-title" id="m-title"></div>
+      <button class="modal-close-eca" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-divider"></div>
+    <div class="eca-modal-body">
+      <div class="status-toggle">
+        <button class="st-btn" id="st-pending"  onclick="setStatus('pending')">⬜ Pendente</button>
+        <button class="st-btn" id="st-enrolled" onclick="setStatus('enrolled')">▶ Cursando</button>
+        <button class="st-btn" id="st-done"     onclick="setStatus('done')">✓ Concluída</button>
+        <button class="st-btn" id="st-failed"   onclick="setStatus('failed')">↺ Reprovei</button>
+      </div>
+      <div class="info-grid">
+        <div class="info-card"><div class="info-label">Código</div><div class="info-value" id="m-code"></div></div>
+        <div class="info-card"><div class="info-label">Carga Horária</div><div class="info-value" id="m-hours"></div></div>
+        <div class="info-card" id="m-gc" style="display:none"><div class="info-label">Média</div><div class="info-value" id="m-grade"></div></div>
+        <div class="info-card" id="m-sc" style="display:none"><div class="info-label">Semestre</div><div class="info-value" id="m-sem"></div></div>
+      </div>
+      <div class="eca-section-title">Pré-requisitos</div><div class="chip-wrap" id="m-pre"></div>
+      <div class="eca-section-title" id="m-coreq-title" style="display:none">Co-requisitos</div><div class="chip-wrap" id="m-coreq" style="display:none"></div>
+      <div class="eca-section-title">Libera as matérias</div><div class="chip-wrap" id="m-post"></div>
+      <div class="extra-section" id="m-opt-section" style="display:none">
+        <div class="eca-section-title">✏️ Nome da Optativa</div>
+        <input class="editable-field" id="m-opt-name" type="text" placeholder="Ex: Visão Computacional, IoT, Robótica...">
+        <button class="save-btn" onclick="saveExtra()">Salvar</button>
+      </div>
+      <div class="extra-section">
+        <div class="eca-section-title">👩‍🏫 Professores</div>
+        <textarea class="editable-field" id="m-teachers" placeholder="Prof. João Silva — sala B203..."></textarea>
+        <button class="save-btn" onclick="saveExtra()">Salvar</button>
+      </div>
+      <div class="extra-section">
+        <div class="eca-section-title">📄 Materiais</div>
+        <textarea class="editable-field" id="m-materials" placeholder="https://drive.google.com/..."></textarea>
+        <button class="save-btn" onclick="saveExtra()">Salvar</button>
+      </div>
+      <div class="extra-section">
+        <div class="eca-section-title">📝 Anotações</div>
+        <textarea class="editable-field" id="m-notes" placeholder="Suas observações..."></textarea>
+        <button class="save-btn" onclick="saveExtra()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORT MODAL -->
+<div class="import-overlay" id="import-overlay" onclick="closeImport()">
+  <div class="import-box" onclick="event.stopPropagation()">
+    <div class="import-header">
+      <h2>📋 Importar Histórico Escolar</h2>
+      <button class="modal-close-eca" onclick="closeImport()">✕</button>
+    </div>
+    <div class="import-body">
+      <div style="margin-bottom:12px;">
+        <div style="font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#7a82a0;margin-bottom:7px;">Aplicar na grade:</div>
+        <div style="display:flex;gap:7px;">
+          <button class="import-grade-btn active" id="igbtn-2014" onclick="setImportGrade('2014',this)">ECA 2014</button>
+          <button class="import-grade-btn" id="igbtn-2023" onclick="setImportGrade('2023',this)">ECA 2023</button>
+          <button class="import-grade-btn" id="igbtn-CMP_2018" onclick="setImportGrade('CMP_2018',this)">Comp. 2018</button>
+        </div>
+      </div>
+      <div class="drop-zone" id="drop-zone"
+        ondragover="event.preventDefault();this.classList.add('drag-over')"
+        ondragleave="this.classList.remove('drag-over')"
+        ondrop="handleDrop(event)"
+        onclick="document.getElementById('pdf-file-input').click()">
+        <div class="drop-zone-icon">📄</div>
+        <p>Arraste o <strong style="color:#e8eaf0">PDF do Histórico Escolar</strong> aqui<br>ou <span>clique para selecionar</span></p>
+        <p style="margin-top:9px;font-size:.66rem;color:#26de81;opacity:.9">🔒 100% local — nenhum dado enviado</p>
+        <p style="margin-top:4px;font-size:.62rem;opacity:.4">Histórico Escolar Parcial — UEA</p>
+      </div>
+      <input type="file" id="pdf-file-input" accept=".pdf,.txt" onchange="handleFileSelect(event)">
+      <div class="import-progress" id="import-progress">
+        <div class="import-status" id="import-status"></div>
+        <div class="import-results" id="import-results"></div>
+      </div>
+      <button class="import-confirm-btn" id="import-confirm-btn" onclick="confirmImport()">✓ Aplicar ao histórico</button>
+    </div>
+  </div>
+</div>
+
+<!-- BACKUP MODAL -->
+<div class="import-overlay" id="backup-overlay" onclick="if(event.target===this)closeBackup()">
+  <div class="import-box" onclick="event.stopPropagation()" style="max-width:420px;">
+    <div class="import-header">
+      <h2>&#128190; Backup dos seus dados</h2>
+      <button class="modal-close-eca" onclick="closeBackup()">✕</button>
+    </div>
+    <div class="import-body">
+      <p style="font-size:.72rem;color:#7a82a0;line-height:1.6;margin-bottom:14px;">
+        Seus dados ficam só neste navegador. Exporte um arquivo <b style="color:#e8eaf0">.json</b>
+        para guardar ou levar para outro dispositivo — inclui histórico, configurações e a grade do Montador.
+      </p>
+      <button class="import-confirm-btn show" style="margin-top:0;" onclick="exportProgress()">&#8595; Exportar meus dados</button>
+      <button class="import-confirm-btn show" style="background:var(--surface2);border:1px solid rgba(255,255,255,.1);" onclick="pickBackupFile()">&#8593; Restaurar de um arquivo</button>
+      <input type="file" id="backup-file-input" accept=".json,application/json" style="display:none"
+             onchange="importProgressFile(this.files[0]); this.value='';">
+      <p style="font-size:.62rem;color:#5a607a;margin-top:12px;line-height:1.5;">
+        Restaurar substitui os dados atuais e recarrega a página.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- CFG PANEL -->
+<div class="cfg-overlay" id="cfg-overlay" onclick="closeCfg()">
+  <div class="cfg-panel" onclick="event.stopPropagation()">
+    <div class="cfg-head"><h2>⚙️ Configurações</h2><button class="modal-close-eca" onclick="closeCfg()">✕</button></div>
+    <div class="cfg-body">
+      <div class="cfg-section">
+        <div class="cfg-section-title">🔍 Filtros de Exibição</div>
+        <div class="cfg-row"><div class="cfg-label">Ocultar concluídas<small>Mostra só o que falta cursar</small></div><label class="cfg-toggle"><input type="checkbox" id="cfg-hide-done" onchange="applyCfg()"><span class="cfg-toggle-slider"></span></label></div>
+        <div class="cfg-row"><div class="cfg-label">Destacar próximas disponíveis<small>Ilumina o que você pode cursar</small></div><label class="cfg-toggle"><input type="checkbox" id="cfg-next-avail" onchange="applyCfg()"><span class="cfg-toggle-slider"></span></label></div>
+        <div class="cfg-row"><div class="cfg-label">Contar "Cursando" como pré-requisito<small>Planeja o próximo semestre com o que você cursa agora</small></div><label class="cfg-toggle"><input type="checkbox" id="cfg-plan-enrolled" checked onchange="applyCfg()"><span class="cfg-toggle-slider"></span></label></div>
+        <div class="cfg-row"><div class="cfg-label">Ocultar optativas</div><label class="cfg-toggle"><input type="checkbox" id="cfg-hide-opt" onchange="applyCfg()"><span class="cfg-toggle-slider"></span></label></div>
+        <div class="cfg-row" style="flex-direction:column;align-items:flex-start;"><div class="cfg-label">Filtrar por período</div><div class="period-chips" id="period-chips"><div class="period-chip all-chip active" onclick="togglePeriod(0)">Todos</div></div></div>
+      </div>
+      <div class="cfg-section">
+        <div class="cfg-section-title">🎨 Tema e Cores</div>
+        <div class="cfg-row"><div class="cfg-label">Tema</div><div class="cfg-seg"><button class="active" onclick="setTheme('dark',this)">Dark</button><button onclick="setTheme('light',this)">Light</button></div></div>
+        <div class="cfg-row"><div class="cfg-label">Cor dos cards</div><div class="cfg-seg"><button class="active" onclick="setColorMode('period',this)">Período</button><button onclick="setColorMode('status',this)">Status</button><button onclick="setColorMode('mono',this)">Mono</button></div></div>
+      </div>
+      <div class="cfg-section">
+        <div class="cfg-section-title">🃏 Informações no Card</div>
+        <div class="cfg-row"><div class="cfg-label">Mostrar código</div><label class="cfg-toggle"><input type="checkbox" id="cfg-show-code" checked onchange="applyCfg()"><span class="cfg-toggle-slider"></span></label></div>
+        <div class="cfg-row"><div class="cfg-label">Mostrar carga horária</div><label class="cfg-toggle"><input type="checkbox" id="cfg-show-hours" checked onchange="applyCfg()"><span class="cfg-toggle-slider"></span></label></div>
+        <div class="cfg-row"><div class="cfg-label">Mostrar nota final</div><label class="cfg-toggle"><input type="checkbox" id="cfg-show-grade" checked onchange="applyCfg()"><span class="cfg-toggle-slider"></span></label></div>
+      </div>
+      <div class="cfg-section">
+        <div class="cfg-section-title">➡️ Setas e Conexões</div>
+        <div class="cfg-row"><div class="cfg-label">Mostrar setas</div><div class="cfg-seg"><button class="active" onclick="setArrowVis('always',this)">Sempre</button><button onclick="setArrowVis('hover',this)">Hover</button><button onclick="setArrowVis('never',this)">Nunca</button></div></div>
+        <div class="cfg-row"><div class="cfg-label">Estilo da seta</div><div class="cfg-seg"><button class="active" onclick="setArrowStyle('curve',this)">Curva</button><button onclick="setArrowStyle('straight',this)">Reta</button><button onclick="setArrowStyle('step',this)">Escada</button></div></div>
+      </div>
+      <div class="cfg-section">
+        <div class="cfg-section-title">📐 Layout da Grade</div>
+        <div class="cfg-row"><div class="cfg-label">Orientação</div><div class="cfg-seg"><button class="active" onclick="setOrientation('h',this)">Horizontal</button><button onclick="setOrientation('v',this)">Vertical</button></div></div>
+        <div class="cfg-row"><div class="cfg-label">Tamanho dos cards</div><div class="cfg-seg"><button onclick="setCardSize('compact',this)">Compact</button><button class="active" onclick="setCardSize('normal',this)">Normal</button><button onclick="setCardSize('large',this)">Largo</button></div></div>
+        <div class="cfg-row"><div class="cfg-label">Agrupar por tipo<small>Separa labs, optativas e obrigatórias</small></div><label class="cfg-toggle"><input type="checkbox" id="cfg-group" onchange="applyCfg()"><span class="cfg-toggle-slider"></span></label></div>
+      </div>
+      <button class="cfg-reset" onclick="resetCfg()">↺ Restaurar padrões</button>
+    </div>
+  </div>
+</div>
+
+<!-- GradeFlow modal -->
+<div class="gf-overlay hidden" id="gf-overlay" onclick="if(event.target===this)closeGFModal()">
+  <div class="gf-modal">
+    <button class="gf-modal-close" onclick="closeGFModal()">✕</button>
+    <h3 id="modal-title"></h3>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-actions" id="modal-acts"></div>
+  </div>
+</div>
+
+<!-- Bulk select bar -->
+<div class="bulk-bar" id="bulk-bar">
+  <div class="bulk-info"><span class="bulk-count" id="bulk-count">0</span><span class="bulk-label">matéria(s) selecionada(s)</span></div>
+  <div class="bulk-actions">
+    <button class="bulk-btn bulk-done" onclick="applyBulk('done')">✓ Concluída</button>
+    <button class="bulk-btn bulk-enrolled" onclick="applyBulk('enrolled')">▶ Cursando</button>
+    <button class="bulk-btn bulk-failed" onclick="applyBulk('failed')">↺ Reprovada</button>
+    <button class="bulk-btn bulk-pending" onclick="applyBulk('pending')">⬜ Pendente</button>
+  </div>
+  <div class="bulk-right">
+    <button class="bulk-sel-all" onclick="bulkSelectAll()">Selecionar todos</button>
+    <button class="bulk-cancel" onclick="toggleSelectMode()">✕ Cancelar</button>
+  </div>
+</div>
+
+<!-- GF Toast -->
+<div class="gf-toast hidden" id="gf-toast"></div>
+<!-- ECA Toast -->
+<div class="eca-toast" id="eca-toast"></div>
+
+<!-- ════ SCRIPTS (load order matters) ════ -->
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/render.js"></script>
+<script src="js/arrows.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/import.js"></script>
+<script src="js/backup.js"></script>
+<script src="js/export.js"></script>
+<script src="js/gradeflow.js"></script>
+<script src="js/consulta.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

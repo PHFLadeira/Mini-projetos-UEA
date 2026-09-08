@@ -1,0 +1,6136 @@
+[
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP002",
+    "disciplina": "ORGANIZAÇÃO E ARQUITETURA DE COMPUTADORES",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP009",
+    "vagas": "45",
+    "sala": "A12",
+    "professor": "EDGARD LUCIANO",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP010",
+    "disciplina": "PROGRAMAÇÃO DE COMPUTADORES E ALGORITMOS",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP009",
+    "vagas": "45",
+    "sala": "LAB.A24",
+    "professor": "MÁRCIA SAMPAIO LIMA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "3ª": [
+        "13:00-14:40"
+      ],
+      "5ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP005",
+    "disciplina": "PARADIGMA DE LINGUAGEM DE PROGRAMAÇÃO (junto com o 4o periodo)",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP009",
+    "vagas": "45",
+    "sala": "D7",
+    "professor": "LUÍS CUEVAS RODRIGUES",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "3ª": [
+        "14:40-16:20"
+      ],
+      "5ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP100",
+    "disciplina": "FUNDAMENTOS DE SISTEMAS DE INFORMAÇÃO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP019",
+    "vagas": "45",
+    "sala": "D5",
+    "professor": "JUCIMAR MAIA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "2ª": [
+        "18:00-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTBAS001",
+    "disciplina": "ÁLGEBRA LINEAR I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "A12",
+    "professor": "JOÃO BATISTA PONCIANO",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTBAS050",
+    "disciplina": "PROBABILIDADE E ESTATÍSTICA (JUNTO COM LIC. Reserva de Vaga)",
+    "ct": "4",
+    "ch": "35",
+    "prerequisito": "ESTBAS002",
+    "vagas": "35",
+    "sala": "A12",
+    "professor": "A DEFINIR",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "6ª": [
+        "13:00-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTBAS017",
+    "disciplina": "INTRODUÇÃO À ECONOMIA",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "A12",
+    "professor": "JUVENAL PINHEIRO DA COSTA FILHO",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "4ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP005",
+    "disciplina": "PARADIGMA DE LINGUAGEM DE PROGRAMAÇÃO",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "3",
+    "vagas": "45",
+    "sala": "D7",
+    "professor": "LUÍS CUEVAS RODRIGUES",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "3ª": [
+        "14:40-16:20"
+      ],
+      "5ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP016",
+    "disciplina": "REDES DE COMPUTADORES I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "4",
+    "vagas": "45",
+    "sala": "A12",
+    "professor": "RICARDO RIOS",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "2ª": [
+        "13:50-15:30"
+      ],
+      "4ª": [
+        "13:50-15:30"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP024",
+    "disciplina": "MODELAGEM E PROJETO DE SISTEMAS",
+    "ct": "4",
+    "ch": "90",
+    "prerequisito": "4",
+    "vagas": "45",
+    "sala": "D7",
+    "professor": "DANIELLE POMPEU NORONHA PONTES",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "2ª": [
+        "15:30-18:00"
+      ],
+      "4ª": [
+        "15:30-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP035",
+    "disciplina": "EMPREENDEDORISMO DIGITAL II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "4",
+    "vagas": "45",
+    "sala": "SALA",
+    "professor": "A DEFINIR",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "5ª": [
+        "18:00-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP012",
+    "disciplina": "ALGORITIMOS E ESTRUTURA DE DADOS II",
+    "ct": "4",
+    "ch": "90",
+    "prerequisito": "4",
+    "vagas": "45",
+    "sala": "LAB A26",
+    "professor": "MÁRCIO PALHETA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "2ª": [
+        "18:00-20:30"
+      ],
+      "4ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP022",
+    "disciplina": "BANCO DE DADOS I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "3",
+    "vagas": "45",
+    "sala": "A12",
+    "professor": "MARCIA SAMPAIO LIMA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP018",
+    "disciplina": "SEGURANÇA DA INFORMAÇÃO I",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP016",
+    "vagas": "45",
+    "sala": "D6",
+    "professor": "POLIANNY ALMEIDA LIMA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "6ª": [
+        "14:40-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP026",
+    "disciplina": "TÓPICOS ESPECIAIS EM ENGENHARIA DE SOFTWARE",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP024",
+    "vagas": "45",
+    "sala": "LAB A26",
+    "professor": "MÁRCIA SAMPAIO LIMA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP031",
+    "disciplina": "INTELIGÊNCIA ARTIFICIAL I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP030",
+    "vagas": "45",
+    "sala": "D7",
+    "professor": "TIAGO DE MELO",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "3ª": [
+        "14:40-16:20"
+      ],
+      "5ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP038",
+    "disciplina": "SISTEMA INTEGRADO DE HARDWARE E SOFTWARE I",
+    "ct": "6",
+    "ch": "90",
+    "prerequisito": "ESTCMP016",
+    "vagas": "45",
+    "sala": "LAB A25",
+    "professor": "CARLOS MAURICIO SERODIO FIGUEIREDO",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "2ª": [
+        "18:00-20:30"
+      ],
+      "4ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP051",
+    "disciplina": "METODOLOGIA CIENTÍFICA PARA COMPUTAÇÃO",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTCMP050",
+    "vagas": "45",
+    "sala": "A1",
+    "professor": "WALTER CHARLES SEIFFERT",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP064",
+    "disciplina": "OFICINA DE DESENVOLVIMENTO DE SISTEMAS I",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP024",
+    "vagas": "30",
+    "sala": "LAB A24",
+    "professor": "FABIO SANTOS DA SILVA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP053",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTCMP052",
+    "vagas": "10",
+    "sala": "B12",
+    "professor": "POLIANNY ALMEIDA LIMA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "6ª": [
+        "20:30-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP066",
+    "disciplina": "OFICINA DE DESENVOLVIMENTO DE SISTEMAS III",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP065",
+    "vagas": "30",
+    "sala": "LAB A26",
+    "professor": "FABIO SANTOS DA SILVA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "4ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP069",
+    "disciplina": "TÓPICOS ESPECIAIS PARA COMPUTAÇÃO II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP030",
+    "vagas": "40",
+    "sala": "LAB A25",
+    "professor": "JUCIMAR MAIA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "3ª": [
+        "18:00-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP081",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM SISTEMAS DE INFORMAÇÃO II",
+    "ct": "5",
+    "ch": "150",
+    "prerequisito": "ESTCMP080",
+    "vagas": "15",
+    "sala": "B12",
+    "professor": "MARCELA SÁVIA PICANÇO PESSOA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "6ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP00233",
+    "disciplina": "REDES NEURAIS (ABERTO POR ECP)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "A12",
+    "professor": "ELLOÁ BARRETO GUEDES DA COSTA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP225",
+    "disciplina": "CIÊNCIA DE DADOS I (Abrir por ECP, com reserva de vaga LIC, SI)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "LAB",
+    "professor": "MÁRCIO PALHETA PIEDADE",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP00229",
+    "disciplina": "INFORMÁTICA APLICADA À EDUCAÇÃO I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "LAB",
+    "professor": "RAFAELA MELO FERREIRA",
+    "secao": "2º PERÍODO - MATRIZ 2025",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP00208",
+    "disciplina": "DIREITO DIGITAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "",
+    "professor": "ALEXANDRE AUGUSTO GUEDES GUIMARÃES",
+    "secao": "6º período",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP00227",
+    "disciplina": "TÓPICOS AVANÇADOS EM COMPUTAÇÃO (Protótipos Inteligentes com Arduino e Integração a Sistemas de Informação)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "10",
+    "sala": "lab A23/A19",
+    "professor": "EDGARD LUCIANO OLIVEIRA DA SILVA",
+    "secao": "6º período",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ],
+      "4ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP00211",
+    "disciplina": "SISTEMA INTEGRADO DE HARDWARE E SOFTWARE II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "10",
+    "sala": "lab A23/A19",
+    "professor": "EDGARD LUCIANO OLIVEIRA DA SILVA",
+    "secao": "6º período",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "4ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP052",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO I",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "6º período completo",
+    "vagas": "10",
+    "sala": "B12",
+    "professor": "Marcela Sávia Picanço Pessoa",
+    "secao": "6º período",
+    "horario": {
+      "4ª": [
+        "20:30-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP081",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM SISTEMAS DE INFORMAÇÃO II",
+    "ct": "10",
+    "ch": "150",
+    "prerequisito": "6o período completo",
+    "vagas": "15",
+    "sala": "B12",
+    "professor": "Marcela Sávia Picanço Pessoa",
+    "secao": "6º período",
+    "horario": {
+      "5ª": [
+        "20:30-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP011",
+    "disciplina": "ALGORITMOS E ESTRUTURA DE DADOS I (Abrir por SI, com reserva de vaga LIC, ECP)",
+    "ct": "6",
+    "ch": "90",
+    "prerequisito": "ESTCMP010",
+    "vagas": "15/15/15",
+    "sala": "LAB A25",
+    "professor": "SERGIO CLEGER TAMAYIO",
+    "secao": "6º período",
+    "horario": {
+      "3ª": [
+        "18:00-20:30"
+      ],
+      "5ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP023",
+    "disciplina": "BANCO DE DADOS II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP001",
+    "vagas": "45",
+    "sala": "A5",
+    "professor": "Alexandre Augusto Guedes Guimarães",
+    "secao": "6º período",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP052",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II (DEIXAR ZERO VAGAS)",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "6º período completo",
+    "vagas": "0",
+    "sala": "B12",
+    "professor": "FÁBIO SANTOS DA SILVA",
+    "secao": "6º período",
+    "horario": {
+      "6ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP053",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTCMP052",
+    "vagas": "15",
+    "sala": "B12",
+    "professor": "POLIANNY ALMEIDA LIMA",
+    "secao": "6º período",
+    "horario": {
+      "6ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP013",
+    "disciplina": "PROJETO E ANÁLISE DE ALGORITMOS (LIC, SI e ECP)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP010",
+    "vagas": "40",
+    "sala": "LAB A23",
+    "professor": "MÁRCIO PALHETA PIEDADE",
+    "secao": "6º período",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ],
+      "4ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP080",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM SISTEMAS DE INFORMAÇÃO I",
+    "ct": "10",
+    "ch": "150",
+    "prerequisito": "6o período completo",
+    "vagas": "15",
+    "sala": "B12",
+    "professor": "Marcela Sávia Picanço Pessoa",
+    "secao": "6º período",
+    "horario": {
+      "6ª": [
+        "13:00-14:40"
+      ],
+      "SAB": [
+        "13:00-15:30"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTCMP052",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO I",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "6º período completo",
+    "vagas": "10",
+    "sala": "B12",
+    "professor": "Marcela Sávia Picanço Pessoa",
+    "secao": "6º período",
+    "horario": {
+      "2ª": [
+        "20:30-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Sistemas de Informação",
+    "sigla": "ESTBAS004",
+    "disciplina": "INTRODUÇÃO ÀS CIÊNCIAS DO AMBIENTE",
+    "ct": "3",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "10",
+    "sala": "SALA",
+    "professor": "FÁBIO BASSINI",
+    "secao": "6º período",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTBAS001",
+    "disciplina": "ÁLGEBRA LINEAR I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "50",
+    "sala": "A12",
+    "professor": "ELAINNE LADISLAU",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "13:00-14:40"
+      ],
+      "5ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTBAS050",
+    "disciplina": "PROBABILIDADE E ESTATÍSTICA (JUNTO COM SI)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS002",
+    "vagas": "45",
+    "sala": "D5",
+    "professor": "IVANILZA TEIXEIRA",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "6ª": [
+        "13:00-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP010",
+    "disciplina": "PROGRAMAÇÃO DE COMPUTADORES E ALGORITIMOS",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP009",
+    "vagas": "40",
+    "sala": "A16",
+    "professor": "WALTER CHARLES SEIFFERT",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP029",
+    "disciplina": "MATEMÁTICA DISCRETA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "40",
+    "sala": "A16",
+    "professor": "MÁRCIO PALHETA PIEDADE",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM205",
+    "disciplina": "PISICOLOGIA DA EDUCAÇÃO",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "A16",
+    "professor": "A DEFINIR",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "4ª": [
+        "13:00-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM206",
+    "disciplina": "PORTUGUÊS INSTRUMENTAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "A16",
+    "professor": "GERMANO MARTINS",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "14:40-16:20"
+      ],
+      "5ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP012",
+    "disciplina": "ALGORITIMOS E ESTRUTURA DE DADOS II",
+    "ct": "4",
+    "ch": "90",
+    "prerequisito": "ESTCMP011",
+    "vagas": "40",
+    "sala": "LAB",
+    "professor": "FLÁVIO COELHO",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "13:50-16:20"
+      ],
+      "5ª": [
+        "13:50-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP022",
+    "disciplina": "BANCO DE DADOS I",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP011",
+    "vagas": "40",
+    "sala": "A17",
+    "professor": "OSVALDO TAVARES VIANA JÚNIOR",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM306",
+    "disciplina": "SOCIOLOGIA DA EDUCAÇÃO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "LCOM304",
+    "vagas": "40",
+    "sala": "A17",
+    "professor": "JOELMA MONTEIRO DE CARVALHO",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "6ª": [
+        "13:00-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM404",
+    "disciplina": "DIDÁTICA II",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "LCOM304",
+    "vagas": "40",
+    "sala": "A17",
+    "professor": "A DEFINIR",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "14:40-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM405",
+    "disciplina": "FUNDAMENTOS DE SOFTWARE EDUCACIONAL",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "LCOM303",
+    "vagas": "45",
+    "sala": "LAB",
+    "professor": "ALMIR DE OLIVEIRA COSTA JR",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "4ª": [
+        "13:00-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM406",
+    "disciplina": "METODOLOGIA DA PESQUISA E PRÁTICA PEDAGÓGICA",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "A17",
+    "professor": "A DEFINIR",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM604",
+    "disciplina": "INTERAÇÃO HOMEM - COMPUTADOR",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP001",
+    "vagas": "45",
+    "sala": "LAB A20",
+    "professor": "DANIELLE POMPEU NORONHA PONTES",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "13:50-15:30"
+      ],
+      "4ª": [
+        "13:50-15:30"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP025",
+    "disciplina": "ENGENHARIA DE SOFTWARE",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP024",
+    "vagas": "40",
+    "sala": "A18",
+    "professor": "DIANA MARIA DA CÂMARA GORAYEB",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM601",
+    "disciplina": "DESIGN INSTRUCIONAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP024",
+    "vagas": "40",
+    "sala": "LAB",
+    "professor": "ALMIR JR",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "14:40-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP064",
+    "disciplina": "OFICINA DE DESENVOLVIMENTO DE SISTEMAS I",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP024",
+    "vagas": "40",
+    "sala": "LAB",
+    "professor": "OSVALDO TAVARES VIANA JÚNIOR",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP007",
+    "disciplina": "SISTEMAS OPERACIONAIS",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP001",
+    "vagas": "40",
+    "sala": "A17",
+    "professor": "DANIELLE GORDIANO VALENTE",
+    "secao": "8º PERÍODO",
+    "horario": {}
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM603",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM COMPUTAÇÃO II (Ens. Médio e Ens. Técnico)",
+    "ct": "8",
+    "ch": "210",
+    "prerequisito": "LCOM501",
+    "vagas": "20",
+    "sala": "A4",
+    "professor": "FERNANDA GABRIELA DE SOUZA PIRES",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "18:00-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTBAS004",
+    "disciplina": "INTRODUÇÃO ÀS CIÊNCIAS DO AMBIENTE",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "40",
+    "sala": "A18",
+    "professor": "FÁBIO BASSINI",
+    "secao": "8º PERÍODO",
+    "horario": {}
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP034",
+    "disciplina": "EMPREENDEDORISMO DIGITAL I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS011",
+    "vagas": "20/20",
+    "sala": "A16",
+    "professor": "DIANA MARIA DA CÂMARA GORAYEB",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP050",
+    "disciplina": "COMPUTAÇÃO, ÉTICA, HOMEM E SOCIEDADE",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "40",
+    "sala": "C12",
+    "professor": "REJANE GOMES FERREIRA",
+    "secao": "8º PERÍODO",
+    "horario": {}
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM801",
+    "disciplina": "OFICINA DE DESENVOLVIMENTO DE SOFTWARE EDUCACIONAL II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "LCOM702",
+    "vagas": "40",
+    "sala": "A18",
+    "professor": "JOSÉ CARLOS DA SILVA DUARTE FILHO",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM806",
+    "disciplina": "TÓPICOS AVANÇADOS EM INFORMÁTICA E EDUCAÇÃO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "40",
+    "sala": "LAB",
+    "professor": "ALMIR JR",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "4ª": [
+        "14:40-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM807",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "45",
+    "prerequisito": "LCOM706",
+    "vagas": "40",
+    "sala": "A2",
+    "professor": "FERNANDA GABRIELA DE SOUZA PIRES",
+    "secao": "8º PERÍODO",
+    "horario": {}
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP066",
+    "disciplina": "OFICINA DE DESENVOLVIMENTO DE SISTEMAS III (Turma de SI)",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP065",
+    "vagas": "30",
+    "sala": "LAB",
+    "professor": "FABIO SANTOS DA SILVA",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP225",
+    "disciplina": "CIÊNCIA DE DADOS I (Abre por ECP, com reserva de vaga LIC, SI)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "LAB",
+    "professor": "MÁRCIO PALHETA PIEDADE",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP00229",
+    "disciplina": "INFORMÁTICA APLICADA À EDUCAÇÃO I (Abre por SI)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "LAB",
+    "professor": "RAFAELA MELO FERREIRA",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP00233",
+    "disciplina": "REDES NEURAIS (ABRE POR ECP)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "D3",
+    "professor": "ELLOÁ BARRETO GUEDES DA COSTA",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTLIN872",
+    "disciplina": "Tópicos Especiais em Informática na Educação",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "D6",
+    "professor": "VOLUNTÁRIA EM PROCESSO DE CONTRATAÇÃO",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM0011",
+    "disciplina": "Tópicos Avançados em Informática",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "40",
+    "sala": "C14/A8",
+    "professor": "OSVALDO TAVARES VIANA JÚNIOR",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM706",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO I",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "até o 6º",
+    "vagas": "20",
+    "sala": "B12",
+    "professor": "FERNANDA GABRIELA DE SOUZA PIRES",
+    "secao": "Página 3",
+    "horario": {
+      "SAB": [
+        "15:30-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "LCOM501",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM COMPUTAÇÃO I",
+    "ct": "210",
+    "ch": "8",
+    "prerequisito": "até o 6º",
+    "vagas": "20",
+    "sala": "LAB",
+    "professor": "FERNANDA GABRIELA DE SOUZA PIRES",
+    "secao": "Página 3",
+    "horario": {
+      "2ª": [
+        "18:00-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP030",
+    "disciplina": "FUNDAMENTOS TEÓRICOS DA COMPUTAÇÃO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP029",
+    "vagas": "20",
+    "sala": "C13",
+    "professor": "ELLOÁ BARRETO GUEDES DA COSTA",
+    "secao": "Página 3",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "4ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Licenciatura em Computação",
+    "sigla": "ESTCMP009",
+    "disciplina": "INTRODUÇÃO À PROGRAMAÇÃO DE COMPUTADORES (ABRIR POR LIC, com reserva para ECP e SI)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "LAB",
+    "professor": "OSVALDO TAVARES VIANA JÚNIOR",
+    "secao": "Página 3",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTBAS010",
+    "disciplina": "DESENHO BÁSICO",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "",
+    "vagas": "35",
+    "sala": "A13",
+    "professor": "JOÃO D'ANNUNZIO",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "4ª": [
+        "15:30-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTBAS013",
+    "disciplina": "FÍSICA II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS007",
+    "vagas": "45",
+    "sala": "D5",
+    "professor": "ISRAEL TORRES",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "10:50-12:30"
+      ],
+      "4ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTBAS017",
+    "disciplina": "INTRODUÇÃO À ECONOMIA",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "",
+    "vagas": "50",
+    "sala": "D1",
+    "professor": "COORDENAÇÃO CICLO BÁSICO (SEM PROFESSOR)",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "5ª": [
+        "09:10-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTECP002",
+    "disciplina": "LINGUAGEM E PROGRAMAÇÃO II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTECP001",
+    "vagas": "35",
+    "sala": "C16",
+    "professor": "WALTER CHARLES SEIFFERT",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "07:30-09:10"
+      ],
+      "5ª": [
+        "07:30-09:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTBAS012",
+    "disciplina": "PROBABILIDADE E ESTATÍSTICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS002",
+    "vagas": "45",
+    "sala": "D5",
+    "professor": "ROSEANI PARENTE",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "09:10-10:50"
+      ],
+      "4ª": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTBAS009",
+    "disciplina": "CÁLCULO II",
+    "ct": "5",
+    "ch": "75",
+    "prerequisito": "ESTBAS002",
+    "vagas": "45",
+    "sala": "D5/A12",
+    "professor": "JOSÉ LUIZ TAVARES",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "14:40-16:20"
+      ],
+      "5ª": [
+        "14:40-17:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTBAS011",
+    "disciplina": "INTRODUÇÃO À ADMINISTRAÇÃO",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D2",
+    "professor": "JOÉSIA PACHECO",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "09:10-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTBAS008",
+    "disciplina": "ÁLGEBRA LINEAR II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS001",
+    "vagas": "45",
+    "sala": "D1",
+    "professor": "LAURIANO SOUZA",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "13:00-14:40"
+      ],
+      "5ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTBAS020",
+    "disciplina": "LABORATÓRIO DE FÍSICA II",
+    "ct": "1",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "LAB",
+    "professor": "JOSÉ LUIZ",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "4ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTBAS049",
+    "disciplina": "CÁLCULO NUMÉRICO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS002",
+    "vagas": "30",
+    "sala": "C18",
+    "professor": "MANOEL AZEVEDO",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ],
+      "4ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEEL055",
+    "disciplina": "ELETRICIDADE GERAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS015",
+    "vagas": "50",
+    "sala": "",
+    "professor": "CLÁUDIO GANÇALVES",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "10:50-12:30"
+      ],
+      "5ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM007",
+    "disciplina": "FÍSICO QUÍMICA II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEQM004",
+    "vagas": "25",
+    "sala": "",
+    "professor": "CLÁUDIA CANDIDA SILVA",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "4ª": [
+        "10:50-12:30"
+      ],
+      "6ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM101",
+    "disciplina": "QUÍMICA GERAL E INORGÂNICA EXPERIMENTAL",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTEQM001",
+    "vagas": "12",
+    "sala": "",
+    "professor": "ELLEN RAPHAEL",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "6ª": [
+        "13:50-15:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM102",
+    "disciplina": "ELETROQUÍMICA",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTBAS005",
+    "vagas": "30",
+    "sala": "",
+    "professor": "RICARDO LIMA SERUDO",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM103",
+    "disciplina": "BIOQUÍMICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEQM100",
+    "vagas": "30",
+    "sala": "",
+    "professor": "ÉRICA SIMPLÍCIO DE SOUZA",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "5ª": [
+        "07:30-09:10"
+      ],
+      "6ª": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTBAS018",
+    "disciplina": "FÍSICA IV",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS015",
+    "vagas": "40",
+    "sala": "D7",
+    "professor": "MOISES OLIVEIRA",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "09:10-10:50"
+      ],
+      "5ª": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTBAS019",
+    "disciplina": "CÁLCULO IV",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS014",
+    "vagas": "50",
+    "sala": "D7",
+    "professor": "RODRIGO TAVARES",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM101",
+    "disciplina": "QUÍMICA GERAL E INORGÂNICA EXPERIMENTAL",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTEQM001",
+    "vagas": "12",
+    "sala": "",
+    "professor": "ELLEN RAPHAEL",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "6ª": [
+        "15:30-17:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTECI024",
+    "disciplina": "HIGIENE E SEGURANÇA DO TRABALHO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "",
+    "professor": "EDRY GARCIA CISNEROS",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "14:40-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM109",
+    "disciplina": "TERMODINÂMICA I",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEQM004 ESTEQM106",
+    "vagas": "25",
+    "sala": "",
+    "professor": "EDSON QUEIROZ DA FONSECA JÚNIOR",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "6ª": [
+        "13:00-15:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM014",
+    "disciplina": "QUÍMICA ANALÍTICA EXPERIMENTAL",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTEQM001 ESTEQM003",
+    "vagas": "12",
+    "sala": "",
+    "professor": "RICARDO LIMA SERUDO",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "4ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM016",
+    "disciplina": "FENÔMENOS DE TRANSPORTE II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEQM008 ESTEQM106",
+    "vagas": "15",
+    "sala": "",
+    "professor": "REGINA YANAKO MORIYA",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM036",
+    "disciplina": "INSTRUMENTAÇÃO NA INDUSTRIA QUÍMICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEQM106",
+    "vagas": "30",
+    "sala": "",
+    "professor": "ADALBERTO GOMES MIRANDA",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "13:00-14:40"
+      ],
+      "4ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM112",
+    "disciplina": "MICROBIOLOGIA INDUSTRIAL",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTEQM104",
+    "vagas": "12",
+    "sala": "",
+    "professor": "ÉRICA SIMPLÍCIO DE SOUZA",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "09:10-10:50"
+      ],
+      "4ª": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM232",
+    "disciplina": "CINÉTICA APLICADA",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTEQM001 ESTEQM103 ESTEQM007 ESTEQM100",
+    "vagas": "30",
+    "sala": "",
+    "professor": "CLAIRON LIMA PINHEIRO",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "5ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM233",
+    "disciplina": "OPERAÇÕES UNITÁRIAS PARA ENGENHARIA QUÍMICA I",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTEQM007 ESTEQM008 ESTEQM106",
+    "vagas": "15",
+    "sala": "",
+    "professor": "JEFFERSON L. G. DA SILVA",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "13:00-14:40"
+      ],
+      "5ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM237",
+    "disciplina": "MATERIAIS PARA ENGENHARIA QUÍMICA",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEQM100",
+    "vagas": "30",
+    "sala": "",
+    "professor": "ROGER HOEL BELLO",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "6ª": [
+        "15:30-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM016",
+    "disciplina": "FENÔMENOS DE TRANSPORTE II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEQM008 ESTEQM106",
+    "vagas": "15",
+    "sala": "",
+    "professor": "REGINA YANAKO MORIYA",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "4ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM014",
+    "disciplina": "QUÍMICA ANALÍTICA EXPERIMENTAL",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTEQM001 ESTEQM003",
+    "vagas": "12",
+    "sala": "",
+    "professor": "RICARDO LIMA SERUDO",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "4ª": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM233",
+    "disciplina": "OPERAÇÕES UNITÁRIAS PARA ENGENHARIA QUÍMICA I",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTEQM007 ESTEQM008 ESTEQM106",
+    "vagas": "15",
+    "sala": "",
+    "professor": "JEFFERSON L. G. DA SILVA",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ],
+      "4ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM112",
+    "disciplina": "MICROBIOLOGIA INDUSTRIAL",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTEQM104",
+    "vagas": "12",
+    "sala": "",
+    "professor": "ÉRICA SIMPLÍCIO DE SOUZA",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "07:30-09:10"
+      ],
+      "4ª": [
+        "07:30-09:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM014",
+    "disciplina": "QUÍMICA ANALÍTICA EXPERIMENTAL",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTEQM001 ESTEQM003",
+    "vagas": "12",
+    "sala": "",
+    "professor": "RICARDO LIMA SERUDO",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "4ª": [
+        "07:30-09:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM116",
+    "disciplina": "MODELAGEM, SIMULAÇÃO E OTIMIZAÇÃO DE PROCESSOS",
+    "ct": "6",
+    "ch": "90",
+    "prerequisito": "ESTBAS049 ESTEQM020 ESTEQM026 ESTEQM234",
+    "vagas": "25",
+    "sala": "LAB MECÂNICA",
+    "professor": "EDSON QUEIROZ DA FONSECA JÚNIOR",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "18:00-20:30"
+      ],
+      "4ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM120",
+    "disciplina": "ENGENHARIA DE PROCESSOS QUÍMICOS",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTBAS049 ESTEQM020 ESTEQM026 ESTEQM234",
+    "vagas": "30",
+    "sala": "",
+    "professor": "EDSON QUEIROZ DA FONSECA JÚNIOR",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "6ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM131",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM ENGENHARIA QUÍMICA II",
+    "ct": "20",
+    "ch": "600",
+    "prerequisito": "ESTEQM130",
+    "vagas": "35",
+    "sala": "",
+    "professor": "PATRÍCIA MELCHIONNA ALBUQUERQUE",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM235",
+    "disciplina": "OPERAÇÕES UNITÁRIAS PARA ENGENHARIA QUÍMICA III",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEQM026 ESTEQM234",
+    "vagas": "15",
+    "sala": "",
+    "professor": "REGINA YANAKO MORIYA",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM061",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II - ENG. QUÍMICA",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTEQM057",
+    "vagas": "25",
+    "sala": "",
+    "professor": "PATRÍCIA MELCHIONNA ALBUQUERQUE",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "6ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM062",
+    "disciplina": "TÓPICOS ESPECIAIS EM ENGENHARIA QUÍMICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEQM233",
+    "vagas": "25",
+    "sala": "",
+    "professor": "CLAIRON LIMA PINHEIRO",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM125",
+    "disciplina": "ANÁLISE DE IMPACTO AMBIENTAL",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTEQM121",
+    "vagas": "25",
+    "sala": "",
+    "professor": "FÁBIO BASSINI",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM210",
+    "disciplina": "ANÁLISE DE ALIMENTOS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEQM233",
+    "vagas": "15",
+    "sala": "",
+    "professor": "PATRÍCIA DE SOUZA PINTO HIDALGO",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "3ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM226",
+    "disciplina": "EMPREENDEDORISMO EM ENGENHARIA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEQM233",
+    "vagas": "15",
+    "sala": "",
+    "professor": "RICARDO LIMA SERUDO",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "4ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM004",
+    "disciplina": "FÍSICO-QUÍMICA I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS009",
+    "vagas": "25",
+    "sala": "",
+    "professor": "CLAUDIA CANDIDA SILVA",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "3ª": [
+        "10:50-12:30"
+      ],
+      "5ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM001",
+    "disciplina": "QUÍMICA INORGÂNICA TEÓRICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS005",
+    "vagas": "30",
+    "sala": "",
+    "professor": "CLÁUDIA CANDIDA SILVA",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "3ª": [
+        "13:00-14:40"
+      ],
+      "5ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM105",
+    "disciplina": "FÍSICO-QUÍMICA EXPERIMENTAL",
+    "ct": "2",
+    "ch": "60",
+    "prerequisito": "ESTEQM007 ESTEQM101",
+    "vagas": "12",
+    "sala": "",
+    "professor": "SERGIO DUVISION JR",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "5ª": [
+        "13:50-17:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM104",
+    "disciplina": "QUÍMICA ORGÂNICA E BIOQUÍMICA EXPERIMENTAL",
+    "ct": "2",
+    "ch": "60",
+    "prerequisito": "ESTEQM103 ESTEQM101",
+    "vagas": "12",
+    "sala": "",
+    "professor": "PATRÍCIA DE SOUZA PINTO HIDALGO",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "3ª": [
+        "09:10-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM008",
+    "disciplina": "FENÔMENOS DE TRANSPORTE I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS018 ESTBAS019",
+    "vagas": "15",
+    "sala": "",
+    "professor": "KIKI PINHEIRO MELO BRAGA",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "3ª": [
+        "10:50-12:30"
+      ],
+      "5ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM130",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM ENG. QUÍMCA I",
+    "ct": "20",
+    "ch": "600",
+    "prerequisito": "Ciclo Básico + Ciclo Pré-Profissional",
+    "vagas": "35",
+    "sala": "",
+    "professor": "PATRÍCIA MELCHIONNA ALBUQUERQUE",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "5ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM234",
+    "disciplina": "OPERAÇÕES UNITÁRIAS PARA ENGENHARIA QUÍMICA II",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTEQM233 ESTEQM016",
+    "vagas": "15",
+    "sala": "",
+    "professor": "JEFFERSON LUIZ GRANGEIRO DA SILVA",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "4ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM026",
+    "disciplina": "FENÔMENOS DE TRANSPORTE III",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEQM016 ESTEQM007",
+    "vagas": "15",
+    "sala": "",
+    "professor": "KIKI PINHEIRO MELO BRAGA",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM057",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO I",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Ciclo Básico + Ciclo Pré-Profissional",
+    "vagas": "20",
+    "sala": "",
+    "professor": "CLAIRON LIMA PINHEIRO",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "2ª": [
+        "20:30-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM124",
+    "disciplina": "REATORES QUÍMICOS HETEROGÊNEOS",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEQM119",
+    "vagas": "25",
+    "sala": "",
+    "professor": "CLAIRON LIMA PINHEIRO",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "5ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM008",
+    "disciplina": "FENÔMENOS DE TRANSPORTE I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS018 ESTBAS019",
+    "vagas": "15",
+    "sala": "",
+    "professor": "KIKI PINHEIRO MELO BRAGA",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "2ª": [
+        "10:50-12:30"
+      ],
+      "4ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Química",
+    "sigla": "ESTEQM105",
+    "disciplina": "FÍSICO-QUÍMICA EXPERIMENTAL",
+    "ct": "2",
+    "ch": "60",
+    "prerequisito": "ESTEQM007 ESTEQM101",
+    "vagas": "12",
+    "sala": "",
+    "professor": "SERGIO DUVISION JR",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "5ª": [
+        "09:10-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTBAS008",
+    "disciplina": "ÁLGEBRA LINEAR II (Compart. Eng. CIVIL)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS001",
+    "vagas": "",
+    "sala": "D1",
+    "professor": "Jose Luis Tavares Dos Santos",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "13:00-14:40"
+      ],
+      "5ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTBAS064",
+    "disciplina": "CÁLCULO DIFERENCIAL E INTEGRAL II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS063",
+    "vagas": "",
+    "sala": "D2",
+    "professor": "Elainne Ladislau Ferreira Pereira",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "14:40-16:20"
+      ],
+      "5ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTBAS010",
+    "disciplina": "DESENHO BÁSICO",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "",
+    "vagas": "",
+    "sala": "A13",
+    "professor": "João D´Anúzio Menezes de Azevedo Filho",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "13:00-15:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTBAS013",
+    "disciplina": "FÍSICA II (Compart. Eng. CIVIL)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS007",
+    "vagas": "",
+    "sala": "D1",
+    "professor": "Tathiana Moreira Diniz Ribeiro Cotta",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "07:30-09:10"
+      ],
+      "5ª": [
+        "07:30-09:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP032",
+    "disciplina": "ÉTICA, COMPUTAÇÃO E SOCIEDADE",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "",
+    "sala": "D6",
+    "professor": "REJANE GOMES",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "6ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP033",
+    "disciplina": "MATEMÁTICA DISCRETA",
+    "ct": "6",
+    "ch": "90",
+    "prerequisito": "ESTCMP019",
+    "vagas": "",
+    "sala": "D2",
+    "professor": "Sergio Cleger Tamayo",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "4ª": [
+        "08:20-10:50"
+      ],
+      "6ª": [
+        "08:20-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTBAS050",
+    "disciplina": "PROBABILIDADE E ESTATÍSTICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS063",
+    "vagas": "",
+    "sala": "D1",
+    "professor": "Feicien Vasquez",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP010",
+    "disciplina": "PROGRAMAÇÃO DE COMPUTADORES E ALGORITMOS",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP009",
+    "vagas": "",
+    "sala": "D2",
+    "professor": "Walter Charles Sousa Seiffert Simões",
+    "secao": "2º PERÍODO",
+    "horario": {}
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTBAS049",
+    "disciplina": "CÁLCULO NUMÉRICO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTECP103",
+    "vagas": "",
+    "sala": "A5",
+    "professor": "Sergio Cleger Tamayo",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP012",
+    "disciplina": "ALGORITMOS E ESTRUTURA DE DADOS II",
+    "ct": "6",
+    "ch": "90",
+    "prerequisito": "ESTCMP011",
+    "vagas": "",
+    "sala": "A5",
+    "professor": "Flávio José Mendes Coelho",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "10:00-12:30"
+      ],
+      "5ª": [
+        "10:00-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP024",
+    "disciplina": "MODELAGEM E PROJETO DE SISTEMAS",
+    "ct": "5",
+    "ch": "90",
+    "prerequisito": "ESTCMP021",
+    "vagas": "",
+    "sala": "A5",
+    "professor": "Danielle Pompeu Noronha Pontes",
+    "secao": "2º PERÍODO",
+    "horario": {}
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP030",
+    "disciplina": "FUNDAMENTOS TEÓRICOS DA COMPUTAÇÃO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP029",
+    "vagas": "",
+    "sala": "A3",
+    "professor": "Elloa Barreto Guedes da Costa",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "14:40-16:20"
+      ],
+      "5ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP040",
+    "disciplina": "SISTEMAS DIGITAIS PARA COMPUTAÇÃO I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL507",
+    "vagas": "",
+    "sala": "A5",
+    "professor": "Walfredo da Costa Lucena Filho",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "13:00-14:40"
+      ],
+      "4ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP051",
+    "disciplina": "METODOLOGIA CIENTÍFICA PARA COMPUTAÇÃO",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "",
+    "sala": "A5",
+    "professor": "Walter Charles Sousa Seiffert Simões",
+    "secao": "2º PERÍODO",
+    "horario": {}
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTEEL508",
+    "disciplina": "ELETRÔNICA I",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTEEL507",
+    "vagas": "",
+    "sala": "A5",
+    "professor": "José Gilson Siqueira",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP007",
+    "disciplina": "SISTEMAS OPERACIONAIS I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP003",
+    "vagas": "",
+    "sala": "A6",
+    "professor": "Danielle Gordiano Valente",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "3ª": [
+        "10:00-11:40"
+      ],
+      "5ª": [
+        "10:00-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTECP116",
+    "disciplina": "HOMEM, SOCIEDADE E MEIO AMBIENTE OU TECNOLOGIA",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "",
+    "sala": "C14",
+    "professor": "Maria da Gloria Gonçalves de Melo Barcelos",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "2ª": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP031",
+    "disciplina": "INTELIGÊNCIA ARTIFICIAL I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP030",
+    "vagas": "",
+    "sala": "A5",
+    "professor": "Tiago Eugenio de Melo",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "3ª": [
+        "13:00-14:40"
+      ],
+      "5ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP025",
+    "disciplina": "ENGENHARIA DE SOFTWARE",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP024",
+    "vagas": "",
+    "sala": "A6",
+    "professor": "Diana Maria da Camara Gorayeb",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "4ª": [
+        "10:00-11:40"
+      ],
+      "6ª": [
+        "10:00-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP027",
+    "disciplina": "INTERAÇÃO HOMEM COMPUTADOR",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP021",
+    "vagas": "",
+    "sala": "A6",
+    "professor": "Aurea Hileia da Silva Melo",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "2ª": [
+        "13:00-14:40"
+      ],
+      "4ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTECP120",
+    "disciplina": "INTRODUÇÃO À CIÊNCIA DOS MATERIAIS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "",
+    "sala": "A5",
+    "professor": "José Costa de Macedo Neto",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "3ª": [
+        "14:40-16:20"
+      ],
+      "5ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP004",
+    "disciplina": "ARQUITETURA DE COMPUTADORES",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP003",
+    "vagas": "",
+    "sala": "A6",
+    "professor": "Carlos Mauricio Serodio Figueiredo",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ],
+      "4ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTEEL018",
+    "disciplina": "SISTEMAS DE CONTROLE I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL012",
+    "vagas": "",
+    "sala": "A6",
+    "professor": "Daniel Guzmán Del Río",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTECP127",
+    "disciplina": "COMPUTAÇÃO GRÁFICA E PDI",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTEEL030",
+    "vagas": "",
+    "sala": "A4",
+    "professor": "Ricardo da Silva Barboza",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP034",
+    "disciplina": "EMPREENDEDORISMO DIGITAL I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS011",
+    "vagas": "",
+    "sala": "A5",
+    "professor": "Raimundo Corrêa de Oliveira",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "4ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTECP130",
+    "disciplina": "REDES DE COMPUTADORES II",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP016",
+    "vagas": "",
+    "sala": "A3",
+    "professor": "Walter Charles Sousa Seiffert Simões",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "3ª": [
+        "14:40-16:20"
+      ],
+      "5ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP020",
+    "disciplina": "SISTEMAS PARALELOS E DISTRIBUIDOS",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "ESTCMP016",
+    "vagas": "",
+    "sala": "A5",
+    "professor": "Ricardo Rios Monteiro do Carmo",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ],
+      "4ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP069",
+    "disciplina": "TÓPICOS ESPECIAIS EM COMPUTAÇÃO II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP025",
+    "vagas": "",
+    "sala": "A5",
+    "professor": "Jonathas Silva dos Santos",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "3ª": [
+        "18:00-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTECP140",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM ENGENHARIA DA COMPUTAÇÃO II",
+    "ct": "15",
+    "ch": "450",
+    "prerequisito": "Ciclo Profissional",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Aurea Hileia da Silva Melo",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "6ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTECP136",
+    "disciplina": "TÓPICOS ESPECIAIS PARA COMPUTAÇÃO IV",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTECP118",
+    "vagas": "",
+    "sala": "A5",
+    "professor": "Jonathas Silva dos Santos",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "5ª": [
+        "18:00-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTECP139",
+    "disciplina": "AUTOMAÇÃO INDUSTRIAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTCMP042",
+    "vagas": "",
+    "sala": "A6",
+    "professor": "José Gomes da Silva",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "4ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP233",
+    "disciplina": "REDES NEURAIS ARTIFICIAIS (ECP/LIC/SI)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "",
+    "sala": "D3",
+    "professor": "Elloa Barreto Guedes da Costa",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP225",
+    "disciplina": "CIÊNCIA DE DADOS I (Abrir por ECP, com reserva de vaga LIC, SI)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "",
+    "sala": "A18",
+    "professor": "Marcio Palheta Piedade",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP225",
+    "disciplina": "HORÁRIO",
+    "ct": "",
+    "ch": "",
+    "prerequisito": "",
+    "vagas": "",
+    "sala": "",
+    "professor": "",
+    "secao": "OPTATIVAS",
+    "horario": {}
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP052",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO I",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "até o 6º",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Aurea Hileia da Silva Melo",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTECP135",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM ENGENHARIA DA COMPUTAÇÃO I",
+    "ct": "2",
+    "ch": "15",
+    "prerequisito": "até o 6º",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Aurea Hileia da Silva Melo",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "6ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP053",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Ciclo Básico e o Profissional",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Elloa Barreto Guedes da Costa",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP053",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Ciclo Básico e o Profissional",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Tiago Eugenio de Melo",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP053",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Ciclo Básico e o Profissional",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Raimundo Corrêa de Oliveira",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP053",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Ciclo Básico e o Profissional",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Marcia Sampaio Lima",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP053",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Ciclo Básico e o Profissional",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Carlos Mauricio Serodio Figueiredo",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP054",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Ciclo Básico e o Profissional",
+    "vagas": "",
+    "sala": "",
+    "professor": "Fabio Santos da Silva",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP053",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Ciclo Básico e o Profissional",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Luis Cuevas Rodriguez",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP053",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Ciclo Básico e o Profissional",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Aurea Hileia da Silva Melo",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "5ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP053",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Ciclo Básico e o Profissional",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Mario Augusto Bessa de Figueiredo",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP053",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Ciclo Básico e o Profissional",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Walter Charles Sousa Seiffert Simões",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP053",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Ciclo Básico e o Profissional",
+    "vagas": "",
+    "sala": "-",
+    "professor": "Jonathas Silva dos Santos",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "6ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Computação",
+    "sigla": "ESTCMP011",
+    "disciplina": "ALGORITMOS E ESTRUTURA DE DADOS I (Abrir por SI, com reserva de vaga LIC, ECP)",
+    "ct": "5",
+    "ch": "90",
+    "prerequisito": "ESTCMP010",
+    "vagas": "",
+    "sala": "",
+    "professor": "Sergio Cleger Tamayo",
+    "secao": "Página 4",
+    "horario": {
+      "3ª": [
+        "18:00-20:30"
+      ],
+      "5ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTBAS008",
+    "disciplina": "INTRODUÇÃO À ECONOMIA",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D1",
+    "professor": "",
+    "secao": "2º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "6ª": [
+        "13:00-15:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEEL0218",
+    "disciplina": "LINGUAGEM DE PROGRAMAÇÃO II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTECP001",
+    "vagas": "45",
+    "sala": "lab informatica",
+    "professor": "",
+    "secao": "2º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "09:10-10:50"
+      ],
+      "4ª": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTBAS005",
+    "disciplina": "DESENHO TÉCNICO ASSISTIDO POR COMPUTADOR",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "25",
+    "sala": "A13",
+    "professor": "",
+    "secao": "2º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "5ª": [
+        "10:50-12:30"
+      ],
+      "6ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEEL0217",
+    "disciplina": "ÁLGEBRA LINEAR II",
+    "ct": "4",
+    "ch": "30",
+    "prerequisito": "ESTBAS001",
+    "vagas": "45",
+    "sala": "D5",
+    "professor": "",
+    "secao": "2º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "3ª": [
+        "13:00-14:40"
+      ],
+      "5ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTBAS012",
+    "disciplina": "CÁLCULO II",
+    "ct": "5",
+    "ch": "75",
+    "prerequisito": "ESTBAS002",
+    "vagas": "45",
+    "sala": "D4",
+    "professor": "",
+    "secao": "2º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "3ª": [
+        "14:40-16:20"
+      ],
+      "5ª": [
+        "14:40-17:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTBAS013",
+    "disciplina": "INTRODUÇÃO À ADMINISTRAÇÃO",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D1",
+    "professor": "",
+    "secao": "2º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "3ª": [
+        "09:10-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEEL0214",
+    "disciplina": "PROBABILIDADE ESTATISTICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS002",
+    "vagas": "45",
+    "sala": "D5",
+    "professor": "",
+    "secao": "2º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ],
+      "4ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTECP002",
+    "disciplina": "FÍSICA II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS007",
+    "vagas": "45",
+    "sala": "D5",
+    "professor": "",
+    "secao": "2º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "10:50-12:30"
+      ],
+      "4ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTBAS018",
+    "disciplina": "FÍSICA IV",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS015",
+    "vagas": "35",
+    "sala": "A1",
+    "professor": "",
+    "secao": "4º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "3ª": [
+        "07:30-09:10"
+      ],
+      "5ª": [
+        "07:30-09:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTBAS020",
+    "disciplina": "LABORATÓRIO DE FÍSICA II",
+    "ct": "1",
+    "ch": "30",
+    "prerequisito": "ESTBAS015",
+    "vagas": "35",
+    "sala": "LAB",
+    "professor": "",
+    "secao": "4º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTBAS049",
+    "disciplina": "CÁLCULO NUMÉRICO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS002",
+    "vagas": "35",
+    "sala": "A1",
+    "professor": "",
+    "secao": "4º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ],
+      "4ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEEL001",
+    "disciplina": "CIRCUITOS ELÉTRICOS I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS015",
+    "vagas": "35",
+    "sala": "A1",
+    "professor": "",
+    "secao": "4º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA403",
+    "disciplina": "LABORATÓRIO DE CIRCUITOS ELÉTRICOS I",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTBAS015",
+    "vagas": "20",
+    "sala": "lab",
+    "professor": "",
+    "secao": "4º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {}
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEEL0207",
+    "disciplina": "SISTEMAS DINÂMICOS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS014",
+    "vagas": "35",
+    "sala": "A1",
+    "professor": "",
+    "secao": "4º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "3ª": [
+        "14:40-16:20"
+      ],
+      "5ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA400",
+    "disciplina": "CÁLCULO VETORIAL",
+    "ct": "5",
+    "ch": "75",
+    "prerequisito": "ESTBAS014",
+    "vagas": "35",
+    "sala": "A1",
+    "professor": "",
+    "secao": "4º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "3ª": [
+        "09:10-10:50"
+      ],
+      "5ª": [
+        "09:10-10:50"
+      ],
+      "SAB": [
+        "08:20-09:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA401",
+    "disciplina": "SINAIS E SISTEMAS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTECI002",
+    "vagas": "35",
+    "sala": "A1",
+    "professor": "",
+    "secao": "4º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTECI024",
+    "disciplina": "HIGIENE E SEGURANÇA DO TRABALHO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "A2",
+    "professor": "",
+    "secao": "6º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "3ª": [
+        "14:40-16:20"
+      ],
+      "5ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA009",
+    "disciplina": "ELETRÔNICA DIGITAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEMA003",
+    "vagas": "30",
+    "sala": "A2",
+    "professor": "",
+    "secao": "6º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "6ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA061",
+    "disciplina": "LABORATÓRIO DE ELETRÔNICA DIGITAL",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEMA003",
+    "vagas": "30",
+    "sala": "lab eletrica",
+    "professor": "",
+    "secao": "6º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "6ª": [
+        "09:10-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA502",
+    "disciplina": "PROCESSO DE FABRICAÇÃO MECÂNICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEMA305",
+    "vagas": "30",
+    "sala": "A2",
+    "professor": "",
+    "secao": "6º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "13:00-14:40"
+      ],
+      "4ª": [
+        "13:00-14:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA503",
+    "disciplina": "AUTOMAÇÃO DE SISTEMAS I",
+    "ct": "6",
+    "ch": "90",
+    "prerequisito": "ESTEMA402",
+    "vagas": "30",
+    "sala": "A2",
+    "professor": "",
+    "secao": "6º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ],
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA600",
+    "disciplina": "CONTROLE II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEMA500",
+    "vagas": "30",
+    "sala": "A2",
+    "professor": "",
+    "secao": "6º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA601",
+    "disciplina": "LABORATÓRIO DE CONTROLE II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTEMA500 ESTEMA501",
+    "vagas": "30",
+    "sala": "lab",
+    "professor": "",
+    "secao": "6º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "4ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA006",
+    "disciplina": "SISTEMAS ELETRÔNICOS DE POTÊNCIA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEEL003",
+    "vagas": "30",
+    "sala": "A2",
+    "professor": "",
+    "secao": "6º PERÍODO - ENGENHARIA CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA020",
+    "disciplina": "LABORATÓRIO DE COMANDOS ELETROPNEUMÁTICOS",
+    "ct": "1",
+    "ch": "30",
+    "prerequisito": "ESTEMA603",
+    "vagas": "20",
+    "sala": "lab",
+    "professor": "",
+    "secao": "8º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "6ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA024",
+    "disciplina": "REDES INDUSTRIAIS DE COMUNICAÇÃO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEMA503",
+    "vagas": "25",
+    "sala": "D6",
+    "professor": "",
+    "secao": "8º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA703",
+    "disciplina": "ESTÁGIO SUPERVISIONADO II EM ECA",
+    "ct": "2",
+    "ch": "390",
+    "prerequisito": "ESTEMA602",
+    "vagas": "25",
+    "sala": "lab",
+    "professor": "",
+    "secao": "8º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA704",
+    "disciplina": "LABORATÓRIO DE MÁQUINAS ELÉTRICAS E ACIONAMENTOS",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEEL027",
+    "vagas": "20",
+    "sala": "lab eletrica",
+    "professor": "",
+    "secao": "8º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "3ª": [
+        "15:30-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA705",
+    "disciplina": "CONTROLE DIGITAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEMA701",
+    "vagas": "25",
+    "sala": "A1",
+    "professor": "",
+    "secao": "8º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA801",
+    "disciplina": "GESTÃO DE OPERAÇÕES DE MANUFATURA",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTEMA502",
+    "vagas": "25",
+    "sala": "A2",
+    "professor": "",
+    "secao": "8º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA802",
+    "disciplina": "AUTOMAÇÃO DE SISTEMAS II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEMA700",
+    "vagas": "25",
+    "sala": "A1",
+    "professor": "",
+    "secao": "8º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "4ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA102",
+    "disciplina": "TÓPICOS ESPECIAIS EM ENG. CONTROLE E AUTOMAÇÃO II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "Todas até o 7º período",
+    "vagas": "35",
+    "sala": "LAB CONNEXUS",
+    "professor": "",
+    "secao": "10º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ],
+      "4ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA046",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II - ENG. DE CONTROLE E AUTOMAÇÃO",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEMA036",
+    "vagas": "35",
+    "sala": "lab",
+    "professor": "",
+    "secao": "10º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "SAB": [
+        "08:20-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA046",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II - ENG. DE CONTROLE E AUTOMAÇÃO",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEMA036",
+    "vagas": "35",
+    "sala": "lab",
+    "professor": "",
+    "secao": "10º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "SAB": [
+        "08:20-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA046",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II - ENG. DE CONTROLE E AUTOMAÇÃO",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEMA036",
+    "vagas": "35",
+    "sala": "lab",
+    "professor": "",
+    "secao": "10º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "SAB": [
+        "08:20-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA046",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II - ENG. DE CONTROLE E AUTOMAÇÃO",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEMA036",
+    "vagas": "35",
+    "sala": "lab",
+    "professor": "",
+    "secao": "10º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "SAB": [
+        "08:20-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA046",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II - ENG. DE CONTROLE E AUTOMAÇÃO",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEMA036",
+    "vagas": "35",
+    "sala": "lab",
+    "professor": "",
+    "secao": "10º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "SAB": [
+        "08:20-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA046",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II - ENG. DE CONTROLE E AUTOMAÇÃO",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEMA036",
+    "vagas": "35",
+    "sala": "lab",
+    "professor": "",
+    "secao": "10º PERÍODO - ENGENHARIA DE CONTROLE E AUTOMAÇÃO",
+    "horario": {
+      "SAB": [
+        "08:20-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEME005",
+    "disciplina": "INTRODUÇÃO AO PROJETO DE SISTEMAS MECÂNICOS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEBAS010",
+    "vagas": "25",
+    "sala": "D9",
+    "professor": "",
+    "secao": "7º período CONNEXUS 16:20 16:20",
+    "horario": {
+      "5ª": [
+        "14:40-16:20"
+      ],
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA030",
+    "disciplina": "INTRODUÇÃO À INTELIGÊNCIA ARTIFICIAL APLICADA AO CONTROLE",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTECP002",
+    "vagas": "25",
+    "sala": "A2",
+    "professor": "",
+    "secao": "7º período CONNEXUS 16:20 16:20",
+    "horario": {
+      "SAB": [
+        "08:20-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMT015",
+    "disciplina": "ROBOTICA INDUSTRIAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEBAS049",
+    "vagas": "",
+    "sala": "25",
+    "professor": "lab robotica fixa",
+    "secao": "7º período CONNEXUS 16:20 16:20",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMT024",
+    "disciplina": "INTRODUÇÃO A BIOMECANICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "25",
+    "sala": "lab inf.",
+    "professor": "",
+    "secao": "7º período CONNEXUS 16:20 16:20",
+    "horario": {
+      "3ª": [
+        "18:00-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA047",
+    "disciplina": "SISTEMAS NEBULOSOS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "25",
+    "sala": "lab connexus",
+    "professor": "",
+    "secao": "7º período CONNEXUS 16:20 16:20",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA003",
+    "disciplina": "PROCESSO DE FABRICAÇÃO DIGITAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "25",
+    "sala": "fablab",
+    "professor": "",
+    "secao": "7º período CONNEXUS 16:20 16:20",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEEL003",
+    "disciplina": "CIRCUITOS ELÉTRICOS II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL001",
+    "vagas": "30",
+    "sala": "SALA",
+    "professor": "",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEEL004",
+    "disciplina": "LABORATÓRIO DE CIRCUITOS ELÉTRICOS II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTEEL001 ESTEEL002",
+    "vagas": "20",
+    "sala": "lab",
+    "professor": "",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA004",
+    "disciplina": "LABORATÓRIO DE ELETRÔNICA ANALOGICA",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEEL001 ESTEEL002",
+    "vagas": "20",
+    "sala": "lab",
+    "professor": "",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "5ª": [
+        "14:40-17:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA011",
+    "disciplina": "ESTÁGIO SUPERVISADO EM ENG. DE CONTROLE E AUTOMAÇÃO I",
+    "ct": "15",
+    "ch": "450",
+    "prerequisito": "Todas Até o 6º Período Completo",
+    "vagas": "20",
+    "sala": "lab",
+    "professor": "",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA021",
+    "disciplina": "ESTÁGIO SUPERVISADO EM ENG. DE CONTROLE E AUTOMAÇÃO II",
+    "ct": "15",
+    "ch": "450",
+    "prerequisito": "Todas Até o 6º Período Completo",
+    "vagas": "20",
+    "sala": "lab",
+    "professor": "",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA036",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO I",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "Todas até o 7º período",
+    "vagas": "20",
+    "sala": "lab",
+    "professor": "",
+    "secao": "Página 4",
+    "horario": {
+      "2ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA100",
+    "disciplina": "TÓPICOS ESPECIAIS EM ENG. CONTROLE E AUTOMAÇÃO I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "Todas até o 7º período",
+    "vagas": "30",
+    "sala": "LAB CONNEXUS",
+    "professor": "",
+    "secao": "Página 4",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA304",
+    "disciplina": "INSTRUMENTAÇÃO BÁSICA",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEMA103",
+    "vagas": "35",
+    "sala": "",
+    "professor": "",
+    "secao": "Página 4",
+    "horario": {
+      "4ª": [
+        "14:40-17:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA305",
+    "disciplina": "INTRODUÇÃO A CIENCIA E TECNOLOGIA DE MATERIAIS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS005",
+    "vagas": "30",
+    "sala": "",
+    "professor": "",
+    "secao": "Página 4",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ],
+      "3ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA602",
+    "disciplina": "ESTÁGIO SUPERVISIONADO I EM ECA",
+    "ct": "2",
+    "ch": "390",
+    "prerequisito": "Todas Até o 6º Período Completo",
+    "vagas": "20",
+    "sala": "",
+    "professor": "",
+    "secao": "Página 4",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia de Controle e Automação",
+    "sigla": "ESTEMA500",
+    "disciplina": "CONTROLE I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "35",
+    "sala": "",
+    "professor": "",
+    "secao": "Página 4",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTBAS008",
+    "disciplina": "ÁLGEBRA LINEAR II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS001",
+    "vagas": "45",
+    "sala": "D4",
+    "professor": "ANDREA FRAGATA",
+    "secao": "2º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "07:30-09:10"
+      ],
+      "5ª": [
+        "07:30-09:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0218",
+    "disciplina": "CÁLCULO DIFERENCIAL E INTEGRAL II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL0120",
+    "vagas": "45",
+    "sala": "D4",
+    "professor": "SILVIA VIVIANE",
+    "secao": "2º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "09:10-10:50"
+      ],
+      "5ª": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTBAS005",
+    "disciplina": "QUÍMICA GERAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D2",
+    "professor": "PATRÍCIA HIDALGO",
+    "secao": "2º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ],
+      "4ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0217",
+    "disciplina": "INTRODUÇÃO À ADMINISTRAÇÃO",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D4",
+    "professor": "RÁRIMA COELHO",
+    "secao": "2º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "6ª": [
+        "13:00-15:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTBAS012",
+    "disciplina": "PROBABILIDADE E ESTATÍSTICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL0120",
+    "vagas": "35",
+    "sala": "D4",
+    "professor": "ROSEANI PARENTE",
+    "secao": "2º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "10:50-12:30"
+      ],
+      "4ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTBAS013",
+    "disciplina": "FÍSICA II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS007",
+    "vagas": "45",
+    "sala": "D5",
+    "professor": "ISRAEL TORRES",
+    "secao": "2º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "10:50-12:30"
+      ],
+      "5ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0214",
+    "disciplina": "INTRODUÇÃO À ECONOMIA ESTBAS017",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D4",
+    "professor": "NEULER ANDRÉ",
+    "secao": "2º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "6ª": [
+        "15:30-17:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTECP002",
+    "disciplina": "LINGUAGEM DE PROGRAMAÇÃO II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTECP001",
+    "vagas": "45",
+    "sala": "D3",
+    "professor": "JONATHAS SANTOS",
+    "secao": "2º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "07:30-09:10"
+      ],
+      "4ª": [
+        "07:30-09:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTBAS018",
+    "disciplina": "FÍSICA IV",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS015",
+    "vagas": "35",
+    "sala": "D5",
+    "professor": "MOISES OLIVEIRA",
+    "secao": "4º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "09:10-10:50"
+      ],
+      "5ª": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTBAS082",
+    "disciplina": "CÁLCULO VETORIAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS014",
+    "vagas": "40",
+    "sala": "D1",
+    "professor": "ADRIAN RIBEIRO",
+    "secao": "4º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "10:50-12:30"
+      ],
+      "5ª": [
+        "10:50-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTBAS020",
+    "disciplina": "LABORATÓRIO DE FÍSICA II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "25",
+    "sala": "LAB",
+    "professor": "JOSÉ LUIZ",
+    "secao": "4º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "4ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTBAS049",
+    "disciplina": "CÁLCULO NUMÉRICO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS002",
+    "vagas": "40",
+    "sala": "D5",
+    "professor": "MANOEL AZEVEDO",
+    "secao": "4º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL003",
+    "disciplina": "CIRCUITOS ELÉTRICOS II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL001",
+    "vagas": "45",
+    "sala": "A3",
+    "professor": "Cleto Leal",
+    "secao": "4º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "09:10-10:50"
+      ],
+      "4ª": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0206",
+    "disciplina": "LABORATÓRIO DE CIRCUITOS ELÉTRICOS II",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEEL001",
+    "vagas": "25",
+    "sala": "Lab B13",
+    "professor": "PSS ELÉTRICA",
+    "secao": "4º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "13:50-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0207",
+    "disciplina": "ELETRÔNICA ANALÓGICA I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL001",
+    "vagas": "40",
+    "sala": "D6",
+    "professor": "Victor Valenzuela",
+    "secao": "4º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "07:30-09:10"
+      ],
+      "4ª": [
+        "07:30-09:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0208",
+    "disciplina": "LABORATÓRIO DE ELETRÔNICA ANALÓGICA I",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEEL001",
+    "vagas": "20",
+    "sala": "Lab B13",
+    "professor": "Victor Valenzuela",
+    "secao": "4º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "6ª": [
+        "07:30-10:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0206",
+    "disciplina": "LABORATÓRIO DE CIRCUITOS ELÉTRICOS II",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEEL001",
+    "vagas": "25",
+    "sala": "Lab B17",
+    "professor": "PSS ELÉTRICA",
+    "secao": "4º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "6ª": [
+        "10:00-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL003",
+    "disciplina": "CIRCUITOS ELÉTRICOS II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL001",
+    "vagas": "30",
+    "sala": "A3",
+    "professor": "Cleto Leal",
+    "secao": "4º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "07:30-09:10"
+      ],
+      "5ª": [
+        "07:30-09:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0208",
+    "disciplina": "LABORATÓRIO DE ELETRÔNICA ANALÓGICA I",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEEL001",
+    "vagas": "20",
+    "sala": "Lab B13",
+    "professor": "José Gomes",
+    "secao": "4º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "6ª": [
+        "15:30-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL017",
+    "disciplina": "PRINCÍPIOS DE COMUNICAÇÕES II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL011",
+    "vagas": "45",
+    "sala": "A14",
+    "professor": "José Nilson",
+    "secao": "6º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "14:40-16:20"
+      ],
+      "4ª": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL022",
+    "disciplina": "ELETRÔNICA DE POTÊNCIA I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL007",
+    "vagas": "45",
+    "sala": "A14",
+    "professor": "Walter Prado",
+    "secao": "6º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL023",
+    "disciplina": "LABORATÓRIO DE ELETRÔNICA DE POTÊNCIA I",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEEL007",
+    "vagas": "35",
+    "sala": "Lab A36",
+    "professor": "Walter Prado",
+    "secao": "6º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "6ª": [
+        "13:00-15:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL026",
+    "disciplina": "LABORATÓRIO DE CONVERSÃO DE ENERGIA",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEEL020",
+    "vagas": "20",
+    "sala": "Lab A29",
+    "professor": "PSS ELÉTRICA",
+    "secao": "6º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "6ª": [
+        "15:30-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL027",
+    "disciplina": "MÁQUINAS ELÉTRICAS E SEUS ACIONAMENTOS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL020",
+    "vagas": "45",
+    "sala": "A14",
+    "professor": "Weverson Cirino",
+    "secao": "6º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL064",
+    "disciplina": "ELETRÔNICA DIGITAL II",
+    "ct": "5",
+    "ch": "75",
+    "prerequisito": "ESTEEL009",
+    "vagas": "20",
+    "sala": "A2",
+    "professor": "Walfredo Lucena",
+    "secao": "6º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "10:00-11:40"
+      ],
+      "5ª": [
+        "09:10-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0703",
+    "disciplina": "ELETRÔNICA ANALÓGICA III",
+    "ct": "5",
+    "ch": "75",
+    "prerequisito": "ESTEEL007",
+    "vagas": "25",
+    "sala": "A2",
+    "professor": "Victor Valenzuela",
+    "secao": "6º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "07:30-10:00"
+      ],
+      "5ª": [
+        "07:30-09:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL064",
+    "disciplina": "ELETRÔNICA DIGITAL II",
+    "ct": "5",
+    "ch": "75",
+    "prerequisito": "ESTEEL009",
+    "vagas": "20",
+    "sala": "A2",
+    "professor": "Walfredo Lucena",
+    "secao": "6º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "07:30-10:00"
+      ],
+      "4ª": [
+        "07:30-09:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0703",
+    "disciplina": "ELETRÔNICA ANALÓGICA III",
+    "ct": "5",
+    "ch": "75",
+    "prerequisito": "ESTEEL007",
+    "vagas": "25",
+    "sala": "A2",
+    "professor": "Victor Valenzuela",
+    "secao": "6º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "10:00-11:40"
+      ],
+      "4ª": [
+        "09:10-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL023",
+    "disciplina": "LABORATÓRIO DE ELETRÔNICA DE POTÊNCIA I",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "ESTEEL007",
+    "vagas": "25",
+    "sala": "Lab A36",
+    "professor": "Walter Prado",
+    "secao": "6º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "13:50-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL021",
+    "disciplina": "TECNOLOGIA DE HARDWARE REPROGRAMÁVEL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL064",
+    "vagas": "35",
+    "sala": "Lab A31",
+    "professor": "Jozias Parente",
+    "secao": "8º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "6ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL024",
+    "disciplina": "SISTEMAS DE TELECOMUNICAÇÕES",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL017",
+    "vagas": "35",
+    "sala": "A1",
+    "professor": "Antonio Luiz Pantoja",
+    "secao": "8º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "19:40-21:20"
+      ],
+      "4ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0705",
+    "disciplina": "SISTEMAS DE CONTROLE II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL018",
+    "vagas": "35",
+    "sala": "A1",
+    "professor": "Daniel Guzman",
+    "secao": "8º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "19:40-21:20"
+      ],
+      "5ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0706",
+    "disciplina": "REDES DE COMUNICAÇÕES DE DADOS I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL064",
+    "vagas": "35",
+    "sala": "A4",
+    "professor": "Antonio Luiz Pantoja",
+    "secao": "8º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0708",
+    "disciplina": "MICROCONTROLADORES",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL064",
+    "vagas": "35",
+    "sala": "A3",
+    "professor": "Walfredo Lucena",
+    "secao": "8º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0710",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM ENGENHARIA ELÉTRICA II",
+    "ct": "2",
+    "ch": "450",
+    "prerequisito": "ESTEEL0704",
+    "vagas": "15",
+    "sala": "B10",
+    "professor": "Ingrid Sammyne Gadelha Figueiredo",
+    "secao": "8º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "SAB": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0710",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM ENGENHARIA ELÉTRICA II",
+    "ct": "2",
+    "ch": "450",
+    "prerequisito": "ESTEEL0704",
+    "vagas": "15",
+    "sala": "B10",
+    "professor": "Júlio Feitoza",
+    "secao": "8º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "6ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0203",
+    "disciplina": "ERGONOMIA E SEGURANÇA DE TRABALHO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "35",
+    "sala": "A8/A7",
+    "professor": "ALEX SANDER",
+    "secao": "10º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "3ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0707",
+    "disciplina": "INFORMÁTICA INDUSTRIAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL064",
+    "vagas": "35",
+    "sala": "A3",
+    "professor": "Marivan Gomes",
+    "secao": "10º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "4ª": [
+        "18:00-19:40"
+      ],
+      "6ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0709",
+    "disciplina": "ANÁLISE DE SISTEMA DE POTENCIA I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL003",
+    "vagas": "35",
+    "sala": "A3",
+    "professor": "Israel Gondres",
+    "secao": "10º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "3ª": [
+        "19:40-21:20"
+      ],
+      "5ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL104",
+    "disciplina": "TÓPICOS ESPECIAIS EM ENGENHARIA ELÉTRICA I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "35",
+    "sala": "Lab A31",
+    "professor": "Raimundo Cláudio",
+    "secao": "10º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "19:40-21:20"
+      ],
+      "4ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL101",
+    "disciplina": "TÓPICOS ESPECIAIS EM ENGENHARIA ELÉTRICA: ARDUÍNO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "35",
+    "sala": "Lab A36",
+    "professor": "José Gomes",
+    "secao": "10º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL105",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO ENG. ELÉTRICA II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "ESTEEL0711",
+    "vagas": "35",
+    "sala": "A7",
+    "professor": "Antonio Luiz Pantoja",
+    "secao": "10º PERÍODO - ENGENHARIA ELÉTRICA",
+    "horario": {
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0022",
+    "disciplina": "SISTEMAS DE TV DIGITAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL030",
+    "vagas": "25",
+    "sala": "Lab A28",
+    "professor": "José Nilson",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0701",
+    "disciplina": "ELETRÔNICA DE POTÊNCIA II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL022",
+    "vagas": "25",
+    "sala": "A2",
+    "professor": "Walter Prado",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "2ª": [
+        "19:40-21:20"
+      ],
+      "4ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL103",
+    "disciplina": "TÓPICOS ESPECIAIS EM ENGENHARIA ELÉTRICA: SISTEMA FOTOVOLTAICO INTERLIGADO À REDE",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL003",
+    "vagas": "25",
+    "sala": "Lab A28",
+    "professor": "Cláudio Gonçalves",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0012",
+    "disciplina": "ENERGIA SOLAR FOTOVOLTAICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL003",
+    "vagas": "25",
+    "sala": "Lab A28",
+    "professor": "CLÁUDIO GONÇALVES",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "4ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEMA030",
+    "disciplina": "INTELIGÊNCIA ARTIFICIAL APLICADA A AUTOMAÇÃO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTECP002",
+    "vagas": "35",
+    "sala": "SALA/C13",
+    "professor": "Wheidima Carneiro de Melo",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "2ª": [
+        "16:20-18:00"
+      ],
+      "4ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL044",
+    "disciplina": "PROCESSAMENTO DIGITAL DE IMAGENS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL030",
+    "vagas": "35",
+    "sala": "Lab A36",
+    "professor": "Wheidima Carneiro de Melo",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL104",
+    "disciplina": "TÓPICOS ESPECIAIS EM ENGENHARIA ELÉTRICA: SMARTSGRIDS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "20",
+    "sala": "A3",
+    "professor": "Raimundo Cláudio",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "3ª": [
+        "16:20-18:00"
+      ],
+      "5ª": [
+        "16:20-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL100",
+    "disciplina": "TÓPICOS ESPECIAIS EM ENGENHARIA ELÉTRICA: ENADE",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL002",
+    "vagas": "35",
+    "sala": "Lab A36",
+    "professor": "Ingrid Sammyne Gadelha Figueiredo",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "SAB": [
+        "09:10-12:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0017",
+    "disciplina": "PROCESSAMENTO DE SINAIS BIOLÓGICOS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL030",
+    "vagas": "35",
+    "sala": "A2",
+    "professor": "Wheidima Carneiro de Melo",
+    "secao": "OPTATIVAS",
+    "horario": {
+      "3ª": [
+        "19:40-21:20"
+      ],
+      "5ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0711",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO ENG. ELÉTRICA I",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "Básico + Pré- Profissional",
+    "vagas": "35",
+    "sala": "A1",
+    "professor": "Antonio Luiz Pantoja",
+    "secao": "FORA DE PERÍODO",
+    "horario": {
+      "6ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0704",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM ENGENHARIA ELÉTRICA I",
+    "ct": "2",
+    "ch": "450",
+    "prerequisito": "ESTEEL0704",
+    "vagas": "15",
+    "sala": "B10",
+    "professor": "Júlio Feitoza",
+    "secao": "FORA DE PERÍODO",
+    "horario": {
+      "SAB": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL011",
+    "disciplina": "PRINCÍPIOS DE COMUNICAÇÕES I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL0207",
+    "vagas": "35",
+    "sala": "A5",
+    "professor": "José Nilson",
+    "secao": "FORA DE PERÍODO",
+    "horario": {
+      "SAB": [
+        "14:40-18:00"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL018",
+    "disciplina": "SISTEMA DE CONTROLE I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS009",
+    "vagas": "35",
+    "sala": "A3",
+    "professor": "Cleto Leal",
+    "secao": "FORA DE PERÍODO",
+    "horario": {
+      "3ª": [
+        "09:10-10:50"
+      ],
+      "5ª": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0901",
+    "disciplina": "EFICIÊNCIA ENERGÉTICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTEEL003",
+    "vagas": "30",
+    "sala": "A6",
+    "professor": "Raimundo Cláudio",
+    "secao": "FORA DE PERÍODO",
+    "horario": {
+      "3ª": [
+        "19:40-21:20"
+      ],
+      "5ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL001",
+    "disciplina": "CIRCUITOS ELÉTRICOS I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "ESTBAS009",
+    "vagas": "30",
+    "sala": "A14",
+    "professor": "Weverson Cirino",
+    "secao": "FORA DE PERÍODO",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Elétrica",
+    "sigla": "ESTEEL0704",
+    "disciplina": "ESTÁGIO SUPERVISIONADO EM ENG. ELÉTRICA I",
+    "ct": "2",
+    "ch": "450",
+    "prerequisito": "Básico + Pré- Profissional",
+    "vagas": "15",
+    "sala": "B10",
+    "professor": "Ingrid Sammyne Gadelha Figueiredo",
+    "secao": "FORA DE PERÍODO",
+    "horario": {
+      "6ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN20",
+    "disciplina": "FUNDAMENTOS MATEMÁTICOS PARA ENG. ELETRÔNICA II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "EEN01",
+    "vagas": "40",
+    "sala": "D2",
+    "professor": "RODRIGO TAVARES",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "19:40-21:20"
+      ],
+      "4ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN21",
+    "disciplina": "INTRODUÇÃO À TEORIA ELETROMAGNÉTICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "EEN01",
+    "vagas": "40",
+    "sala": "D2",
+    "professor": "FELIPE TORRES",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN22",
+    "disciplina": "FUNDAMENTOS PARA ANÁLISE DE CIRCUITOS ELÉTRICOS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "40",
+    "sala": "D2",
+    "professor": "ANDREA FRAGATA",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "6ª": [
+        "18:00-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN23",
+    "disciplina": "LABORATÓRIO MATEMÁTICO PARA ENG. ELTRÔNICA II",
+    "ct": "1",
+    "ch": "30",
+    "prerequisito": "EEN04",
+    "vagas": "35",
+    "sala": "A36",
+    "professor": "EDUARDO LIMA",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "4ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN02_T01",
+    "disciplina": "EEN24",
+    "ct": "",
+    "ch": "3",
+    "prerequisito": "60",
+    "vagas": "EEN05",
+    "sala": "45",
+    "professor": "ANGILBERTO MUNIZ",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "SAB": [
+        "09:10-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN25",
+    "disciplina": "ECONOMIA PARA ENG. ELETRÔNICA",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D2",
+    "professor": "ALEX SANDER",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "5ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN26",
+    "disciplina": "COMUNICAÇÃO E EXPRESSÃO PARA ENGENHEIROS",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D2",
+    "professor": "ELISABETH BRITO",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "3ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN27",
+    "disciplina": "INTRODUÇÃO À ELETROQUÍMICA",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D2",
+    "professor": "ELLEN RAPHAEL",
+    "secao": "2º PERÍODO",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN40",
+    "disciplina": "ANÁLISE, MODELAGEM E SIMULAÇÃO DE SISTEMAS I",
+    "ct": "3",
+    "ch": "60",
+    "prerequisito": "EEN20",
+    "vagas": "30",
+    "sala": "Lab A35",
+    "professor": "DANIEL GUZMAN",
+    "secao": "4º PERÍODO",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN41",
+    "disciplina": "FENÔMENO DE TRANSPORTE II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "EEN31",
+    "vagas": "40",
+    "sala": "D3",
+    "professor": "JOÃO EVANGELISTA",
+    "secao": "4º PERÍODO",
+    "horario": {
+      "4ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN42",
+    "disciplina": "CIRCUITOS LÓGICOS",
+    "ct": "5",
+    "ch": "90",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D3",
+    "professor": "ROBERTO HIGINO",
+    "secao": "4º PERÍODO",
+    "horario": {
+      "3ª": [
+        "19:40-22:10"
+      ],
+      "6ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN04_T01",
+    "disciplina": "EEN43",
+    "ct": "",
+    "ch": "1",
+    "prerequisito": "30",
+    "vagas": "-",
+    "sala": "18",
+    "professor": "Lab. B17",
+    "secao": "4º PERÍODO",
+    "horario": {
+      "2ª": [
+        "20:30-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN44",
+    "disciplina": "FUNDAMENTOS DE ELETRÔNICA",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "EEN35",
+    "vagas": "45",
+    "sala": "D2",
+    "professor": "ANDRÉ PRINTES",
+    "secao": "4º PERÍODO",
+    "horario": {
+      "SAB": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN45",
+    "disciplina": "ANÁLISE DE CIRCUITOS ELÉTRICOS II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "EEN35",
+    "vagas": "45",
+    "sala": "D3",
+    "professor": "ANDRÉ PRINTES",
+    "secao": "4º PERÍODO",
+    "horario": {
+      "2ª": [
+        "19:40-20:30"
+      ],
+      "4ª": [
+        "19:40-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN46",
+    "disciplina": "CAD PARA ELETRÔNICA",
+    "ct": "1",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "Lab. A36",
+    "professor": "GERALDO ABREU",
+    "secao": "4º PERÍODO",
+    "horario": {
+      "5ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN47",
+    "disciplina": "CONSTRUÇÃO ELETRÔNICA",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D3",
+    "professor": "MARIVAN GOMES",
+    "secao": "4º PERÍODO",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN04_T02",
+    "disciplina": "EEN43",
+    "ct": "",
+    "ch": "1",
+    "prerequisito": "30",
+    "vagas": "-",
+    "sala": "18",
+    "professor": "NEILSON LUNIERE",
+    "secao": "4º PERÍODO",
+    "horario": {
+      "2ª": [
+        "20:30-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN60",
+    "disciplina": "MÉTODOS NUMÉRICOS EM ENG. ELETRÔNICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "EEN01",
+    "vagas": "45",
+    "sala": "D4",
+    "professor": "MANOEL AZEVEDO",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "4ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN61",
+    "disciplina": "ELETRICIDADE APLICADA I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "EEN51",
+    "vagas": "45",
+    "sala": "D4",
+    "professor": "JOSÉ GILSON",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "3ª": [
+        "19:40-21:20"
+      ],
+      "4ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN62",
+    "disciplina": "SENSORES INSTRUMENTAÇÃO ELETRÔNICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "EEN55",
+    "vagas": "45",
+    "sala": "D3",
+    "professor": "MIGUEL ORELLANA",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN06_T01",
+    "disciplina": "EEN63",
+    "ct": "",
+    "ch": "1",
+    "prerequisito": "30",
+    "vagas": "-",
+    "sala": "30",
+    "professor": "Lab. B13",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "6ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN64",
+    "disciplina": "ELETRÔNICA DE POTÊNCIA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "EEN55",
+    "vagas": "45",
+    "sala": "D4/D3",
+    "professor": "PSS ELÉTRICA",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "2ª": [
+        "19:40-21:20"
+      ],
+      "SAB": [
+        "09:10-10:50"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN65",
+    "disciplina": "ELETRÔNICA APLICADA II",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "EEN55",
+    "vagas": "45",
+    "sala": "D3",
+    "professor": "ANDRÉ PRINTES",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "5ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN66",
+    "disciplina": "GERÊNCIA DE PROJETOS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D4",
+    "professor": "ALEX SANDER",
+    "secao": "6º PERÍODO",
+    "horario": {
+      "5ª": [
+        "21:20-22:10"
+      ],
+      "6ª": [
+        "19:40-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN80",
+    "disciplina": "TEORIA DA INFORMAÇÃO E CODIFICAÇÃO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "EEN34",
+    "vagas": "45",
+    "sala": "D6",
+    "professor": "PAULO CAVALCANTE",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "19:40-22:10"
+      ],
+      "5ª": [
+        "19:40-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN81",
+    "disciplina": "SISTEMAS OPERACIONAIS EMBARCADOS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "EEN24",
+    "vagas": "40",
+    "sala": "D4/D6",
+    "professor": "FÁBIO CARDOSO",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "6ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN82",
+    "disciplina": "MICROELETRÔNICA",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "EEN42",
+    "vagas": "35",
+    "sala": "A31",
+    "professor": "JOZIAS OLIVEIRA",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "6ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN08_T01",
+    "disciplina": "EEN83",
+    "ct": "",
+    "ch": "4",
+    "prerequisito": "60",
+    "vagas": "-",
+    "sala": "45",
+    "professor": "MARIVAN GOMES",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "4ª": [
+        "19:40-21:20"
+      ],
+      "5ª": [
+        "20:30-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN84",
+    "disciplina": "CIÊNCIA E TECNOLOGIA DOS MATERIAIS ELETRÔNICOS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D6",
+    "professor": "ALEX SANDER",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "2ª": [
+        "19:40-21:20"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN108",
+    "disciplina": "ESTÁGIO SUPERVISIONADO",
+    "ct": "15",
+    "ch": "450",
+    "prerequisito": "",
+    "vagas": "40",
+    "sala": "B10",
+    "professor": "JOSÉ GILSON",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "SAB": [
+        "08:20-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN08_T02",
+    "disciplina": "EEN84",
+    "ct": "",
+    "ch": "4",
+    "prerequisito": "60",
+    "vagas": "",
+    "sala": "20",
+    "professor": "IVANA GUARANY",
+    "secao": "8º PERÍODO",
+    "horario": {
+      "SAB": [
+        "08:20-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN100",
+    "disciplina": "SISTEMAS ELETRÔNICOS DE TEMPO-REAL",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "EEN81",
+    "vagas": "45",
+    "sala": "D7/D4",
+    "professor": "FÁBIO CARDOSO",
+    "secao": "10º PERÍODO",
+    "horario": {
+      "3ª": [
+        "19:40-21:20"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN101",
+    "disciplina": "AUTOMAÇÃO DE MANUFATURA",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D3",
+    "professor": "ROBERTO HIGINO",
+    "secao": "10º PERÍODO",
+    "horario": {
+      "2ª": [
+        "20:30-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN102",
+    "disciplina": "SISTEMAS ELETRÔNICOS DE IMAGENS",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D4",
+    "professor": "JOSÉ NILSON",
+    "secao": "10º PERÍODO",
+    "horario": {
+      "6ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN103",
+    "disciplina": "INTERFERÊNCIA ELETROMAGNÉTICA",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D7",
+    "professor": "ANGILBERTO MUNIZ",
+    "secao": "10º PERÍODO",
+    "horario": {
+      "4ª": [
+        "18:00-20:30"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN10_T01",
+    "disciplina": "EEN104",
+    "ct": "",
+    "ch": "4",
+    "prerequisito": "60",
+    "vagas": "-",
+    "sala": "45",
+    "professor": "ANGILBERTO MUNIZ",
+    "secao": "10º PERÍODO",
+    "horario": {
+      "2ª": [
+        "18:00-19:40"
+      ],
+      "3ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN105",
+    "disciplina": "CONFIABILIDADE EM SISTEMAS ELETRÔNICOS",
+    "ct": "3",
+    "ch": "45",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D7",
+    "professor": "MARIVAN GOMES",
+    "secao": "10º PERÍODO",
+    "horario": {
+      "2ª": [
+        "19:40-20:30"
+      ],
+      "6ª": [
+        "19:40-21:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN106",
+    "disciplina": "SISTEMAS DE GEO-LOCALIZAÇÃO BASEADO EM SATÉLITES",
+    "ct": "2",
+    "ch": "30",
+    "prerequisito": "",
+    "vagas": "45",
+    "sala": "D7",
+    "professor": "GERALDO ABREU",
+    "secao": "10º PERÍODO",
+    "horario": {
+      "4ª": [
+        "20:30-22:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN107",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO II",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "EEN95",
+    "vagas": "20",
+    "sala": "C24",
+    "professor": "BRUNO MONTEIRO",
+    "secao": "10º PERÍODO",
+    "horario": {
+      "5ª": [
+        "19:40-21:20"
+      ],
+      "SAB": [
+        "14:40-16:20"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN0002",
+    "disciplina": "PROPAGAÇÃO E ANTENAS PARA SISTEMAS EMBARCADOS",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "A4",
+    "professor": "BRUNO MONTEIRO",
+    "secao": "10º PERÍODO",
+    "horario": {
+      "3ª": [
+        "19:40-21:20"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN0004",
+    "disciplina": "TÓPICOS AVANÇADOS EM SISTEMAS EMBARCADOS (ENERGIAS RENOVÁVEIS)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "35",
+    "sala": "A3",
+    "professor": "JOSÉ GILSON",
+    "secao": "10º PERÍODO",
+    "horario": {
+      "SAB": [
+        "13:50-17:10"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN0004",
+    "disciplina": "TÓPICOS AVANÇADOS EM SISTEMAS EMBARCADOS (METODOLOGIA CIENTÍFICA)",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "A6",
+    "professor": "PAULO CAVALCANTE",
+    "secao": "10º PERÍODO",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "5ª": [
+        "18:00-19:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN75",
+    "disciplina": "TÉCNICAS DE MODULAÇÃO",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "",
+    "vagas": "30",
+    "sala": "A8",
+    "professor": "JOÃO EVANGELISTA",
+    "secao": "FORA DE PERÍODO",
+    "horario": {
+      "SAB": [
+        "08:20-11:40"
+      ]
+    }
+  },
+  {
+    "curso": "Engenharia Eletrônica",
+    "sigla": "EEN95",
+    "disciplina": "TRABALHO DE CONCLUSÃO DE CURSO I",
+    "ct": "4",
+    "ch": "60",
+    "prerequisito": "Comp. Curriculares do 1º ao 8º Sem. Letivo",
+    "vagas": "20",
+    "sala": "A28",
+    "professor": "BRUNO MONTEIRO",
+    "secao": "FORA DE PERÍODO",
+    "horario": {
+      "3ª": [
+        "18:00-19:40"
+      ],
+      "SAB": [
+        "13:00-14:40"
+      ]
+    }
+  }
+]
