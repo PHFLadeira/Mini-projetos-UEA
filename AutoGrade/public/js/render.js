@@ -137,6 +137,11 @@ function updateStats(){
     const avail = getAvailableSubjects();
     setText('s-avail', avail.length);
   }
+  if(typeof updateMatriculadasBadge === 'function') updateMatriculadasBadge();
+  if(typeof renderMatriculadas === 'function' &&
+     document.getElementById('view-matriculadas')?.classList.contains('active')){
+    renderMatriculadas();
+  }
 }
 
 function doSearch(q){

@@ -15,31 +15,63 @@
 <body>
 
 <!-- ════════════════════════════════════════════
-     UNIFIED SHELL NAVIGATION
+     SHELL — barra lateral + área principal
 ════════════════════════════════════════════ -->
-<nav class="shell-nav">
-  <div class="shell-logo">
-    <div class="shell-logo-main">AutoGrade</div>
-  </div>
-  <div class="shell-tabs">
-    <div class="shell-tab active" id="stab-grade" onclick="shellSwitch('grade')">
-      🗺&nbsp; Grade Curricular
+<div class="app-shell" id="app-shell">
+
+  <aside class="side-nav" id="side-nav">
+    <div class="side-head">
+      <div class="side-logo">
+        <span class="side-logo-mark">◇</span>
+        <span class="side-logo-text">
+          <span class="side-logo-main">AutoGrade</span>
+          <span class="side-logo-sub">UEA · Grade &amp; Horários</span>
+        </span>
+      </div>
+      <button class="side-collapse" id="side-collapse" onclick="toggleSideNav()" aria-label="Recolher menu" title="Recolher menu">‹</button>
     </div>
-    <div class="shell-tab" id="stab-horario" onclick="shellSwitch('horario')">
-      📅&nbsp; Montador de Horários
-      <span class="tab-badge hidden" id="horario-badge">0</span>
+
+    <nav class="side-links" aria-label="Seções">
+      <button class="side-link shell-tab active" id="stab-grade" onclick="shellSwitch('grade')" title="Grade Curricular">
+        <span class="side-link-icon">🗺</span><span class="side-link-label">Grade Curricular</span>
+      </button>
+      <button class="side-link shell-tab" id="stab-matriculadas" onclick="shellSwitch('matriculadas')" title="Matérias Matriculadas">
+        <span class="side-link-icon">🎓</span><span class="side-link-label">Matriculadas</span>
+        <span class="tab-badge hidden" id="matriculadas-badge">0</span>
+      </button>
+      <button class="side-link shell-tab" id="stab-horario" onclick="shellSwitch('horario')" title="Montador de Horários">
+        <span class="side-link-icon">📅</span><span class="side-link-label">Montador de Horários</span>
+        <span class="tab-badge hidden" id="horario-badge">0</span>
+      </button>
+      <button class="side-link shell-tab" id="stab-consulta" onclick="shellSwitch('consulta')" title="Consulta de Horários">
+        <span class="side-link-icon">🔍</span><span class="side-link-label">Consulta de Horários</span>
+      </button>
+    </nav>
+
+    <div class="side-foot">
+      <button class="side-link smart-btn hidden" id="smart-btn" onclick="smartAction()" title="Montar horário automaticamente com suas matérias disponíveis">
+        <span class="side-link-icon">⚡</span><span class="side-link-label">Montar automaticamente</span>
+        <span class="sb-cnt" id="smart-cnt">0</span>
+      </button>
+      <button class="side-link" onclick="openBackup()" title="Backup">
+        <span class="side-link-icon">💾</span><span class="side-link-label">Backup</span>
+      </button>
+      <button class="side-link" onclick="openCfg()" title="Configurações">
+        <span class="side-link-icon">⚙️</span><span class="side-link-label">Configurações</span>
+      </button>
+      <a class="side-link" href="https://github.com/PHFLadeira/Mini-projetos-UEA" target="_blank" rel="noopener" title="Código no GitHub">
+        <span class="side-link-icon">&lt;/&gt;</span><span class="side-link-label">Código no GitHub</span>
+      </a>
     </div>
-    <div class="shell-tab" id="stab-consulta" onclick="shellSwitch('consulta')">
-      🔍&nbsp; Consulta de Horários
-    </div>
+  </aside>
+
+  <div class="mobile-bar">
+    <button class="mobile-menu-btn" onclick="openSideNav()" aria-label="Abrir menu">☰</button>
+    <span class="mobile-bar-title">AutoGrade</span>
   </div>
-  <div class="shell-right">
-    <button class="smart-btn hidden" id="smart-btn" onclick="smartAction()" title="Montar horário automaticamente com suas matérias disponíveis">
-      ⚡ Montar automaticamente
-      <span class="sb-cnt" id="smart-cnt">0</span>
-    </button>
-  </div>
-</nav>
+  <div class="side-backdrop" id="side-backdrop" onclick="closeSideNav()"></div>
+
+  <main class="app-main" id="app-main">
 
 <!-- ════════════════════════════════════════════
      TAB 1: GRADE CURRICULAR (ECA)
@@ -85,6 +117,25 @@
   <div class="grid-scroll" id="scroll">
     <div class="grid-track" id="track"><svg id="svg-layer"></svg></div>
   </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     TAB: MATÉRIAS MATRICULADAS
+════════════════════════════════════════════ -->
+<div class="tab-view" id="view-matriculadas">
+  <header class="mat-header">
+    <div>
+      <div class="mat-title">Matérias Matriculadas</div>
+      <div class="mat-sub">O que você está cursando neste semestre</div>
+    </div>
+    <div class="tab-switcher" style="align-self:center">
+      <button class="tab-btn active" onclick="switchGrade('2014',this)">ECA 2014</button>
+      <button class="tab-btn" onclick="switchGrade('2023',this)">ECA 2023</button>
+      <button class="tab-btn" onclick="switchGrade('CMP_2018',this)">Comp. 2018</button>
+    </div>
+  </header>
+  <div class="mat-stats" id="mat-stats"></div>
+  <div class="mat-body" id="mat-body"></div>
 </div>
 
 <!-- ════════════════════════════════════════════
@@ -366,6 +417,9 @@
   </div>
 </div>
 
+  </main><!-- /.app-main -->
+</div><!-- /.app-shell -->
+
 <!-- ════════════════════════════════════════════
      ECA CARD MODAL
 ════════════════════════════════════════════ -->
@@ -558,6 +612,7 @@
 <script src="js/export.js"></script>
 <script src="js/gradeflow.js"></script>
 <script src="js/consulta.js"></script>
+<script src="js/matriculadas.js"></script>
 <script src="js/shell.js"></script>
 <script src="js/main.js"></script>
 

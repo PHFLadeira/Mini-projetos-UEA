@@ -1,16 +1,42 @@
 /* ══ shell.js — Navigation, ECA↔GradeFlow Bridge, ecaInit ══ */
 
+// ── Barra lateral: recolher (desktop) e gaveta (celular) ──────────────
+window.toggleSideNav = function() {
+  var nav = document.getElementById('side-nav');
+  if(!nav) return;
+  var collapsed = nav.classList.toggle('collapsed');
+  try { localStorage.setItem('side_collapsed', collapsed ? '1' : '0'); } catch(e) {}
+};
+window.openSideNav = function() {
+  document.getElementById('side-nav')?.classList.add('open');
+  document.getElementById('side-backdrop')?.classList.add('show');
+};
+window.closeSideNav = function() {
+  document.getElementById('side-nav')?.classList.remove('open');
+  document.getElementById('side-backdrop')?.classList.remove('show');
+};
+(function restoreSideNav(){
+  try {
+    if(localStorage.getItem('side_collapsed') === '1')
+      document.getElementById('side-nav')?.classList.add('collapsed');
+  } catch(e) {}
+})();
+
 // ── Shell Tab Switching (3 tabs) ──────────────────────────────────────
 window.shellSwitch = function(tab) {
+  if(typeof closeSideNav === 'function') closeSideNav();
   document.querySelectorAll('.tab-view').forEach(function(v){ v.classList.remove('active'); });
-  document.querySelectorAll('.shell-tab').forEach(function(t){ t.classList.remove('active'); });
-  var viewMap = { grade: 'view-grade', horario: 'view-horario', consulta: 'view-consulta' };
+  document.querySelectorAll('.side-link.shell-tab').forEach(function(t){ t.classList.remove('active'); });
+  var viewMap = { grade: 'view-grade', matriculadas: 'view-matriculadas', horario: 'view-horario', consulta: 'view-consulta' };
   var viewId = viewMap[tab] || 'view-grade';
   var tabId = 'stab-' + tab;
   var view = document.getElementById(viewId);
   var tabEl = document.getElementById(tabId);
   if(view) view.classList.add('active');
   if(tabEl) tabEl.classList.add('active');
+  if(tab === 'matriculadas') {
+    if(typeof renderMatriculadas === 'function') renderMatriculadas();
+  }
   if(tab === 'horario') {
     if(typeof autoLoadPDFs === 'function') autoLoadPDFs();
     if(typeof renderAvailableSidebar === 'function') renderAvailableSidebar();
@@ -25,10 +51,13 @@ window.shellSwitch = function(tab) {
 function switchGrade(g, btn) {
   G = g; window.G = g;
   try { localStorage.setItem('eca_grade', g); } catch(e) {}
-  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
+  // sincroniza todos os seletores de grade (cabeçalho da Grade + das Matriculadas)
+  document.querySelectorAll('.tab-btn').forEach(function(b){
+    b.classList.toggle('active', (b.getAttribute('onclick') || '').indexOf("'" + g + "'") !== -1);
+  });
   var s = document.getElementById('search'); if(s) s.value = '';
   render();
+  if(typeof renderMatriculadas === 'function') renderMatriculadas();
   if(typeof updateSmartBadge === 'function') updateSmartBadge();
 }
 window.switchGrade = switchGrade;
